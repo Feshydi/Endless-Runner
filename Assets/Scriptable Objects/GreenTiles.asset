@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bb4eb4e6d73435a9c7e05bb08ebb7c, type: 3}
+  m_Name: GreenTiles
+  m_EditorClassIdentifier: 
+  _directionalTiles:
+  - _tile: {fileID: 11400000, guid: 03a361472cdbb4ecf8da5594ea1a07cb, type: 2}
+    _tileDirection: 0
+  - _tile: {fileID: 11400000, guid: fd05ff49c09b24e66ad199d12f73ae69, type: 2}
+    _tileDirection: 0
+  - _tile: {fileID: 11400000, guid: 064e71334a4f84d29b1ba249bf758f36, type: 2}
+    _tileDirection: 0
+  - _tile: {fileID: 11400000, guid: f71781d92ed784df19ed22e5c88be4ec, type: 2}
+    _tileDirection: 0
