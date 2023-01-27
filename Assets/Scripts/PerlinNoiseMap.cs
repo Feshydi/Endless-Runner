@@ -5,21 +5,6 @@ using UnityEngine.Tilemaps;
 
 #region Structures
 
-[System.Serializable]
-public struct TileData
-{
-    [SerializeField]
-    private TileDirectionData _tileDirectionData;
-
-    [SerializeField]
-    [Range(0.01f, 1.00f)]
-    private float _initialChance;
-
-    public TileDirectionData TileDirectionData => _tileDirectionData;
-
-    public float InitialChance => _initialChance;
-}
-
 public struct TileVector
 {
     public Vector3Int Vector;
@@ -38,93 +23,102 @@ public struct TileVector
 public class PerlinNoiseMap : MonoBehaviour
 {
 
-    #region Properties
+    #region Fields
 
-    [Header("List of tile sets")]
+    [Header("Data for generation")]
     [SerializeField]
-    private List<TileData> _tileData;
-
-    [Header("Map Generator Settings")]
-    [SerializeField]
-    private int _mapWidth;
-
-    [SerializeField]
-    private int _mapHeight;
-
-    [SerializeField]
-    private int _scale;
+    private MapData _mapData;
 
     [SerializeField]
     private int _seed;
+
+    [SerializeField]
+    private bool _autoSeedGeneration;
+
+    [Header("Generated data")]
+    [SerializeField]
+    private float[,] _noiseMap;
+
+    [SerializeField]
+    private List<TileVector> _tileVector;
+
+    [SerializeField]
+    private Tilemap _tilemap;
 
     [Header("Additional")]
     [SerializeField]
     private Logger _logger;
 
-    private float[,] _noiseMap;
-
-    private List<TileVector> _tileVector;
-
-    private Tilemap _tilemap;
-
     #endregion
 
     #region Methods
 
-    private void Awake()
+    /// <summary>
+    /// Generates with Perlin noise method structure using passed parameters.
+    /// </summary>
+    /// <param name="mapData"></param>
+    public void Init(MapData mapData)
     {
-        _noiseMap = new float[_mapWidth, _mapHeight];
+        _mapData = mapData;
+
+        if (_autoSeedGeneration)
+            _seed = Random.Range(0, int.MaxValue);
+
+        Random.InitState(_seed);
+        _noiseMap = new float[_mapData.MapWidth, _mapData.MapHeight];
         _tileVector = new List<TileVector>();
         _tilemap = GetComponent<Tilemap>();
-    }
 
-    private void Start()
-    {
-        // simply generate Perlin noise map
         GenerateNoiseMap();
-        // create list of tiles and vectors, based on Perlin noise map and initial chances
         GenerateTileMap();
-        // set tiles to its position
         SetTileMap();
     }
 
+    /// <summary>
+    /// Simply generates Perlin noise map.
+    /// </summary>
     private void GenerateNoiseMap()
     {
-        Random.InitState(_seed);
         var offsetX = Random.Range(-9999f, 9999f);
         var offsetY = Random.Range(-9999f, 9999f);
 
-        for (int x = 0; x < _mapWidth; x++)
+        for (int x = 0; x < _mapData.MapWidth; x++)
         {
-            for (int y = 0; y < _mapHeight; y++)
+            for (int y = 0; y < _mapData.MapHeight; y++)
             {
-                var scaledX = (float)x / _mapWidth * _scale + offsetX;
-                var scaledY = (float)y / _mapHeight * _scale + offsetY;
+                var scaledX = (float)x / _mapData.MapWidth * _mapData.Scale + offsetX;
+                var scaledY = (float)y / _mapData.MapHeight * _mapData.Scale + offsetY;
 
                 var perlinValue = Mathf.PerlinNoise(scaledX, scaledY);
                 _noiseMap[x, y] = Mathf.Clamp(perlinValue, 0, 1);
             }
         }
-        _logger.Log("Generated noise map", this);
+        _logger.Log($"Noisemap for tilemap {_tilemap.name} generated", this);
     }
 
+    /// <summary>
+    /// Creates list of tiles and its position, based on Perlin noise map.
+    /// </summary>
     private void GenerateTileMap()
     {
-        for (int x = 0; x < _mapWidth; x++)
+        for (int x = 0; x < _mapData.MapWidth; x++)
         {
-            for (int y = 0; y < _mapHeight; y++)
+            for (int y = 0; y < _mapData.MapHeight; y++)
             {
                 var selectedTile = GetTile(_noiseMap[x, y]);
                 _tileVector.Add(new TileVector(new Vector3Int(x, y), selectedTile));
             }
         }
-        _logger.Log("Generated tile map", this);
+        _logger.Log($"Tilemap {_tilemap.name} generated", this);
     }
 
+    /// <summary>
+    /// <c>GetTile</c> gets the random tile by its initial chances.
+    /// </summary>
     private Tile GetTile(float perlinValue)
     {
         float chanceValue = 0f;
-        foreach (var tileChance in _tileData)
+        foreach (var tileChance in _mapData.TerrainTileData)
         {
             if (perlinValue >= chanceValue && perlinValue <= chanceValue + tileChance.InitialChance)
             {
@@ -136,13 +130,16 @@ public class PerlinNoiseMap : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Set tiles to its position on the grid.
+    /// </summary>
     private void SetTileMap()
     {
         foreach (var tile in _tileVector)
         {
             if (tile.Tile == null || tile.Vector == null)
             {
-                _logger.Log($"Tilemap contain empty tiles or coordinates", this);
+                _logger.Log($"Tilemap {_tilemap.name} contain empty tiles or coordinates", this);
                 return;
             }
         }
@@ -150,8 +147,31 @@ public class PerlinNoiseMap : MonoBehaviour
         {
             _tilemap.SetTile(tile.Vector, tile.Tile);
         }
-        _logger.Log("Tilemap applied to scene", this);
+        _logger.Log($"Tilemap {_tilemap.name} applied to scene", this);
     }
+
+    //public Tile GetDirectionTile(TileDirection tileDirection)
+    //{
+    //    foreach (var tile in _directionalTiles)
+    //    {
+    //        if (tile.TileDirection.Equals(tileDirection))
+    //            return tile.Tile;
+    //    }
+    //    return null;
+    //}
+
+    //public TileDirection GetTileDirection(float[,] array, int width, int height)
+    //{
+    //    switch (array)
+    //    {
+    //        case var value when< [width, height]:
+
+    //            break;
+
+    //    }
+
+    //    return TileDirection.Central;
+    //}
 
     #endregion
 

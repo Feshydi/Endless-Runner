@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5517d34578f4d7cbaf0851d601eba3, type: 3}
+  m_Name: LargeTerrain
+  m_EditorClassIdentifier: 
+  _tileData:
+  - _tileDirectionData: {fileID: 11400000, guid: d2ccdf0722b064ecd95ebee6bb4ff71a, type: 2}
+    _initialChance: 0.64
+  - _tileDirectionData: {fileID: 11400000, guid: ac79d973fdba84d4d865dbafd50cbad8, type: 2}
+    _initialChance: 0.36
+  _mapWidth: 0
+  _mapHeight: 0
+  _scale: 0
