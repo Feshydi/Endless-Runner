@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cca864c0707416fbe340de979b7182, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  _groundMapData: {fileID: 0}
-  _objectMapData: {fileID: 0}
+  _terrainMapData: {fileID: 11400000, guid: 582921d9a1fe049ae9aacea4854383d1, type: 2}

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5517d34578f4d7cbaf0851d601eba3, type: 3}
   m_Name: MediumTerrain
   m_EditorClassIdentifier: 
-  _tileData:
+  _terrainTileData:
   - _tileDirectionData: {fileID: 11400000, guid: d2ccdf0722b064ecd95ebee6bb4ff71a, type: 2}
     _initialChance: 0.64
   - _tileDirectionData: {fileID: 11400000, guid: ac79d973fdba84d4d865dbafd50cbad8, type: 2}
     _initialChance: 0.36
-  _mapWidth: 0
-  _mapHeight: 0
-  _scale: 0
+  _wallTilePackData: {fileID: 11400000, guid: ef9961c1c0cd14873a60681cc4931c9e, type: 2}
+  _mapWidth: 512
+  _mapHeight: 512
+  _scale: 40
