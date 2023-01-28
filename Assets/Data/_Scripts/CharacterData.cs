@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Player")]
-public class CharacterData : ScriptableObject
+public class CharacterData : EntityData
 {
 
     #region Fields
 
     [SerializeField]
-    private float _moveSpeed;
-
-
+    private float _projectileSpeed;
 
     #endregion
 
     #region Properties
 
-    public float MoveSpeed => _moveSpeed;
+    public float ProjectileSpeed => _projectileSpeed;
 
     #endregion
 
