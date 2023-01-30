@@ -18,26 +18,19 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField]
     public Action<float> OnHealthChanged;
 
-    [Header("Additional")]
-    [SerializeField]
-    private Logger _logger;
-
     #endregion
 
     #region Methods
 
-    private void Awake()
+    private void Start()
     {
         _healthPoints = _entityData.HealthPoints;
-        _logger.Log($"{gameObject}'s health: {_healthPoints}", this);
     }
 
     public void DoDamage(float damage)
     {
         _healthPoints -= damage;
         OnHealthChanged?.Invoke(_healthPoints);
-
-        _logger.Log($"{gameObject}'s new health: {_healthPoints}", this);
     }
 
     #endregion

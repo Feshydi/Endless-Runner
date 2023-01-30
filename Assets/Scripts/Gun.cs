@@ -22,6 +22,9 @@ public class Gun : MonoBehaviour
     private Projectile _projectilePrefab;
 
     [SerializeField]
+    private SpriteRenderer _muzzleSpriteRenderer;
+
+    [SerializeField]
     private Transform _muzzlePosition;
 
     [Header("Generated Data")]
@@ -34,29 +37,26 @@ public class Gun : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new PlayerControls();
+        _muzzleSpriteRenderer.enabled = false;
     }
 
-    private void OnEnable() => _inputActions.Player.Enable();
-
-    private void OnDisable() => _inputActions.Player.Disable();
-
-    private void Update()
-    {
-        if (_inputActions.Player.Fire.IsPressed())
-            Shoot();
-    }
-
-    private void Shoot()
+    public void Shoot()
     {
         if (Time.time < _nextShotTime)
             return;
         _nextShotTime = Time.time + 60 / _characterData.DamageRate;
 
         Vector2 shootDirection = transform.right;
-
+        StartCoroutine(OnFire());
         var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
         projectile.Init(_characterData, shootDirection);
+    }
+
+    private IEnumerator OnFire()
+    {
+        _muzzleSpriteRenderer.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        _muzzleSpriteRenderer.enabled = false;
     }
 
     #endregion

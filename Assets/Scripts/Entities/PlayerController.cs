@@ -15,6 +15,9 @@ public class PlayerController : EntityController
     [SerializeField]
     private PlayerControls _inputActions;
 
+    [SerializeField]
+    private Gun _gun;
+
     [Header("Generated data")]
     [SerializeField]
     private Vector2 _moveInput;
@@ -23,7 +26,7 @@ public class PlayerController : EntityController
     private Vector2 _mouseInput;
 
     [SerializeField]
-    private bool _isMouseLeft;
+    private Vector2 _lastInput;
 
     [SerializeField]
     private bool _isRolling;
@@ -48,7 +51,7 @@ public class PlayerController : EntityController
         base.Awake();
 
         _inputActions = new PlayerControls();
-        AfterAnimation();
+        _speedModifier = 1f;
     }
 
     protected override void OnEnable()
@@ -73,8 +76,10 @@ public class PlayerController : EntityController
 
     private void Update()
     {
-        // FlipByPointerPosition();
         WeaponLookAtPointerPosition();
+
+        if (_inputActions.Player.Fire.IsPressed())
+            _gun.Shoot();
 
         _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
         _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
@@ -82,7 +87,10 @@ public class PlayerController : EntityController
 
     private void FixedUpdate()
     {
-        _rigidbody2D.MovePosition(_rigidbody2D.position + _moveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
+        if (!_isRolling)
+            _lastInput = _moveInput;
+
+        _rigidbody2D.MovePosition(_rigidbody2D.position + _lastInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
     }
 
     #region Input Action
@@ -94,9 +102,6 @@ public class PlayerController : EntityController
 
     private void Move_performed(InputAction.CallbackContext context)
     {
-        if (_isRolling)
-            return;
-
         _moveInput = context.ReadValue<Vector2>();
     }
 
@@ -106,56 +111,38 @@ public class PlayerController : EntityController
             return;
 
         _speedModifier = 3f;
+        GetComponent<Collider2D>().enabled = false;
         _isRolling = true;
 
-        _entityAnimator.SetTrigger("DoRoll");
-        _weaponAnimator.SetTrigger("DoRoll");
-        _logger.Log($"{gameObject} rolling", this);
+        _entityAnimator.SetTrigger("Roll");
+        _weaponAnimator.SetTrigger("Roll");
     }
 
     #endregion
 
-    public void AfterAnimation()
+    public void AfterRollingAnimation()
     {
         _speedModifier = 1f;
+        GetComponent<Collider2D>().enabled = true;
         _isRolling = false;
+    }
+
+    protected override void HealthEvent(float health)
+    {
+        base.HealthEvent(health);
+
+        _weaponAnimator.SetFloat("Health", health);
+        _weaponAnimator.SetTrigger("Hit");
+    }
+
+    protected override void AfterDeath()
+    {
+        base.AfterDeath();
 
         _moveInput = Vector2.zero;
         _mouseInput = Vector2.zero;
+        enabled = false;
     }
-
-    //private void FlipByPointerPosition()
-    //{
-    //    if (_isRolling)
-    //        return;
-
-    //    var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-    //    if (mouseCoordinate.x < transform.position.x)
-    //    {
-    //        if (!_isMouseLeft)
-    //        {
-    //            FlipLeft(true);
-    //            _logger.Log($"{gameObject} looking at the right", this);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (_isMouseLeft)
-    //        {
-    //            FlipLeft(false);
-    //            _logger.Log($"{gameObject} looking at the left", this);
-    //        }
-    //    }
-    //}
-
-    //private void FlipLeft(bool value)
-    //{
-    //    _isMouseLeft = value;
-
-    //    _playerSpriteRenderer.flipX = value;
-    //    _weaponSpriteRenderer.flipX = value;
-    //}
 
     private void WeaponLookAtPointerPosition()
     {

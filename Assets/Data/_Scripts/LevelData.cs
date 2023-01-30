@@ -11,6 +11,9 @@ public class LevelData : ScriptableObject
     [SerializeField]
     private MapData _terrainMapData;
 
+    [SerializeField]
+    private List<EnemyController> _enemyList;
+
     #endregion
 
     #region Properties
@@ -20,6 +23,8 @@ public class LevelData : ScriptableObject
         get => _terrainMapData;
         set => _terrainMapData = value;
     }
+
+    public List<EnemyController> EnemyList => _enemyList;
 
     #endregion
 

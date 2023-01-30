@@ -15,9 +15,6 @@ public class EnemyController : EntityController
     [SerializeField]
     private PlayerController _target;
 
-    //[SerializeField]
-    //private bool _isLookingLeft;
-
     [Header("Generated Data")]
     [SerializeField]
     private float _nextShotTime;
@@ -32,17 +29,9 @@ public class EnemyController : EntityController
         _target = target;
     }
 
-    //private void Update()
-    //{
-    //    if (_playerController == null || _isDead)
-    //        return;
-
-    //       FlipByDirection();
-    //}
-
     private void FixedUpdate()
     {
-        if (_target == null || _isDead)
+        if (_isDead || _target == null || _target.IsDead)
             return;
 
         var playerPos = _target.transform.position;
@@ -55,43 +44,17 @@ public class EnemyController : EntityController
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (Time.time < _nextShotTime)
             return;
-        _nextShotTime = Time.time + 60 / _enemyData.DamageRate;
 
-        if (other.TryGetComponent(out IDamageable damageable))
+        if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.DoDamage(_enemyData.Damage);
+            _nextShotTime = Time.time + 60 / _enemyData.DamageRate;
         }
     }
-
-    //private void FlipByDirection()
-    //{
-    //    if (_playerController.transform.position.x < transform.position.x)
-    //    {
-    //        if (!_isLookingLeft)
-    //        {
-    //            FlipLeft(true);
-    //            _logger.Log($"{gameObject} looking at the right", this);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (_isLookingLeft)
-    //        {
-    //            FlipLeft(false);
-    //            _logger.Log($"{gameObject} looking at the left", this);
-    //        }
-    //    }
-    //}
-
-    //private void FlipLeft(bool value)
-    //{
-    //    _isLookingLeft = value;
-    //    _enemySpriteRenderer.flipX = value;
-    //}
 
     #endregion
 }

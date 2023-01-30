@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultCharacter
   m_EditorClassIdentifier: 
   _moveSpeed: 3
-  _healthPoints: 1000
+  _healthPoints: 100
   _damage: 20
   _damageRate: 300
   _projectileSpeed: 10

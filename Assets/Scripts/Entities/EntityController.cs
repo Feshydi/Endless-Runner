@@ -22,9 +22,12 @@ public class EntityController : MonoBehaviour
     [SerializeField]
     protected Animator _entityAnimator;
 
-    [Header("Additional")]
-    [SerializeField]
-    protected Logger _logger;
+
+    #endregion
+
+    #region Properties
+
+    public bool IsDead => _isDead;
 
     #endregion
 
