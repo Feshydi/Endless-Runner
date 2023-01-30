@@ -51,12 +51,11 @@ public class Gun : MonoBehaviour
     {
         if (Time.time < _nextShotTime)
             return;
-        _nextShotTime = Time.time + _characterData.DamageRate / 1000;
+        _nextShotTime = Time.time + 60 / _characterData.DamageRate;
 
-        var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        var shootDirection = mouseCoordinate - _muzzlePosition.position;
+        Vector2 shootDirection = transform.right;
 
-        var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.rotation);
+        var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
         projectile.Init(_characterData, shootDirection);
     }
 

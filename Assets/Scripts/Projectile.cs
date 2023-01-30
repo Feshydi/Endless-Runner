@@ -16,6 +16,9 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private Vector2 _direction;
 
+    [SerializeField]
+    private float _flyDistance;
+
     #endregion
 
     #region Methods
@@ -24,12 +27,18 @@ public class Projectile : MonoBehaviour
     {
         _damage = characterData.Damage;
         _speed = characterData.ProjectileSpeed;
-        _direction = direction.normalized;
+        _direction = direction;
+        _flyDistance = 0f;
     }
 
     private void Update()
     {
-        transform.Translate(_direction * _speed * Time.deltaTime);
+        var move = _direction * _speed * Time.deltaTime;
+        _flyDistance += (move).magnitude;
+        if (_flyDistance > 20)
+            Destroy(gameObject);
+
+        transform.Translate(move);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

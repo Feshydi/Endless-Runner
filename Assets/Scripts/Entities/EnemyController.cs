@@ -2,77 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.GraphicsBuffer;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : EntityController
 {
 
     #region Fields
 
-    [Header("Data")]
+    [Header("Enemy Data")]
     [SerializeField]
     private EnemyData _enemyData;
 
     [SerializeField]
-    private Rigidbody2D _rigidbody2D;
+    private PlayerController _target;
 
-    [SerializeField]
-    private PlayerController _playerController;
+    //[SerializeField]
+    //private bool _isLookingLeft;
 
     [Header("Generated Data")]
     [SerializeField]
-    private bool _isLookingLeft;
-
-    [SerializeField]
-    private bool _isDead;
-
-    [Header("Animation Settings")]
-    [SerializeField]
-    private SpriteRenderer _enemySpriteRenderer;
-
-    [SerializeField]
-    private Animator _enemyAnimator;
-
-    [Header("Additional")]
-    [SerializeField]
-    private Logger _logger;
+    private float _nextShotTime;
 
     #endregion
 
     #region Methods
 
-    private void OnEnable()
+    public void Init(PlayerController target)
     {
-        GetComponent<Health>().OnHealthChanged += HealthEvent;
+        _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
+        _target = target;
     }
 
-    private void OnDisable()
-    {
-        GetComponent<Health>().OnHealthChanged -= HealthEvent;
-    }
+    //private void Update()
+    //{
+    //    if (_playerController == null || _isDead)
+    //        return;
 
-    public void Init(PlayerController playerController)
-    {
-        _enemyAnimator.SetFloat("Health", _enemyData.HealthPoints);
-        _playerController = playerController;
-    }
-
-    private void Update()
-    {
-        if (_playerController == null || _isDead)
-            return;
-
-        FlipByDirection();
-    }
+    //       FlipByDirection();
+    //}
 
     private void FixedUpdate()
     {
-        if (_playerController == null || _isDead)
+        if (_target == null || _isDead)
             return;
 
-        var playerPos = _playerController.transform.position;
+        var playerPos = _target.transform.position;
 
         float distance = Vector2.Distance(transform.position, playerPos);
         if (distance > float.Epsilon)
@@ -82,36 +55,43 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void FlipByDirection()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (_playerController.transform.position.x < transform.position.x)
+        if (Time.time < _nextShotTime)
+            return;
+        _nextShotTime = Time.time + 60 / _enemyData.DamageRate;
+
+        if (other.TryGetComponent(out IDamageable damageable))
         {
-            if (!_isLookingLeft)
-            {
-                FlipLeft(true);
-                _logger.Log($"{gameObject} looking at the right", this);
-            }
-        }
-        else
-        {
-            if (_isLookingLeft)
-            {
-                FlipLeft(false);
-                _logger.Log($"{gameObject} looking at the left", this);
-            }
+            damageable.DoDamage(_enemyData.Damage);
         }
     }
 
-    private void FlipLeft(bool value)
-    {
-        _isLookingLeft = value;
-        _enemySpriteRenderer.flipX = value;
-    }
+    //private void FlipByDirection()
+    //{
+    //    if (_playerController.transform.position.x < transform.position.x)
+    //    {
+    //        if (!_isLookingLeft)
+    //        {
+    //            FlipLeft(true);
+    //            _logger.Log($"{gameObject} looking at the right", this);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (_isLookingLeft)
+    //        {
+    //            FlipLeft(false);
+    //            _logger.Log($"{gameObject} looking at the left", this);
+    //        }
+    //    }
+    //}
 
-    private void HealthEvent(float health)
-    {
-        _enemyAnimator.SetFloat("Health", health);
-    }
+    //private void FlipLeft(bool value)
+    //{
+    //    _isLookingLeft = value;
+    //    _enemySpriteRenderer.flipX = value;
+    //}
 
     #endregion
 }

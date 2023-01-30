@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : EntityController
 {
 
     #region Fields
 
-    [Header("Data")]
+    [Header("Player Data")]
     [SerializeField]
     private CharacterData _characterData;
-
-    [SerializeField]
-    private Rigidbody2D _rigidbody2D;
 
     [SerializeField]
     private PlayerControls _inputActions;
@@ -35,16 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _speedModifier;
 
-    [Header("Animation Settings")]
-    [SerializeField]
-    private SpriteRenderer _playerSpriteRenderer;
-
-    [SerializeField]
-    private Animator _playerAnimator;
-
-    [SerializeField]
-    private SpriteRenderer _weaponSpriteRenderer;
-
+    [Header("Animation")]
     [SerializeField]
     private Animator _weaponAnimator;
 
@@ -52,31 +39,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
-    [SerializeField]
-    private Logger _logger;
-
     #endregion
 
     #region Methods
 
-    private void Awake()
+    protected override void Awake()
     {
-        _inputActions = new PlayerControls();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        base.Awake();
 
+        _inputActions = new PlayerControls();
         AfterAnimation();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         _inputActions.Player.Enable();
         _inputActions.Player.Look.performed += Look_performed;
         _inputActions.Player.Move.performed += Move_performed;
         _inputActions.Player.Roll.performed += Roll_performed;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         _inputActions.Player.Look.performed -= Look_performed;
         _inputActions.Player.Move.performed -= Move_performed;
         _inputActions.Player.Roll.performed -= Roll_performed;
@@ -85,10 +73,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        FlipByPointerPosition();
+        // FlipByPointerPosition();
         WeaponLookAtPointerPosition();
 
-        _playerAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+        _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
         _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
     }
 
@@ -96,6 +84,8 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2D.MovePosition(_rigidbody2D.position + _moveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
     }
+
+    #region Input Action
 
     private void Look_performed(InputAction.CallbackContext context)
     {
@@ -118,10 +108,12 @@ public class PlayerController : MonoBehaviour
         _speedModifier = 3f;
         _isRolling = true;
 
-        _playerAnimator.SetTrigger("DoRoll");
+        _entityAnimator.SetTrigger("DoRoll");
         _weaponAnimator.SetTrigger("DoRoll");
         _logger.Log($"{gameObject} rolling", this);
     }
+
+    #endregion
 
     public void AfterAnimation()
     {
@@ -132,38 +124,38 @@ public class PlayerController : MonoBehaviour
         _mouseInput = Vector2.zero;
     }
 
-    private void FlipByPointerPosition()
-    {
-        if (_isRolling)
-            return;
+    //private void FlipByPointerPosition()
+    //{
+    //    if (_isRolling)
+    //        return;
 
-        var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+    //    var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        if (mouseCoordinate.x < transform.position.x)
-        {
-            if (!_isMouseLeft)
-            {
-                FlipLeft(true);
-                _logger.Log($"{gameObject} looking at the right", this);
-            }
-        }
-        else
-        {
-            if (_isMouseLeft)
-            {
-                FlipLeft(false);
-                _logger.Log($"{gameObject} looking at the left", this);
-            }
-        }
-    }
+    //    if (mouseCoordinate.x < transform.position.x)
+    //    {
+    //        if (!_isMouseLeft)
+    //        {
+    //            FlipLeft(true);
+    //            _logger.Log($"{gameObject} looking at the right", this);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (_isMouseLeft)
+    //        {
+    //            FlipLeft(false);
+    //            _logger.Log($"{gameObject} looking at the left", this);
+    //        }
+    //    }
+    //}
 
-    private void FlipLeft(bool value)
-    {
-        _isMouseLeft = value;
+    //private void FlipLeft(bool value)
+    //{
+    //    _isMouseLeft = value;
 
-        _playerSpriteRenderer.flipX = value;
-        _weaponSpriteRenderer.flipX = value;
-    }
+    //    _playerSpriteRenderer.flipX = value;
+    //    _weaponSpriteRenderer.flipX = value;
+    //}
 
     private void WeaponLookAtPointerPosition()
     {
@@ -172,14 +164,11 @@ public class PlayerController : MonoBehaviour
 
         var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        Vector3 difference = mouseCoordinate - _weaponSpriteRenderer.transform.position;
+        Vector3 difference = mouseCoordinate - _weaponAnimator.transform.position;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        var curRotation = _weaponSpriteRenderer.transform.rotation;
-        if (_isMouseLeft)
-            _weaponSpriteRenderer.transform.rotation = Quaternion.Lerp(curRotation, Quaternion.Euler(0.0f, 0.0f, rotationZ - 180), 0.2f);
-        else
-            _weaponSpriteRenderer.transform.rotation = Quaternion.Lerp(curRotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), 0.2f);
+        _weaponAnimator.transform.rotation =
+            Quaternion.Lerp(_weaponAnimator.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), 0.2f);
     }
 
     #endregion
