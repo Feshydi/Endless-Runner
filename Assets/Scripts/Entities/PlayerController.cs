@@ -23,13 +23,19 @@ public class PlayerController : EntityController
     private Vector2 _moveInput;
 
     [SerializeField]
+    private Vector2 _lastMoveInput;
+
+    [SerializeField]
     private Vector2 _mouseInput;
 
     [SerializeField]
-    private Vector2 _lastInput;
+    private Vector2 _lastMousePosition;
 
     [SerializeField]
     private bool _isRolling;
+
+    [SerializeField]
+    private bool _isLookingLeft;
 
     [SerializeField]
     private float _speedModifier;
@@ -52,6 +58,9 @@ public class PlayerController : EntityController
 
         _inputActions = new PlayerControls();
         _speedModifier = 1f;
+
+        _lastMoveInput = Vector2.zero;
+        _lastMousePosition = Vector2.zero;
     }
 
     protected override void OnEnable()
@@ -78,19 +87,12 @@ public class PlayerController : EntityController
     {
         WeaponLookAtPointerPosition();
 
-        if (_inputActions.Player.Fire.IsPressed())
-            _gun.Shoot();
-
-        _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
-        _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+        ShootHandle();
     }
 
     private void FixedUpdate()
     {
-        if (!_isRolling)
-            _lastInput = _moveInput;
-
-        _rigidbody2D.MovePosition(_rigidbody2D.position + _lastInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
+        MoveHandle();
     }
 
     #region Input Action
@@ -114,11 +116,59 @@ public class PlayerController : EntityController
         GetComponent<Collider2D>().enabled = false;
         _isRolling = true;
 
+        if (_lastMoveInput.Equals(Vector2.zero))
+        {
+            var difference = _lastMousePosition - (Vector2)transform.position;
+            _lastMoveInput = difference.normalized;     // choosing roll direction by mouse position
+        }
+
         _entityAnimator.SetTrigger("Roll");
         _weaponAnimator.SetTrigger("Roll");
     }
 
     #endregion
+
+    private void ShootHandle()
+    {
+        if (_isRolling)
+            return;
+
+        if (_inputActions.Player.Fire.IsPressed())
+            _gun.Shoot();
+    }
+
+    private void MoveHandle()
+    {
+        _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+        _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+
+        if (!_isRolling)
+            _lastMoveInput = _moveInput;
+
+        if (_lastMoveInput == Vector2.zero)     // return if player not moving
+            return;
+
+        _rigidbody2D.MovePosition(_rigidbody2D.position + _lastMoveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
+    }
+
+    private void WeaponLookAtPointerPosition()
+    {
+        if (_isRolling)
+            return;
+
+        Vector2 mousePosition = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        if (_lastMousePosition.Equals(mousePosition))      // return if mouse not moving
+            return;
+
+        _lastMousePosition = mousePosition;
+
+        var difference = _lastMousePosition - (Vector2)_weaponAnimator.transform.position;
+        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+
+        _weaponAnimator.transform.rotation =
+            Quaternion.Lerp(_weaponAnimator.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), 0.2f);
+    }
 
     public void AfterRollingAnimation()
     {
@@ -142,20 +192,6 @@ public class PlayerController : EntityController
         _moveInput = Vector2.zero;
         _mouseInput = Vector2.zero;
         enabled = false;
-    }
-
-    private void WeaponLookAtPointerPosition()
-    {
-        if (_isRolling)
-            return;
-
-        var mouseCoordinate = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-        Vector3 difference = mouseCoordinate - _weaponAnimator.transform.position;
-        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-
-        _weaponAnimator.transform.rotation =
-            Quaternion.Lerp(_weaponAnimator.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), 0.2f);
     }
 
     #endregion
