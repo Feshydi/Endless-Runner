@@ -17,10 +17,16 @@ public class LevelLauncher : MonoBehaviour
     private PerlinNoiseMap _objectMap;
 
     [SerializeField]
-    private EnemySpawner _spawner;
+    private SpawnManager _spawnManagerPrefab;
 
     [SerializeField]
     private PlayerController _player;
+
+    [SerializeField]
+    private SpawnManagerData _spawnManagerData;
+
+    [SerializeField]
+    private Logger _logger;
 
     #endregion
 
@@ -30,7 +36,11 @@ public class LevelLauncher : MonoBehaviour
     {
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
-        _spawner.Init(_player, levelData.EnemyList[0]);
+
+        var spawnManager = Instantiate(_spawnManagerPrefab, transform);
+        spawnManager.Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
+
+        _logger.Log($"{gameObject} completed, level created", this);
     }
 
     #endregion

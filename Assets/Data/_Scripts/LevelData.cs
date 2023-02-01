@@ -11,20 +11,11 @@ public class LevelData : ScriptableObject
     [SerializeField]
     private MapData _terrainMapData;
 
-    [SerializeField]
-    private List<EnemyController> _enemyList;
-
     #endregion
 
     #region Properties
 
-    public MapData TerrainMapData
-    {
-        get => _terrainMapData;
-        set => _terrainMapData = value;
-    }
-
-    public List<EnemyController> EnemyList => _enemyList;
+    public MapData TerrainMapData => _terrainMapData;
 
     #endregion
 

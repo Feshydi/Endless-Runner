@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c1021ef06e5490aa5cf139b6d7f81e, type: 3}
+  m_Name: DefaultEnemies
+  m_EditorClassIdentifier: 
+  _enemiesPrefabs:
+  - {fileID: 7797848528001264923, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
+  _spawnRadius: 25
+  _spawnStartTime: 3
+  _spawnInterval: 3
