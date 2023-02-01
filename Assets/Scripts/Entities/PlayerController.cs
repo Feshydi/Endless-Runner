@@ -185,10 +185,8 @@ public class PlayerController : EntityController
         _weaponAnimator.SetTrigger("Hit");
     }
 
-    protected override void AfterDeath()
+    private void AfterDeath()
     {
-        base.AfterDeath();
-
         _moveInput = Vector2.zero;
         _mouseInput = Vector2.zero;
         enabled = false;

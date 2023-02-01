@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 7797848528001264923, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
   _spawnRadius: 25
   _spawnStartTime: 3
-  _spawnInterval: 3
+  _spawnInterval: 2

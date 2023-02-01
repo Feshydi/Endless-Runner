@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class EnemyController : EntityController
@@ -17,7 +16,10 @@ public class EnemyController : EntityController
 
     [Header("Generated Data")]
     [SerializeField]
-    private float _nextShotTime;
+    private Health _targetHealth;
+
+    [SerializeField]
+    private float _nextHitTime;
 
     #endregion
 
@@ -27,12 +29,27 @@ public class EnemyController : EntityController
     {
         _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
         _target = target;
+        _targetHealth = target.GetComponent<Health>();
+
+        InvokeRepeating("MoveHandle", 1, 0.25f);
     }
 
-    private void FixedUpdate()
+    private void MoveHandle()
     {
-        if (_isDead || _target == null || _target.IsDead)
+        if (_isDead)
             return;
+
+        if (_target == null || _target.IsDead)
+        {
+            _entityAnimator.SetBool("Idle", true);
+            _rigidbody2D.velocity = Vector2.zero;
+            return;
+        }
+
+        if (_rigidbody2D.velocity.sqrMagnitude > 0.01)
+            _entityAnimator.SetBool("Idle", false);
+        else
+            _entityAnimator.SetBool("Idle", true);
 
         var playerPos = _target.transform.position;
 
@@ -46,13 +63,16 @@ public class EnemyController : EntityController
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (Time.time < _nextShotTime)
+        if (Time.time < _nextHitTime)
             return;
 
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            damageable.DoDamage(_enemyData.Damage);
-            _nextShotTime = Time.time + 60 / _enemyData.DamageRate;
+            if (damageable.Equals(_targetHealth))
+            {
+                damageable.DoDamage(_enemyData.Damage);
+                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
+            }
         }
     }
 

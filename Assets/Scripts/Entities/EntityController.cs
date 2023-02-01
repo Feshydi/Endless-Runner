@@ -54,16 +54,12 @@ public class EntityController : MonoBehaviour
         if (health <= 0)
         {
             _isDead = true;
+            GetComponent<CapsuleCollider2D>().enabled = false;
             _rigidbody2D.velocity = Vector2.zero;
         }
 
         _entityAnimator.SetFloat("Health", health);
         _entityAnimator.SetTrigger("Hit");
-    }
-
-    protected virtual void AfterDeath()
-    {
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     #endregion
