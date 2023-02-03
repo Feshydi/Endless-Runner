@@ -15,4 +15,4 @@ MonoBehaviour:
   _moveSpeed: 2
   _healthPoints: 100
   _damage: 15
-  _damageRate: 100
+  _damageRate: 50

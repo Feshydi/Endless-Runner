@@ -31,34 +31,33 @@ public class EnemyController : EntityController
         _target = target;
         _targetHealth = target.GetComponent<Health>();
 
-        InvokeRepeating("MoveHandle", 1, 0.25f);
+        InvokeRepeating("MoveHandle", 1, 0.2f);
     }
 
     private void MoveHandle()
     {
-        if (_isDead)
+        if (_isDead || _isHit)
             return;
 
         if (_target == null || _target.IsDead)
         {
-            _entityAnimator.SetBool("Idle", true);
             _rigidbody2D.velocity = Vector2.zero;
-            return;
+        }
+        else
+        {
+            var playerPos = _target.transform.position;
+            var distance = Vector2.Distance(transform.position, playerPos);
+            if (distance > float.Epsilon)
+            {
+                Vector2 direction = (playerPos - transform.position).normalized;
+                _rigidbody2D.velocity = direction * _enemyData.MoveSpeed;
+            }
         }
 
         if (_rigidbody2D.velocity.sqrMagnitude > 0.01)
             _entityAnimator.SetBool("Idle", false);
         else
             _entityAnimator.SetBool("Idle", true);
-
-        var playerPos = _target.transform.position;
-
-        float distance = Vector2.Distance(transform.position, playerPos);
-        if (distance > float.Epsilon)
-        {
-            Vector2 direction = (playerPos - transform.position).normalized;
-            _rigidbody2D.velocity = direction * _enemyData.MoveSpeed;
-        }
     }
 
     private void OnCollisionStay2D(Collision2D other)

@@ -16,6 +16,9 @@ public class EntityController : MonoBehaviour
     protected Health _health;
 
     [SerializeField]
+    protected bool _isHit;
+
+    [SerializeField]
     protected bool _isDead;
 
     [Header("Animation")]
@@ -37,6 +40,7 @@ public class EntityController : MonoBehaviour
     {
         if (_rigidbody2D == null) _rigidbody2D = GetComponent<Rigidbody2D>();
         _isDead = false;
+        _isHit = false;
     }
 
     protected virtual void OnEnable()
@@ -60,6 +64,17 @@ public class EntityController : MonoBehaviour
 
         _entityAnimator.SetFloat("Health", health);
         _entityAnimator.SetTrigger("Hit");
+    }
+
+    public void OnHitStart()
+    {
+        _isHit = true;
+        _rigidbody2D.velocity = Vector2.zero;
+    }
+
+    public void OnHitEnd()
+    {
+        _isHit = false;
     }
 
     #endregion

@@ -57,6 +57,7 @@ public class PlayerController : EntityController
         base.Awake();
 
         _inputActions = new PlayerControls();
+        _entityAnimator.SetFloat("Health", _characterData.HealthPoints);
         _speedModifier = 1f;
 
         _lastMoveInput = Vector2.zero;
@@ -130,7 +131,7 @@ public class PlayerController : EntityController
 
     private void ShootHandle()
     {
-        if (_isRolling)
+        if (_isRolling || _isHit)
             return;
 
         if (_inputActions.Player.Fire.IsPressed())
@@ -139,21 +140,28 @@ public class PlayerController : EntityController
 
     private void MoveHandle()
     {
-        _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
-        _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+        if (_isHit)
+            return;
 
         if (!_isRolling)
             _lastMoveInput = _moveInput;
 
         if (_lastMoveInput == Vector2.zero)     // return if player not moving
+        {
+            _entityAnimator.SetFloat("Speed", 0f);
+            _weaponAnimator.SetFloat("Speed", 0f);
             return;
+        }
 
         _rigidbody2D.MovePosition(_rigidbody2D.position + _lastMoveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
+
+        _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
+        _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
     }
 
     private void WeaponLookAtPointerPosition()
     {
-        if (_isRolling)
+        if (_isRolling || _isHit)
             return;
 
         Vector2 mousePosition = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());

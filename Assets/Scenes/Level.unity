@@ -751,6 +751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 1267168723}
   _health: {fileID: 1267168726}
+  _isHit: 0
   _isDead: 0
   _entityAnimator: {fileID: 1267168727}
   _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
