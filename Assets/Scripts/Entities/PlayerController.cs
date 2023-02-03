@@ -72,6 +72,7 @@ public class PlayerController : EntityController
         _inputActions.Player.Look.performed += Look_performed;
         _inputActions.Player.Move.performed += Move_performed;
         _inputActions.Player.Roll.performed += Roll_performed;
+        _inputActions.Player.Skill.performed += Skill_performed;
     }
 
     protected override void OnDisable()
@@ -81,6 +82,7 @@ public class PlayerController : EntityController
         _inputActions.Player.Look.performed -= Look_performed;
         _inputActions.Player.Move.performed -= Move_performed;
         _inputActions.Player.Roll.performed -= Roll_performed;
+        _inputActions.Player.Skill.performed -= Skill_performed;
         _inputActions.Player.Disable();
     }
 
@@ -127,7 +129,34 @@ public class PlayerController : EntityController
         _weaponAnimator.SetTrigger("Roll");
     }
 
+    private void Skill_performed(InputAction.CallbackContext context)
+    {
+        if (_isRolling)
+            return;
+
+        var explosionPos = (Vector2)transform.position;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, _characterData.ExplosionRadius);
+        foreach (var hit in colliders)
+        {
+            StartCoroutine(ExplosionHandle(hit));
+        }
+    }
+
     #endregion
+
+    private IEnumerator ExplosionHandle(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out Rigidbody2D rigidbody2D)
+            && collider.TryGetComponent(out EnemyController entity)
+            && collider.TryGetComponent(out IDamageable damageable))
+        {
+            entity.OnHitStart();
+            var direction = (collider.transform.position - transform.position).normalized;
+            rigidbody2D.AddForce(direction * _characterData.ExplosionForce, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.2f);
+            damageable.DoDamage(_characterData.ExplosionDamage);
+        }
+    }
 
     private void ShootHandle()
     {

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DefaultEnemy
   m_EditorClassIdentifier: 
   _moveSpeed: 2
-  _healthPoints: 100
+  _healthPoints: 120
   _damage: 15
   _damageRate: 50

@@ -17,3 +17,6 @@ MonoBehaviour:
   _damage: 20
   _damageRate: 300
   _projectileSpeed: 10
+  _explosionRadius: 3
+  _explosionForce: 200
+  _explosionDamage: 100
