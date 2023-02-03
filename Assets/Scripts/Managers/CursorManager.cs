@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorController : MonoBehaviour
+public class CursorManager : MonoBehaviour
 {
 
     #region Fields
@@ -17,14 +17,29 @@ public class CursorController : MonoBehaviour
 
     #region Methods
 
-    private void Update()
+    private void OnEnable()
+    {
+        GameManager.Instance.OnGameStatusChanged += UpdateCursor;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnGameStatusChanged -= UpdateCursor;
+    }
+
+    private void UpdateCursor()
     {
         _currentStatus = GameManager.Instance.GameMode;
 
-        if (_currentStatus.Equals(GameMode.Playing))
-            SetCrosshair();
-        else
-            SetDefault();
+        switch (_currentStatus)
+        {
+            case GameMode.Playing:
+                SetCrosshair();
+                break;
+            case GameMode.Paused:
+                SetDefault();
+                break;
+        }
     }
 
     public void SetCrosshair()

@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Setting")]
     [SerializeField]
-    private LevelLauncher _levelLauncher;
+    private LevelManager _levelManager;
 
     [SerializeField]
     private GameMode _gameMode;
 
-    [SerializeField]
-    private Action OnGameStatusChanged;
+    [System.NonSerialized]
+    public Action OnGameStatusChanged;
 
     #endregion
 
@@ -53,18 +53,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _levelLauncher.CreateLevel(_levelData);
+        _levelManager.CreateLevel(_levelData);
         _gameMode = GameMode.Playing;
+        OnGameStatusChanged?.Invoke();
     }
 
     private void OnApplicationPause(bool pause)
     {
         _gameMode = GameMode.Paused;
+        OnGameStatusChanged?.Invoke();
     }
 
     private void OnApplicationFocus(bool focus)
     {
         _gameMode = GameMode.Playing;
+        OnGameStatusChanged?.Invoke();
     }
 
     #endregion
