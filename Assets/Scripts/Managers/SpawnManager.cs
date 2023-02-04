@@ -37,11 +37,14 @@ public class SpawnManager : MonoBehaviour
 
         _logger = logger;
 
-        InvokeRepeating("SpawnEnemy", _spawnManagerData.SpawnStartTime, _spawnManagerData.SpawnInterval);
+        Invoke("SpawnEnemy", _spawnManagerData.SpawnStartTime);
     }
 
     protected virtual void SpawnEnemy()
     {
+        if (_target.IsDead)
+            return;
+
         Vector2 spawnPosition = new Vector2();
         do
         {
@@ -54,6 +57,8 @@ public class SpawnManager : MonoBehaviour
         enemy.Init(_target);
 
         _logger.Log($"{gameObject} spawned {enemy.gameObject}", this);
+
+        Invoke("SpawnEnemy", _spawnManagerData.SpawnInterval);
     }
 
     #endregion
