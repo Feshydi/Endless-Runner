@@ -8,11 +8,6 @@ public class MainMenu : MonoBehaviour
 
     #region Methods
 
-    public void LoadLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
     public void Quit()
     {
 #if UNITY_EDITOR

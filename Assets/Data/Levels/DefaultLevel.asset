@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cca864c0707416fbe340de979b7182, type: 3}
   m_Name: DefaultLevel
   m_EditorClassIdentifier: 
+  _name: First Level
+  _icon: {fileID: 21300000, guid: fe34d352a702a4561a1970964e9485df, type: 3}
   _terrainMapData: {fileID: 11400000, guid: a7197b3228df34d3bbe08c703f568760, type: 2}
-  _enemyList:
-  - {fileID: 7797848528001264923, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
