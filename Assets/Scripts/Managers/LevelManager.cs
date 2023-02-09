@@ -32,8 +32,20 @@ public class LevelManager : MonoBehaviour
 
     #region Methods
 
-    public void CreateLevel(LevelData levelData)
+    private void Start()
     {
+        CreateLevel();
+    }
+
+    public void CreateLevel()
+    {
+        var levelData = GameManager.Instance.LevelData;
+        if (levelData == null)
+        {
+            _logger.Log("No Level Data", this);
+            return;
+        }
+
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
 

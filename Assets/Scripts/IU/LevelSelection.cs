@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,6 +72,8 @@ public class LevelSelection : MonoBehaviour
         _selectedLevelButton = levelButton;
         _selectedLevel = levelData;
 
+        GameManager.Instance.LevelData = _selectedLevel;
+
         _selectedLevelButton.interactable = false;
         _playButton.interactable = true;
         _playButton.Select();
@@ -86,9 +89,7 @@ public class LevelSelection : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        //add parameters 
+        SceneManager.LoadSceneAsync((int)SceneIndexes.Level);
     }
 
     #endregion

@@ -9,7 +9,6 @@ public enum GameMode
     Paused
 }
 
-
 public class GameManager : MonoBehaviour
 {
 
@@ -17,9 +16,16 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance;
 
-    public static GameManager Instance => _instance == null ? new GameManager() : _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.LogError("Game Manager is Null");
 
-    private GameManager() => _instance = this;
+            return _instance;
+        }
+    }
 
     #endregion
 
@@ -27,47 +33,54 @@ public class GameManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
-    private LevelData _levelData;
-
-    [Header("Setting")]
-    [SerializeField]
-    private LevelManager _levelManager;
+    public LevelData LevelData;
 
     [SerializeField]
-    private GameMode _gameMode;
+    public SettingsData SettingsData;
+
+    [SerializeField]
+    public GameMode GameMode;
 
     [System.NonSerialized]
     public Action OnGameStatusChanged;
 
     #endregion
 
-    #region Properties
-
-    public LevelData LevelData => _levelData;
-
-    public GameMode GameMode => _gameMode;
-
-    #endregion
-
     #region Methods
+
+    private void Awake()
+    {
+        _instance = this;
+
+        DontDestroyOnLoad(this);
+    }
 
     private void Start()
     {
-        _levelManager.CreateLevel(_levelData);
-        _gameMode = GameMode.Playing;
+        GameMode = GameMode.Playing;
         OnGameStatusChanged?.Invoke();
     }
 
     private void OnApplicationPause(bool pause)
     {
-        _gameMode = GameMode.Paused;
+        GameMode = GameMode.Paused;
         OnGameStatusChanged?.Invoke();
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        _gameMode = GameMode.Playing;
+        GameMode = GameMode.Playing;
         OnGameStatusChanged?.Invoke();
+    }
+
+    private void OnApplicationQuit()
+    {
+        
+    }
+
+    private void AssignLevelData(LevelData levelData)
+    {
+        LevelData = levelData;
     }
 
     #endregion
