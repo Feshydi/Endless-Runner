@@ -39,7 +39,13 @@ public class GameManager : MonoBehaviour
     public SettingsData SettingsData;
 
     [SerializeField]
-    public GameMode GameMode;
+    private GameMode _gameMode;
+
+    #endregion
+
+    #region Properties
+
+    public GameMode GameMode => _gameMode;
 
     [System.NonSerialized]
     public Action OnGameStatusChanged;
@@ -50,37 +56,36 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance != null)
+            return;
+
         _instance = this;
 
-        DontDestroyOnLoad(this);
+        _gameMode = GameMode.Paused;
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    private void OnApplicationPause()
     {
-        GameMode = GameMode.Playing;
+        _gameMode = GameMode.Paused;
         OnGameStatusChanged?.Invoke();
     }
 
-    private void OnApplicationPause(bool pause)
+    private void OnApplicationFocus()
     {
-        GameMode = GameMode.Paused;
         OnGameStatusChanged?.Invoke();
-    }
-
-    private void OnApplicationFocus(bool focus)
-    {
-        GameMode = GameMode.Playing;
-        OnGameStatusChanged?.Invoke();
-    }
-
-    private void OnApplicationQuit()
-    {
-        
     }
 
     private void AssignLevelData(LevelData levelData)
     {
         LevelData = levelData;
+    }
+
+    public void SetGameMode(GameMode gameMode)
+    {
+        _gameMode = gameMode;
+        OnGameStatusChanged?.Invoke();
     }
 
     #endregion

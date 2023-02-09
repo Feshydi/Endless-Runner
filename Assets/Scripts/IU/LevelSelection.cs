@@ -89,6 +89,7 @@ public class LevelSelection : MonoBehaviour
             return;
         }
 
+        GameManager.Instance.SetGameMode(GameMode.Playing);
         SceneManager.LoadSceneAsync((int)SceneIndexes.Level);
     }
 

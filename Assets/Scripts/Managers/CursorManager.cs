@@ -5,6 +5,23 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour
 {
 
+    #region Singleton
+
+    private static CursorManager _instance;
+
+    public static CursorManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.LogError("Game Manager is Null");
+
+            return _instance;
+        }
+    }
+
+    #endregion
+
     #region Fields
 
     [SerializeField]
@@ -17,14 +34,16 @@ public class CursorManager : MonoBehaviour
 
     #region Methods
 
-    private void OnEnable()
+    private void Start()
     {
-        GameManager.Instance.OnGameStatusChanged += UpdateCursor;
-    }
+        if (_instance != null)
+            return;
 
-    private void OnDisable()
-    {
-        GameManager.Instance.OnGameStatusChanged -= UpdateCursor;
+        _instance = this;
+
+        GameManager.Instance.OnGameStatusChanged += UpdateCursor;
+
+        DontDestroyOnLoad(this);
     }
 
     private void UpdateCursor()

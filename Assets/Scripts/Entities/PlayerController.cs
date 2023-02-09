@@ -112,7 +112,7 @@ public class PlayerController : EntityController
 
     private void Roll_performed(InputAction.CallbackContext context)
     {
-        if (_isRolling)
+        if (_isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
 
         _speedModifier = 3f;
@@ -131,7 +131,7 @@ public class PlayerController : EntityController
 
     private void Skill_performed(InputAction.CallbackContext context)
     {
-        if (_isRolling)
+        if (_isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
 
         var explosionPos = (Vector2)transform.position;
@@ -160,7 +160,7 @@ public class PlayerController : EntityController
 
     private void ShootHandle()
     {
-        if (_isRolling || _isHit)
+        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
 
         if (_inputActions.Player.Fire.IsPressed())
@@ -169,7 +169,7 @@ public class PlayerController : EntityController
 
     private void MoveHandle()
     {
-        if (_isHit)
+        if (_isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
 
         if (!_isRolling)
@@ -190,7 +190,7 @@ public class PlayerController : EntityController
 
     private void WeaponLookAtPointerPosition()
     {
-        if (_isRolling || _isHit)
+        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
 
         Vector2 mousePosition = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
