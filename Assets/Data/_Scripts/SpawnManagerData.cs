@@ -12,7 +12,13 @@ public class SpawnManagerData : ScriptableObject
     private List<EnemyController> _enemiesPrefabs;
 
     [SerializeField]
-    private float _spawnRadius;
+    protected float _borderOffset;
+
+    [SerializeField]
+    private float _minSpawnRadius;
+
+    [SerializeField]
+    private float _maxSpawnRadius;
 
     [SerializeField]
     private float _spawnStartTime;
@@ -26,7 +32,11 @@ public class SpawnManagerData : ScriptableObject
 
     public List<EnemyController> EnemiesPrefabs => _enemiesPrefabs;
 
-    public float SpawnRadius => _spawnRadius;
+    public float BorderOffset => _borderOffset;
+
+    public float MinSpawnRadius => _minSpawnRadius;
+
+    public float MaxSpawnRadius => _maxSpawnRadius;
 
     public float SpawnStartTime => _spawnStartTime;
 

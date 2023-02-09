@@ -14,11 +14,24 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     protected PlayerController _target;
 
+    [Header("Generated Data")]
     [SerializeField]
-    private int _borderWidth;
+    protected float _borderWidth;
 
     [SerializeField]
-    private int _borderHeight;
+    protected float _borderHeight;
+
+    [SerializeField]
+    protected float _leftFOVBorder;
+
+    [SerializeField]
+    protected float _rightFOVBorder;
+
+    [SerializeField]
+    protected float _downFOVBorder;
+
+    [SerializeField]
+    protected float _upFOVBorder;
 
     [Header("Additional")]
     [SerializeField]
@@ -32,8 +45,8 @@ public class SpawnManager : MonoBehaviour
     {
         _target = target;
         _spawnManagerData = spawnManagerData;
-        _borderWidth = borderWidth;
-        _borderHeight = borderHeight;
+        _borderWidth = (float)borderWidth - _spawnManagerData.BorderOffset;
+        _borderHeight = (float)borderHeight - _spawnManagerData.BorderOffset;
 
         _logger = logger;
 
@@ -48,9 +61,10 @@ public class SpawnManager : MonoBehaviour
         Vector2 spawnPosition = new Vector2();
         do
         {
-            spawnPosition = Random.insideUnitCircle * _spawnManagerData.SpawnRadius + (Vector2)_target.transform.position;
-        } while (spawnPosition.x < 1 || spawnPosition.x > _borderWidth - 1 ||
-                    spawnPosition.y < 1 || spawnPosition.y > _borderHeight - 1);
+            spawnPosition = Random.insideUnitCircle * _spawnManagerData.MaxSpawnRadius + (Vector2)_target.transform.position;
+        } while (spawnPosition.x < _spawnManagerData.BorderOffset || spawnPosition.x > _borderWidth ||
+                    spawnPosition.y < _spawnManagerData.BorderOffset || spawnPosition.y > _borderHeight ||
+                    Vector2.Distance(spawnPosition, _target.transform.position) <= _spawnManagerData.MinSpawnRadius);
 
         var enemyIndex = Random.Range(0, _spawnManagerData.EnemiesPrefabs.Count);
         var enemy = Instantiate(_spawnManagerData.EnemiesPrefabs[enemyIndex], spawnPosition, Quaternion.identity);
