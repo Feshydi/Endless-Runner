@@ -20,6 +20,12 @@ public class CharacterData : EntityData
     [SerializeField]
     private float _explosionDamage;
 
+    [SerializeField]
+    private float _explosionCooldownTime;
+
+    [SerializeField]
+    private float _rollCooldownTime;
+
     #endregion
 
     #region Properties
@@ -31,6 +37,10 @@ public class CharacterData : EntityData
     public float ExplosionForce => _explosionForce;
 
     public float ExplosionDamage => _explosionDamage;
+
+    public float ExplosionCooldownTime => _explosionCooldownTime;
+
+    public float RollCooldownTime => _rollCooldownTime;
 
     #endregion
 

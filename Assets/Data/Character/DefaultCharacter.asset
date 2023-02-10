@@ -20,3 +20,5 @@ MonoBehaviour:
   _explosionRadius: 3
   _explosionForce: 200
   _explosionDamage: 100
+  _explosionCooldownTime: 15
+  _rollCooldownTime: 5

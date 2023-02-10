@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,9 +27,6 @@ public class PlayerController : EntityController
     private Vector2 _lastMoveInput;
 
     [SerializeField]
-    private Vector2 _mouseInput;
-
-    [SerializeField]
     private Vector2 _lastMousePosition;
 
     [SerializeField]
@@ -40,6 +38,12 @@ public class PlayerController : EntityController
     [SerializeField]
     private float _speedModifier;
 
+    [SerializeField]
+    private float _nextRollTime;
+
+    [SerializeField]
+    private float _nextSkillTime;
+
     [Header("Animation")]
     [SerializeField]
     private Animator _weaponAnimator;
@@ -47,6 +51,16 @@ public class PlayerController : EntityController
     [Header("Additional")]
     [SerializeField]
     private Camera _camera;
+
+    [Header("UI Events")]
+    [NonSerialized]
+    public Action<float, float> OnHealthChanged;
+
+    [NonSerialized]
+    public Action<float> OnRollTimeChanged;
+
+    [NonSerialized]
+    public Action<float> OnSkillTimeChanged;
 
     #endregion
 
@@ -69,7 +83,6 @@ public class PlayerController : EntityController
         base.OnEnable();
 
         _inputActions.Player.Enable();
-        _inputActions.Player.Look.performed += Look_performed;
         _inputActions.Player.Move.performed += Move_performed;
         _inputActions.Player.Roll.performed += Roll_performed;
         _inputActions.Player.Skill.performed += Skill_performed;
@@ -79,7 +92,6 @@ public class PlayerController : EntityController
     {
         base.OnDisable();
 
-        _inputActions.Player.Look.performed -= Look_performed;
         _inputActions.Player.Move.performed -= Move_performed;
         _inputActions.Player.Roll.performed -= Roll_performed;
         _inputActions.Player.Skill.performed -= Skill_performed;
@@ -100,11 +112,6 @@ public class PlayerController : EntityController
 
     #region Input Action
 
-    private void Look_performed(InputAction.CallbackContext context)
-    {
-        _mouseInput = context.ReadValue<Vector2>();
-    }
-
     private void Move_performed(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
@@ -112,8 +119,11 @@ public class PlayerController : EntityController
 
     private void Roll_performed(InputAction.CallbackContext context)
     {
-        if (_isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (Time.time < _nextRollTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
+
+        _nextRollTime = Time.time + _characterData.RollCooldownTime;
+        OnRollTimeChanged?.Invoke(_characterData.RollCooldownTime);
 
         _speedModifier = 3f;
         GetComponent<Collider2D>().enabled = false;
@@ -131,8 +141,11 @@ public class PlayerController : EntityController
 
     private void Skill_performed(InputAction.CallbackContext context)
     {
-        if (_isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (Time.time < _nextSkillTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
             return;
+
+        _nextSkillTime = Time.time + _characterData.ExplosionCooldownTime;
+        OnSkillTimeChanged?.Invoke(_characterData.ExplosionCooldownTime);
 
         var explosionPos = (Vector2)transform.position;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, _characterData.ExplosionRadius);
@@ -218,6 +231,7 @@ public class PlayerController : EntityController
     {
         base.HealthEvent(health);
 
+        OnHealthChanged?.Invoke(health, _characterData.HealthPoints);
         _weaponAnimator.SetFloat("Health", health);
         _weaponAnimator.SetTrigger("Hit");
     }
@@ -225,7 +239,6 @@ public class PlayerController : EntityController
     private void AfterDeath()
     {
         _moveInput = Vector2.zero;
-        _mouseInput = Vector2.zero;
         enabled = false;
     }
 
