@@ -20,21 +20,17 @@ public class PauseMenu : MonoBehaviour
 
     private void PauseGame()
     {
-        Time.timeScale = 0;
-
-        GameManager.Instance.SetGameMode(GameMode.Paused);
+        GameManager.Instance.SetGameMode(GameMode.PauseMenu);
     }
 
     public void ContinueGame()
     {
-        Time.timeScale = 1;
-
         GameManager.Instance.SetGameMode(GameMode.Playing);
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadSceneAsync((int)SceneIndexes.MainMenu);
+        GameManager.Instance.LoadingManager.LoadMenu();
     }
 
     #endregion

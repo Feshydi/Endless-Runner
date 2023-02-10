@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameMode
 {
+    MainMenu,
+    PauseMenu,
     Playing,
     Paused
 }
@@ -39,6 +42,9 @@ public class GameManager : MonoBehaviour
     public SettingsData SettingsData;
 
     [SerializeField]
+    public SceneLoadingManager LoadingManager;
+
+    [SerializeField]
     private GameMode _gameMode;
 
     #endregion
@@ -56,25 +62,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null)
-            return;
-
         _instance = this;
-
-        _gameMode = GameMode.Paused;
+        SetGameMode(GameMode.MainMenu);
 
         DontDestroyOnLoad(gameObject);
     }
 
     private void OnApplicationPause()
     {
-        _gameMode = GameMode.Paused;
-        OnGameStatusChanged?.Invoke();
+        if (_gameMode.Equals(GameMode.Playing))
+            SetGameMode(GameMode.Paused);
     }
 
     private void OnApplicationFocus()
     {
-        OnGameStatusChanged?.Invoke();
+        if (_gameMode.Equals(GameMode.Paused))
+            SetGameMode(GameMode.Playing);
     }
 
     private void AssignLevelData(LevelData levelData)
@@ -86,6 +89,22 @@ public class GameManager : MonoBehaviour
     {
         _gameMode = gameMode;
         OnGameStatusChanged?.Invoke();
+
+        switch (_gameMode)
+        {
+            case GameMode.MainMenu:
+                Time.timeScale = 0;
+                break;
+            case GameMode.PauseMenu:
+                Time.timeScale = 0;
+                break;
+            case GameMode.Playing:
+                Time.timeScale = 1;
+                break;
+            case GameMode.Paused:
+                Time.timeScale = 0;
+                break;
+        }
     }
 
     #endregion

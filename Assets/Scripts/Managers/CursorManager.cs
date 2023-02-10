@@ -36,14 +36,10 @@ public class CursorManager : MonoBehaviour
 
     private void Start()
     {
-        if (_instance != null)
-            return;
-
         _instance = this;
-
         GameManager.Instance.OnGameStatusChanged += UpdateCursor;
 
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void UpdateCursor()

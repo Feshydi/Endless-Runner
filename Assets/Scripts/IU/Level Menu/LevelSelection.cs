@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelection : MonoBehaviour
 {
 
-    #region
+    #region Fields
 
     [Header("Data")]
     [SerializeField]
@@ -89,8 +89,7 @@ public class LevelSelection : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.SetGameMode(GameMode.Playing);
-        SceneManager.LoadSceneAsync((int)SceneIndexes.Level);
+        GameManager.Instance.LoadingManager.LoadLevel();
     }
 
     #endregion
