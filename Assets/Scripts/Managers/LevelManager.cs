@@ -52,6 +52,8 @@ public class LevelManager : MonoBehaviour
         var spawnManager = Instantiate(_spawnManagerPrefab, transform);
         spawnManager.Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
 
+        ScoreManager.Instance.Init();
+
         _logger.Log($"{gameObject} completed, level created", this);
     }
 

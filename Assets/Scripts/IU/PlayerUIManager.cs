@@ -48,6 +48,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.OnHealthChanged += NewHealthPoints;
         _player.OnRollTimeChanged += RollBarProgress;
         _player.OnSkillTimeChanged += SkillBarProgress;
+        ScoreManager.OnScorePointsChanged += NewScore;
     }
 
     private void OnDisable()
@@ -55,9 +56,10 @@ public class PlayerUIManager : MonoBehaviour
         _player.OnHealthChanged -= NewHealthPoints;
         _player.OnRollTimeChanged -= RollBarProgress;
         _player.OnSkillTimeChanged -= SkillBarProgress;
+        ScoreManager.OnScorePointsChanged -= NewScore;
     }
 
-    public void AddScore(int value)
+    public void NewScore(int value)
     {
         _scoreText.text = string.Concat("Score: ", value);
 

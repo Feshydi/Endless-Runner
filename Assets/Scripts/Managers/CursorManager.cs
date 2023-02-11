@@ -27,9 +27,6 @@ public class CursorManager : MonoBehaviour
     [SerializeField]
     private Texture2D _crosshairTexture;
 
-    [SerializeField]
-    private GameMode _currentStatus;
-
     #endregion
 
     #region Methods
@@ -44,14 +41,12 @@ public class CursorManager : MonoBehaviour
 
     private void UpdateCursor()
     {
-        _currentStatus = GameManager.Instance.GameMode;
-
-        switch (_currentStatus)
+        switch (GameManager.Instance.GameMode)
         {
             case GameMode.Playing:
                 SetCrosshair();
                 break;
-            case GameMode.Paused:
+            default:
                 SetDefault();
                 break;
         }
