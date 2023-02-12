@@ -31,12 +31,26 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private float _nextShotTime;
 
+    [SerializeField]
+    protected List<Projectile> _spawnedProjectiles;
+
     #endregion
 
     #region Methods
 
+    private void OnDestroy()
+    {
+        foreach (var projectile in _spawnedProjectiles)
+        {
+            if (projectile != null)
+                Destroy(projectile.gameObject);
+        }
+    }
+
     private void Awake()
     {
+        _spawnedProjectiles = new List<Projectile>();
+
         _muzzleSpriteRenderer.enabled = false;
     }
 
@@ -50,6 +64,7 @@ public class Gun : MonoBehaviour
         StartCoroutine(OnFire());
         var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
         projectile.Init(_characterData, shootDirection);
+        _spawnedProjectiles.Add(projectile);
     }
 
     private IEnumerator OnFire()

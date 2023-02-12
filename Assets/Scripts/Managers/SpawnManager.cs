@@ -33,6 +33,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     protected float _upFOVBorder;
 
+    [SerializeField]
+    protected List<EntityController> _spawnedEntities;
+
     [Header("Additional")]
     [SerializeField]
     protected Logger _logger;
@@ -41,8 +44,19 @@ public class SpawnManager : MonoBehaviour
 
     #region Methods
 
+    private void OnDestroy()
+    {
+        foreach (var entity in _spawnedEntities)
+        {
+            if (entity != null)
+                Destroy(entity.gameObject);
+        }
+    }
+
     public virtual void Init(PlayerController target, SpawnManagerData spawnManagerData, int borderWidth, int borderHeight, Logger logger)
     {
+        _spawnedEntities = new List<EntityController>();
+
         _target = target;
         _spawnManagerData = spawnManagerData;
         _borderWidth = (float)borderWidth - _spawnManagerData.BorderOffset;
@@ -69,6 +83,7 @@ public class SpawnManager : MonoBehaviour
         var enemyIndex = Random.Range(0, _spawnManagerData.EnemiesPrefabs.Count);
         var enemy = Instantiate(_spawnManagerData.EnemiesPrefabs[enemyIndex], spawnPosition, Quaternion.identity);
         enemy.Init(_target);
+        _spawnedEntities.Add(enemy);
 
         _logger.Log($"{gameObject} spawned {enemy.gameObject}", this);
 
