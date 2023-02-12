@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 977368220}
   - component: {fileID: 977368219}
   m_Layer: 0
-  m_Name: Level Launcher
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1768,8 +1768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapData: {fileID: 11400000, guid: 582921d9a1fe049ae9aacea4854383d1, type: 2}
-  _seed: 56762314
-  _autoSeedGeneration: 1
   _tilemap: {fileID: 0}
   _logger: {fileID: 1017184326}
 --- !u!483693784 &983699400
@@ -2947,6 +2945,7 @@ MonoBehaviour:
   _muzzleSpriteRenderer: {fileID: 2061684532}
   _muzzlePosition: {fileID: 2061684531}
   _nextShotTime: 0
+  _spawnedProjectiles: []
 --- !u!1 &1566738190
 GameObject:
   m_ObjectHideFlags: 0

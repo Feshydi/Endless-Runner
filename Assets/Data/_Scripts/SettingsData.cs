@@ -9,8 +9,11 @@ public class SettingsData : ScriptableObject
     #region Fields
 
     [SerializeField]
+    public string Username = "Player";
+
+    [SerializeField]
     [Range(0, 1)]
-    public float SoundVolume;
+    public float SoundVolume = 0.5f;
 
     #endregion
 

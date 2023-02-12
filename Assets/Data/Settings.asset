@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b725205fa6775412ab475784b4defc41, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  SoundVolume: 0.2742857
+  Username: Player
+  SoundVolume: 0.5

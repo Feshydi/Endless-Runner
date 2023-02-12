@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -63,50 +64,58 @@ public class ScoreManager : MonoBehaviour
     public void UpdateHighscores()
     {
         Highscores = GetSavedScores();
-
-        if (Highscores == null)
-            Highscores = new List<ScoreboardRowData>();
     }
 
     public void AddScore(ScoreboardRowData scoreboardRowData)
     {
         var highscores = GetSavedScores();
 
+        var _isAdded = false;
         for (int i = 0; i < highscores.Count; i++)
         {
             if (scoreboardRowData.Score > highscores[i].Score)
             {
                 highscores.Insert(i, scoreboardRowData);
-                SaveScores(highscores);
-                UpdateHighscores();
-                return;
+                _isAdded = true;
+                break;
             }
         }
+        if (!_isAdded)
+            highscores.Add(scoreboardRowData);
+
+        SaveScores(highscores);
     }
 
     private List<ScoreboardRowData> GetSavedScores()
     {
         if (!File.Exists(SavePath))
-        {
             File.Create(SavePath).Dispose();
-            return new List<ScoreboardRowData>();
-        }
 
         using (StreamReader stream = new StreamReader(SavePath))
         {
             string json = stream.ReadToEnd();
 
-            return JsonUtility.FromJson<List<ScoreboardRowData>>(json);
+            var highscores = JsonConvert.DeserializeObject<List<ScoreboardRowData>>(json);
+            if (highscores != null)
+                return highscores;
         }
+
+        return new List<ScoreboardRowData>();
     }
 
     private void SaveScores(List<ScoreboardRowData> scoreboardRowDatas)
     {
         using (StreamWriter stream = new StreamWriter(SavePath))
         {
-            string json = JsonUtility.ToJson(scoreboardRowDatas, true);
+            string json = JsonConvert.SerializeObject(scoreboardRowDatas);
             stream.Write(json);
         }
+    }
+
+    public ScoreboardRowData GetCurrentScore()
+    {
+        return new ScoreboardRowData(GameManager.Instance.SettingsData.Username,
+            _currentScorePoints, 1430f, GameManager.Instance.LevelData.Seed);
     }
 
     #endregion

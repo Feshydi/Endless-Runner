@@ -63,7 +63,7 @@ public class PlayerUIManager : MonoBehaviour
     {
         _scoreText.text = string.Concat("Score: ", value);
 
-        _logger.Log($"New Score: {_scoreText}", this);
+        _logger.Log($"New Score: {_scoreText.text}", this);
     }
 
     public void NewHealthPoints(float currentHP, float maxHP)

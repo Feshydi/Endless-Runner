@@ -18,6 +18,14 @@ public struct ScoreboardRowData
 
     [SerializeField]
     public int Seed;
+
+    public ScoreboardRowData(string username, int score, float time, int seed)
+    {
+        Username = username;
+        Score = score;
+        Time = time;
+        Seed = seed;
+    }
 }
 
 public class Scoreboard : MonoBehaviour

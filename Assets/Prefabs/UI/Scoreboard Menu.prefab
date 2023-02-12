@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 6023685762943318457}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -160,7 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956d17658d1dc49b8a3d59655e7eb2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _context: {fileID: 6023685762943318458}
+  _contextHolderTransform: {fileID: 0}
+  _scoreboardTitlePrefab: {fileID: 0}
   _scoreboardRowPrefab: {fileID: 0}
   _highscores: []
 --- !u!1 &6023685762094074427
