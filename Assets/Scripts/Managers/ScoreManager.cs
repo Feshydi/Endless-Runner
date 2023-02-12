@@ -64,7 +64,8 @@ public class ScoreManager : MonoBehaviour
     {
         Highscores = GetSavedScores();
 
-      //  SaveScores(Highscores);
+        if (Highscores == null)
+            Highscores = new List<ScoreboardRowData>();
     }
 
     public void AddScore(ScoreboardRowData scoreboardRowData)

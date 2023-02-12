@@ -46,6 +46,10 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (levelData.AutoSeedGeneration)
+            levelData.Seed = Random.Range(0, int.MaxValue);
+        Random.InitState(levelData.Seed);
+
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
 

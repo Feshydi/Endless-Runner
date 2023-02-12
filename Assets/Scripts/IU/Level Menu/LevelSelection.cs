@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
@@ -13,10 +12,19 @@ public class LevelSelection : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
+    private Transform _contextHolderTransform;
+
+    [SerializeField]
     private List<LevelData> _levelDatas;
 
     [SerializeField]
     private Button _levelPrefab;
+
+    [SerializeField]
+    private Toggle _toggle;
+
+    [SerializeField]
+    private TMP_InputField _inputField;
 
     [SerializeField]
     private Button _playButton;
@@ -48,7 +56,7 @@ public class LevelSelection : MonoBehaviour
     {
         foreach (var levelData in _levelDatas)
         {
-            var level = Instantiate(_levelPrefab, transform);
+            var level = Instantiate(_levelPrefab, _contextHolderTransform);
             level.GetComponent<Level>().Init(this, levelData);
 
             if (_selectedLevel == null)
@@ -88,6 +96,10 @@ public class LevelSelection : MonoBehaviour
             _logger.Log("No level selected", this);
             return;
         }
+
+        GameManager.Instance.LevelData.AutoSeedGeneration = _toggle.isOn;
+        if (!_toggle.isOn)
+            GameManager.Instance.LevelData.Seed = int.Parse(_inputField.text);
 
         GameManager.Instance.LoadingManager.LoadLevel();
     }

@@ -25,15 +25,9 @@ public class PerlinNoiseMap : MonoBehaviour
 
     #region Fields
 
-    [Header("Data for generation")]
+    [Header("Data")]
     [SerializeField]
     private MapData _mapData;
-
-    [SerializeField]
-    private int _seed;
-
-    [SerializeField]
-    private bool _autoSeedGeneration;
 
     [Header("Generated data")]
     [SerializeField]
@@ -61,10 +55,6 @@ public class PerlinNoiseMap : MonoBehaviour
     {
         _mapData = mapData;
 
-        if (_autoSeedGeneration)
-            _seed = Random.Range(0, int.MaxValue);
-
-        Random.InitState(_seed);
         _noiseMap = new float[_mapData.MapWidth, _mapData.MapHeight];
         _tileVector = new List<TileVector>();
         _tilemap = GetComponent<Tilemap>();
