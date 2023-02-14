@@ -77,7 +77,7 @@ public class EnemyController : EntityController
 
     private void AfterDeath()
     {
-        ScoreManager.Instance.AddScore(1);
+        GameManager.Instance.ScoreManager.AddScore(1);
         Destroy(gameObject);
     }
 

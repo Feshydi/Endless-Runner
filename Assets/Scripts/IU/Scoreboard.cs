@@ -10,10 +10,8 @@ public struct ScoreboardRowData
     [SerializeField]
     public string Username;
 
-    [SerializeField]
     public int Score;
 
-    [SerializeField]
     public float Time;
 
     [SerializeField]
@@ -51,8 +49,9 @@ public class Scoreboard : MonoBehaviour
 
     private void OnEnable()
     {
-        ScoreManager.Instance.UpdateHighscores();
-        _highscores = ScoreManager.Instance.Highscores;
+        var scoreManager = GameManager.Instance.ScoreManager;
+        scoreManager.UpdateHighscores();
+        _highscores = scoreManager.Highscores;
         UpdateUI(_highscores);
     }
 

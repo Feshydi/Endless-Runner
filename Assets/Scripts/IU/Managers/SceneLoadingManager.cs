@@ -8,23 +8,6 @@ using TMPro;
 public class SceneLoadingManager : MonoBehaviour
 {
 
-    #region Singleton
-
-    private static SceneLoadingManager _instance;
-
-    public static SceneLoadingManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-                Debug.LogError("Game Manager is Null");
-
-            return _instance;
-        }
-    }
-
-    #endregion
-
     #region Fields
 
     [SerializeField]
@@ -45,7 +28,6 @@ public class SceneLoadingManager : MonoBehaviour
 
     private void Awake()
     {
-        _instance = this;
         _scenesLoading = new List<AsyncOperation>();
         SceneManager.LoadSceneAsync((int)SceneIndexes.MainMenu, LoadSceneMode.Additive);
 

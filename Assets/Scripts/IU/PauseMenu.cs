@@ -36,7 +36,8 @@ public class PauseMenu : MonoBehaviour
 
     private void SaveGameStatistic()
     {
-        ScoreManager.Instance.AddScore(ScoreManager.Instance.GetCurrentScore());
+        var scoreManager = GameManager.Instance.ScoreManager;
+        scoreManager.AddScore(scoreManager.GetCurrentScore());
     }
 
     #endregion

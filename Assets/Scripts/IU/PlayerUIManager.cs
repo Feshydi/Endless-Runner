@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor.U2D.Animation;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerUIManager : MonoBehaviour
 {
@@ -48,7 +47,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.OnHealthChanged += NewHealthPoints;
         _player.OnRollTimeChanged += RollBarProgress;
         _player.OnSkillTimeChanged += SkillBarProgress;
-        ScoreManager.OnScorePointsChanged += NewScore;
+        GameManager.Instance.ScoreManager.OnScorePointsChanged += NewScore;
     }
 
     private void OnDisable()
@@ -56,7 +55,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.OnHealthChanged -= NewHealthPoints;
         _player.OnRollTimeChanged -= RollBarProgress;
         _player.OnSkillTimeChanged -= SkillBarProgress;
-        ScoreManager.OnScorePointsChanged -= NewScore;
+        GameManager.Instance.ScoreManager.OnScorePointsChanged -= NewScore;
     }
 
     public void NewScore(int value)

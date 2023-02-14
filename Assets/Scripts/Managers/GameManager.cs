@@ -34,27 +34,30 @@ public class GameManager : MonoBehaviour
 
     #region Fields
 
+    [Header("Managers")]
+    public SceneLoadingManager SceneLoadingManager;
+
+    public ScoreManager ScoreManager;
+
+    public CursorManager CursorManager;
+
     [Header("Data")]
-    [SerializeField]
     public LevelData LevelData;
 
-    [SerializeField]
     public SettingsData SettingsData;
 
-    [SerializeField]
     public SceneLoadingManager LoadingManager;
 
     [SerializeField]
     private GameMode _gameMode;
+
+    public event Action OnGameStatusChanged;
 
     #endregion
 
     #region Properties
 
     public GameMode GameMode => _gameMode;
-
-    [System.NonSerialized]
-    public Action OnGameStatusChanged;
 
     #endregion
 

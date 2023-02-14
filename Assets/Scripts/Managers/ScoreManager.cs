@@ -8,33 +8,14 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
 
-    #region Singleton
-
-    private static ScoreManager _instance;
-
-    public static ScoreManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-                Debug.LogError("Game Manager is Null");
-
-            return _instance;
-        }
-    }
-
-    #endregion
-
     #region Fields
 
     [SerializeField]
-    private int _currentScorePoints;
+    private int _currentScorePoints = 0;
 
-    [SerializeField]
     public List<ScoreboardRowData> Highscores;
 
-    [NonSerialized]
-    public static Action<int> OnScorePointsChanged;
+    public event Action<int> OnScorePointsChanged;
 
     private string SavePath => $"{Application.persistentDataPath}/highscores.json";
 
@@ -44,15 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        _instance = this;
-
         DontDestroyOnLoad(gameObject);
-    }
-
-    public void Init()
-    {
-        _currentScorePoints = 0;
-        OnScorePointsChanged?.Invoke(_currentScorePoints);
     }
 
     public void AddScore(int value)
