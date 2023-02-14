@@ -7,14 +7,12 @@ using UnityEngine;
 [Serializable]
 public struct ScoreboardRowData
 {
-    [SerializeField]
     public string Username;
 
     public int Score;
 
     public float Time;
 
-    [SerializeField]
     public int Seed;
 
     public ScoreboardRowData(string username, int score, float time, int seed)

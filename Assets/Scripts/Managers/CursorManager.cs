@@ -14,16 +14,16 @@ public class CursorManager : MonoBehaviour
 
     #region Methods
 
-    private void Start()
+    public void Init(GameManager gameManager)
     {
-        GameManager.Instance.OnGameStatusChanged += UpdateCursor;
+        gameManager.OnGameStatusChanged += UpdateCursor;
 
         DontDestroyOnLoad(gameObject);
     }
 
-    private void UpdateCursor()
+    private void UpdateCursor(GameMode gameMode)
     {
-        switch (GameManager.Instance.GameMode)
+        switch (gameMode)
         {
             case GameMode.Playing:
                 SetCrosshair();

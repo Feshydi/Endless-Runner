@@ -15,8 +15,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField]
     private float _healthPoints;
 
-    [SerializeField]
-    public Action<float> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
 
     #endregion
 

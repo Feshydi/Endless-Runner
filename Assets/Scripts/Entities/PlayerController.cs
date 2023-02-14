@@ -52,15 +52,11 @@ public class PlayerController : EntityController
     [SerializeField]
     private Camera _camera;
 
-    [Header("UI Events")]
-    [NonSerialized]
-    public Action<float, float> OnHealthChanged;
+    public event Action<float, float> OnHealthChanged;
 
-    [NonSerialized]
-    public Action<float> OnRollTimeChanged;
+    public event Action<float> OnRollTimeChanged;
 
-    [NonSerialized]
-    public Action<float> OnSkillTimeChanged;
+    public event Action<float> OnSkillTimeChanged;
 
     #endregion
 

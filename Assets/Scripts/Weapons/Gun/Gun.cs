@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
     private float _nextShotTime;
 
     [SerializeField]
-    protected List<Projectile> _spawnedProjectiles;
+    private List<Projectile> _spawnedProjectiles;
 
     #endregion
 

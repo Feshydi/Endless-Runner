@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
 
     #region Methods
 
-    private void Awake()
+    public void Init()
     {
         DontDestroyOnLoad(gameObject);
     }

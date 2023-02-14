@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
         CreateLevel();
     }
 
-    public void CreateLevel()
+    private void CreateLevel()
     {
         var levelData = GameManager.Instance.LevelData;
         if (levelData == null)
@@ -53,8 +53,8 @@ public class LevelManager : MonoBehaviour
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
 
-        var spawnManager = Instantiate(_spawnManagerPrefab, transform);
-        spawnManager.Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
+        Instantiate(_spawnManagerPrefab, transform)
+            .Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
 
         _logger.Log($"{gameObject} completed, level created", this);
     }

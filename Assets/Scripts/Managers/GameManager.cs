@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameMode _gameMode;
 
-    public event Action OnGameStatusChanged;
+    public event Action<GameMode> OnGameStatusChanged;
 
     #endregion
 
@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        SetGameMode(GameMode.MainMenu);
+        SceneLoadingManager.Init();
+        ScoreManager.Init();
+        CursorManager.Init(this);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -83,15 +85,10 @@ public class GameManager : MonoBehaviour
             SetGameMode(GameMode.Playing);
     }
 
-    private void AssignLevelData(LevelData levelData)
-    {
-        LevelData = levelData;
-    }
-
     public void SetGameMode(GameMode gameMode)
     {
         _gameMode = gameMode;
-        OnGameStatusChanged?.Invoke();
+        OnGameStatusChanged?.Invoke(_gameMode);
 
         switch (_gameMode)
         {

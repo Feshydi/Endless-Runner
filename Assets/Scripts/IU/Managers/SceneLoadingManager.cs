@@ -26,7 +26,7 @@ public class SceneLoadingManager : MonoBehaviour
 
     #region Methods
 
-    private void Awake()
+    public void Init()
     {
         _scenesLoading = new List<AsyncOperation>();
         SceneManager.LoadSceneAsync((int)SceneIndexes.MainMenu, LoadSceneMode.Additive);

@@ -25,7 +25,6 @@ public class EntityController : MonoBehaviour
     [SerializeField]
     protected Animator _entityAnimator;
 
-
     #endregion
 
     #region Properties

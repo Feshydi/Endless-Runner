@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
 
     #region Methods
 
+    private void Awake()
+    {
+        GameManager.Instance.SetGameMode(GameMode.MainMenu);
+    }
+
     public void Quit()
     {
 #if UNITY_EDITOR
