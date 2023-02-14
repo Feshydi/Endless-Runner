@@ -28,7 +28,6 @@ public class SceneLoadingManager : MonoBehaviour
 
     public void Init()
     {
-        _scenesLoading = new List<AsyncOperation>();
         SceneManager.LoadSceneAsync((int)SceneIndexes.MainMenu, LoadSceneMode.Additive);
 
         DontDestroyOnLoad(gameObject);
@@ -36,7 +35,19 @@ public class SceneLoadingManager : MonoBehaviour
 
     public void LoadLevel()
     {
+        _scenesLoading = new List<AsyncOperation>();
+
         SceneManager.UnloadSceneAsync((int)SceneIndexes.MainMenu);
+        _scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.Level, LoadSceneMode.Additive));
+
+        StartCoroutine(SceneLoadProgress(GameMode.Playing));
+    }
+
+    public void RestartLevel()
+    {
+        _scenesLoading = new List<AsyncOperation>();
+
+        SceneManager.UnloadSceneAsync((int)SceneIndexes.Level);
         _scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.Level, LoadSceneMode.Additive));
 
         StartCoroutine(SceneLoadProgress(GameMode.Playing));
@@ -44,6 +55,8 @@ public class SceneLoadingManager : MonoBehaviour
 
     public void LoadMenu()
     {
+        _scenesLoading = new List<AsyncOperation>();
+
         SceneManager.UnloadSceneAsync((int)SceneIndexes.Level);
         _scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.MainMenu, LoadSceneMode.Additive));
 

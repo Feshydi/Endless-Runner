@@ -1,31 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class GameplayMenu : MonoBehaviour
 {
 
     #region Methods
 
-    private void OnEnable()
-    {
-        PauseGame();
-    }
-
-    private void OnDisable()
-    {
-        ContinueGame();
-    }
-
-    private void PauseGame()
-    {
-        GameManager.Instance.SetGameMode(GameMode.PauseMenu);
-    }
-
     public void ContinueGame()
     {
         GameManager.Instance.SetGameMode(GameMode.Playing);
+    }
+
+    public void RestartGame()
+    {
+        SaveGameStatistic();
+        GameManager.Instance.LoadingManager.RestartLevel();
     }
 
     public void LoadMainMenu()

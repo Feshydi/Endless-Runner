@@ -29,6 +29,7 @@ public class Health : MonoBehaviour, IDamageable
     public void DoDamage(float damage)
     {
         _healthPoints -= damage;
+        if (_healthPoints < 0) _healthPoints = 0;
         OnHealthChanged?.Invoke(_healthPoints);
     }
 

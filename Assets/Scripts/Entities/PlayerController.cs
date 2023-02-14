@@ -115,7 +115,7 @@ public class PlayerController : EntityController
 
     private void Roll_performed(InputAction.CallbackContext context)
     {
-        if (Time.time < _nextRollTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (Time.time < _nextRollTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
         _nextRollTime = Time.time + _characterData.RollCooldownTime;
@@ -137,7 +137,7 @@ public class PlayerController : EntityController
 
     private void Skill_performed(InputAction.CallbackContext context)
     {
-        if (Time.time < _nextSkillTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (Time.time < _nextSkillTime || _isRolling || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
         _nextSkillTime = Time.time + _characterData.ExplosionCooldownTime;
@@ -169,7 +169,7 @@ public class PlayerController : EntityController
 
     private void ShootHandle()
     {
-        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
         if (_inputActions.Player.Fire.IsPressed())
@@ -178,7 +178,7 @@ public class PlayerController : EntityController
 
     private void MoveHandle()
     {
-        if (_isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (_isHit || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
         if (!_isRolling)
@@ -199,7 +199,7 @@ public class PlayerController : EntityController
 
     private void WeaponLookAtPointerPosition()
     {
-        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.Paused))
+        if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
         Vector2 mousePosition = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
