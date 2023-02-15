@@ -41,9 +41,9 @@ public class Projectile : MonoBehaviour
         transform.Translate(move);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.TryGetComponent(out IDamageable damageable))
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.DoDamage(_damage);
         }

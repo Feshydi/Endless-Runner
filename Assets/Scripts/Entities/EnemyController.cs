@@ -19,6 +19,9 @@ public class EnemyController : EntityController
     private Health _targetHealth;
 
     [SerializeField]
+    private CapsuleCollider2D _targetCollider;
+
+    [SerializeField]
     private float _nextHitTime;
 
     #endregion
@@ -30,8 +33,12 @@ public class EnemyController : EntityController
         _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
         _target = target;
         _targetHealth = target.GetComponent<Health>();
+        _targetCollider = target.GetComponent<CapsuleCollider2D>();
+    }
 
-        InvokeRepeating("MoveHandle", 1, 0.2f);
+    private void FixedUpdate()
+    {
+        MoveHandle();
     }
 
     private void MoveHandle()
@@ -47,10 +54,10 @@ public class EnemyController : EntityController
         {
             var playerPos = _target.transform.position;
             var distance = Vector2.Distance(transform.position, playerPos);
-            if (distance > float.Epsilon)
+            if (distance > _targetCollider.bounds.extents.magnitude)
             {
                 Vector2 direction = (playerPos - transform.position).normalized;
-                _rigidbody2D.velocity = direction * _enemyData.MoveSpeed;
+                _rigidbody2D.velocity = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
             }
         }
 
@@ -67,7 +74,7 @@ public class EnemyController : EntityController
 
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            if (damageable.Equals(_targetHealth))
+            if (damageable.Equals(_targetHealth) && other.gameObject.GetComponent<Health>().enabled)
             {
                 damageable.DoDamage(_enemyData.Damage);
                 _nextHitTime = Time.time + 60 / _enemyData.DamageRate;

@@ -121,8 +121,8 @@ public class PlayerController : EntityController
         _nextRollTime = Time.time + _characterData.RollCooldownTime;
         OnRollTimeChanged?.Invoke(_characterData.RollCooldownTime);
 
-        _speedModifier = 3f;
-        GetComponent<Collider2D>().enabled = false;
+        _speedModifier = 5f;
+        _health.enabled = false;
         _isRolling = true;
 
         if (_lastMoveInput.Equals(Vector2.zero))
@@ -186,12 +186,13 @@ public class PlayerController : EntityController
 
         if (_lastMoveInput == Vector2.zero)     // return if player not moving
         {
+            _rigidbody2D.velocity = Vector2.zero;
             _entityAnimator.SetFloat("Speed", 0f);
             _weaponAnimator.SetFloat("Speed", 0f);
             return;
         }
 
-        _rigidbody2D.MovePosition(_rigidbody2D.position + _lastMoveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime);
+        _rigidbody2D.velocity = _lastMoveInput * _characterData.MoveSpeed * _speedModifier * Time.fixedDeltaTime;
 
         _entityAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
         _weaponAnimator.SetFloat("Speed", _moveInput.sqrMagnitude);
@@ -203,23 +204,19 @@ public class PlayerController : EntityController
             return;
 
         Vector2 mousePosition = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
         if (_lastMousePosition.Equals(mousePosition))      // return if mouse not moving
             return;
-
         _lastMousePosition = mousePosition;
 
         var difference = _lastMousePosition - (Vector2)_weaponAnimator.transform.position;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-
-        _weaponAnimator.transform.rotation =
-            Quaternion.Lerp(_weaponAnimator.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), 0.2f);
+        _weaponAnimator.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
     }
 
     public void AfterRollingAnimation()
     {
         _speedModifier = 1f;
-        GetComponent<Collider2D>().enabled = true;
+        _health.enabled = true;
         _isRolling = false;
     }
 

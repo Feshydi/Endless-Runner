@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cf189371aca4db88ebbf9aec590b2d, type: 3}
   m_Name: DefaultCharacter
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
+  _moveSpeed: 100
   _healthPoints: 100
   _damage: 20
   _damageRate: 300
   _projectileSpeed: 10
   _explosionRadius: 3
-  _explosionForce: 200
+  _explosionForce: 15
   _explosionDamage: 100
   _explosionCooldownTime: 15
   _rollCooldownTime: 5
