@@ -11,7 +11,10 @@ public class ScoreManager : MonoBehaviour
     #region Fields
 
     [SerializeField]
-    private int _currentScorePoints = 0;
+    private int _currentScorePoints;
+
+    [SerializeField]
+    private int _maxScoreboardRows;
 
     public List<ScoreboardRowData> Highscores;
 
@@ -28,6 +31,11 @@ public class ScoreManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ResetScore()
+    {
+        _currentScorePoints = 0;
+        OnScorePointsChanged?.Invoke(_currentScorePoints);
+    }
     public void AddScore(int value)
     {
         _currentScorePoints += value;
@@ -55,6 +63,9 @@ public class ScoreManager : MonoBehaviour
         }
         if (!_isAdded)
             highscores.Add(scoreboardRowData);
+
+        if (highscores.Count > _maxScoreboardRows)
+            highscores.RemoveRange(_maxScoreboardRows, highscores.Count - _maxScoreboardRows);
 
         SaveScores(highscores);
     }
