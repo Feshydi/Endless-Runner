@@ -29,8 +29,11 @@ public class ScoreboardRow : MonoBehaviour
     {
         _username.text = scoreboardRowData.Username;
         _score.text = scoreboardRowData.Score.ToString();
-        TimeSpan timeSpan = TimeSpan.FromSeconds(scoreboardRowData.Time);
-        _time.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        var timeSpan = TimeSpan.FromSeconds(scoreboardRowData.Time);
+        if (timeSpan.Hours >= 1)
+            _time.text = "OVER AN HOUR";
+        else
+            _time.text = timeSpan.ToString("mm':'ss'.'ff");
         _seed.text = scoreboardRowData.Seed.ToString();
     }
 

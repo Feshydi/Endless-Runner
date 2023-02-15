@@ -98,8 +98,11 @@ public class ScoreManager : MonoBehaviour
 
     public ScoreboardRowData GetCurrentScore()
     {
-        return new ScoreboardRowData(GameManager.Instance.SettingsData.Username,
-            _currentScorePoints, 1430f, GameManager.Instance.LevelData.Seed);
+        var gameManager = GameManager.Instance;
+        return new ScoreboardRowData(gameManager.SettingsData.Username,
+            _currentScorePoints,
+            gameManager.CurrentLevelManager.TimerController.Elapsedtime,
+            gameManager.LevelData.Seed);
     }
 
     #endregion

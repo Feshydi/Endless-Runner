@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private SpawnManagerData _spawnManagerData;
 
+    public TimerController TimerController;
+
     [SerializeField]
     private Logger _logger;
 
@@ -39,6 +41,8 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        GameManager.Instance.CurrentLevelManager = this;
+
         var levelData = GameManager.Instance.LevelData;
         if (levelData == null)
         {
@@ -57,8 +61,14 @@ public class LevelManager : MonoBehaviour
             .Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
 
         GameManager.Instance.ScoreManager.ResetScore();
+        TimerController.Init();
 
         _logger.Log($"{gameObject} completed, level created", this);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.CurrentLevelManager = null;
     }
 
     #endregion

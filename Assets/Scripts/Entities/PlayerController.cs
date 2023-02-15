@@ -236,6 +236,8 @@ public class PlayerController : EntityController
     {
         _moveInput = Vector2.zero;
         enabled = false;
+
+        GameManager.Instance.SetGameMode(GameMode.PauseMenu);
     }
 
     #endregion

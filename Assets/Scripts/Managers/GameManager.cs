@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
 
     public SceneLoadingManager LoadingManager;
 
+    public LevelManager CurrentLevelManager;
+
     [SerializeField]
     private GameMode _gameMode;
 
