@@ -41,12 +41,12 @@ public class GameManager : MonoBehaviour
 
     public CursorManager CursorManager;
 
+    public SettingsManager SettingsManager;
+
     public LevelManager CurrentLevelManager;
 
     [Header("Data")]
     public LevelData LevelData;
-
-    public SettingsData SettingsData;
 
     [SerializeField]
     private GameMode _gameMode;
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         LoadingManager.Init();
         ScoreManager.Init();
         CursorManager.Init(this);
+        SettingsManager.Init();
 
         DontDestroyOnLoad(gameObject);
     }

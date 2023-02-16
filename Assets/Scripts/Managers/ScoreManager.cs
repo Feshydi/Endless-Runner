@@ -16,6 +16,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int _maxScoreboardRows;
 
+    [SerializeField]
+    private string _savePath;
+
     public List<ScoreboardRowData> Highscores;
 
     public event Action<int> OnScorePointsChanged;
@@ -26,6 +29,7 @@ public class ScoreManager : MonoBehaviour
 
     public void Init()
     {
+        _savePath = DataPath.Scoreboard;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -70,12 +74,10 @@ public class ScoreManager : MonoBehaviour
 
     private List<ScoreboardRowData> GetSavedScores()
     {
-        var savePath = DataPath.Settings;
+        if (!File.Exists(_savePath))
+            File.Create(_savePath).Dispose();
 
-        if (!File.Exists(savePath))
-            File.Create(savePath).Dispose();
-
-        using (StreamReader stream = new StreamReader(savePath))
+        using (StreamReader stream = new StreamReader(_savePath))
         {
             string json = stream.ReadToEnd();
 
@@ -89,7 +91,7 @@ public class ScoreManager : MonoBehaviour
 
     private void SaveScores(List<ScoreboardRowData> scoreboardRowDatas)
     {
-        using (StreamWriter stream = new StreamWriter(DataPath.Settings))
+        using (StreamWriter stream = new StreamWriter(_savePath))
         {
             string json = JsonConvert.SerializeObject(scoreboardRowDatas);
             stream.Write(json);
@@ -99,7 +101,7 @@ public class ScoreManager : MonoBehaviour
     public ScoreboardRowData GetCurrentScore()
     {
         var gameManager = GameManager.Instance;
-        return new ScoreboardRowData(gameManager.SettingsData.Username,
+        return new ScoreboardRowData(gameManager.SettingsManager.Settings.Username,
             _currentScorePoints,
             gameManager.CurrentLevelManager.TimerController.Elapsedtime,
             gameManager.Seed);

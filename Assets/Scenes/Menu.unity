@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 382878842}
   - component: {fileID: 382878841}
   m_Layer: 5
-  m_Name: Options Button
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3752,9 +3752,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900695423}
     m_Modifications:
+    - target: {fileID: 5674530851409177153, guid: d468d24d1bb7b4ba0b2d7e0731297f37, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5674530851544459680, guid: d468d24d1bb7b4ba0b2d7e0731297f37, type: 3}
       propertyPath: m_Name
-      value: Options Menu
+      value: Settings Menu
       objectReference: {fileID: 0}
     - target: {fileID: 5674530851544459683, guid: d468d24d1bb7b4ba0b2d7e0731297f37, type: 3}
       propertyPath: m_Pivot.x
@@ -3852,6 +3856,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 382878841}
+    - target: {fileID: 7103619986836141504, guid: d468d24d1bb7b4ba0b2d7e0731297f37, type: 3}
+      propertyPath: _logger
+      value: 
+      objectReference: {fileID: 789660109}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d468d24d1bb7b4ba0b2d7e0731297f37, type: 3}
 --- !u!1001 &6023685762692685771
