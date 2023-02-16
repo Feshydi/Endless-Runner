@@ -19,12 +19,6 @@ public class LevelData : ScriptableObject
     [SerializeField]
     private MapData _terrainMapData;
 
-    [SerializeField]
-    private bool _autoSeedGeneration = true;
-
-    [SerializeField]
-    private int _seed;
-
     #endregion
 
     #region Properties
@@ -34,18 +28,6 @@ public class LevelData : ScriptableObject
     public Sprite Icon => _icon;
 
     public MapData TerrainMapData => _terrainMapData;
-
-    public bool AutoSeedGeneration
-    {
-        get => _autoSeedGeneration;
-        set => _autoSeedGeneration = value;
-    }
-
-    public int Seed
-    {
-        get => _seed;
-        set => _seed = value;
-    }
 
     #endregion
 

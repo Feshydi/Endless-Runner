@@ -35,25 +35,28 @@ public class GameManager : MonoBehaviour
     #region Fields
 
     [Header("Managers")]
-    public SceneLoadingManager SceneLoadingManager;
+    public SceneLoadingManager LoadingManager;
 
     public ScoreManager ScoreManager;
 
     public CursorManager CursorManager;
+
+    public LevelManager CurrentLevelManager;
 
     [Header("Data")]
     public LevelData LevelData;
 
     public SettingsData SettingsData;
 
-    public SceneLoadingManager LoadingManager;
-
-    public LevelManager CurrentLevelManager;
-
     [SerializeField]
     private GameMode _gameMode;
 
     public event Action<GameMode> OnGameStatusChanged;
+
+    [Header("Generation Data")]
+    public bool AutoSeedGeneration;
+
+    public int Seed;
 
     #endregion
 
@@ -68,7 +71,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        SceneLoadingManager.Init();
+        LoadingManager.Init();
         ScoreManager.Init();
         CursorManager.Init(this);
 

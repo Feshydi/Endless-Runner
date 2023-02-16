@@ -97,9 +97,9 @@ public class LevelSelection : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.LevelData.AutoSeedGeneration = _toggle.isOn;
+        GameManager.Instance.AutoSeedGeneration = _toggle.isOn;
         if (!_toggle.isOn)
-            GameManager.Instance.LevelData.Seed = int.Parse(_inputField.text);
+            GameManager.Instance.Seed = int.Parse(_inputField.text);
 
         GameManager.Instance.LoadingManager.LoadLevel();
     }

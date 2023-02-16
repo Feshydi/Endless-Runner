@@ -20,8 +20,6 @@ public class ScoreManager : MonoBehaviour
 
     public event Action<int> OnScorePointsChanged;
 
-    private string SavePath => $"{Application.persistentDataPath}/highscores.json";
-
     #endregion
 
     #region Methods
@@ -72,10 +70,12 @@ public class ScoreManager : MonoBehaviour
 
     private List<ScoreboardRowData> GetSavedScores()
     {
-        if (!File.Exists(SavePath))
-            File.Create(SavePath).Dispose();
+        var savePath = DataPath.Settings;
 
-        using (StreamReader stream = new StreamReader(SavePath))
+        if (!File.Exists(savePath))
+            File.Create(savePath).Dispose();
+
+        using (StreamReader stream = new StreamReader(savePath))
         {
             string json = stream.ReadToEnd();
 
@@ -89,7 +89,7 @@ public class ScoreManager : MonoBehaviour
 
     private void SaveScores(List<ScoreboardRowData> scoreboardRowDatas)
     {
-        using (StreamWriter stream = new StreamWriter(SavePath))
+        using (StreamWriter stream = new StreamWriter(DataPath.Settings))
         {
             string json = JsonConvert.SerializeObject(scoreboardRowDatas);
             stream.Write(json);
@@ -102,7 +102,7 @@ public class ScoreManager : MonoBehaviour
         return new ScoreboardRowData(gameManager.SettingsData.Username,
             _currentScorePoints,
             gameManager.CurrentLevelManager.TimerController.Elapsedtime,
-            gameManager.LevelData.Seed);
+            gameManager.Seed);
     }
 
     #endregion

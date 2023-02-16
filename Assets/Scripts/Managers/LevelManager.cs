@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 
     #region Fields
 
+    [Header("Map")]
     [SerializeField]
     private PerlinNoiseMap _groundMap;
 
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private PerlinNoiseMap _objectMap;
 
+    [Header("Entities")]
     [SerializeField]
     private SpawnManager _spawnManagerPrefab;
 
@@ -25,6 +27,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private SpawnManagerData _spawnManagerData;
 
+    [Header("Additional")]
     public TimerController TimerController;
 
     [SerializeField]
@@ -41,18 +44,19 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
-        GameManager.Instance.CurrentLevelManager = this;
+        var gameManager = GameManager.Instance;
+        gameManager.CurrentLevelManager = this;
 
-        var levelData = GameManager.Instance.LevelData;
+        var levelData = gameManager.LevelData;
         if (levelData == null)
         {
             _logger.Log("No Level Data", this);
             return;
         }
 
-        if (levelData.AutoSeedGeneration)
-            levelData.Seed = Random.Range(0, int.MaxValue);
-        Random.InitState(levelData.Seed);
+        if (gameManager.AutoSeedGeneration)
+            gameManager.Seed = Random.Range(0, int.MaxValue);
+        Random.InitState(gameManager.Seed);
 
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
@@ -60,7 +64,7 @@ public class LevelManager : MonoBehaviour
         Instantiate(_spawnManagerPrefab, transform)
             .Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
 
-        GameManager.Instance.ScoreManager.ResetScore();
+        gameManager.ScoreManager.ResetScore();
         TimerController.Init();
 
         _logger.Log($"{gameObject} completed, level created", this);
