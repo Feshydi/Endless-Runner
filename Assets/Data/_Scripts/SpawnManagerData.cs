@@ -11,6 +11,7 @@ public class SpawnManagerData : ScriptableObject
     [SerializeField]
     private List<EnemyController> _enemiesPrefabs;
 
+    [Header("Position Data")]
     [SerializeField]
     protected float _borderOffset;
 
@@ -20,11 +21,29 @@ public class SpawnManagerData : ScriptableObject
     [SerializeField]
     private float _maxSpawnRadius;
 
+    [Header("Time Data")]
     [SerializeField]
     private float _spawnStartTime;
 
     [SerializeField]
-    private float _spawnInterval;
+    private AnimationCurve _difficultyCurve;
+
+    [SerializeField]
+    private float _curveTimeMinutes;
+
+    [SerializeField]
+    private float _minSpawnInterval;
+
+    [SerializeField]
+    private float _maxSpawnInterval;
+
+    [Header("Wave Data")]
+    [SerializeField]
+    [Range(0, 1)]
+    private float _waveSpawnChance;
+
+    [SerializeField]
+    private int _maxCountInWave;
 
     #endregion
 
@@ -40,7 +59,17 @@ public class SpawnManagerData : ScriptableObject
 
     public float SpawnStartTime => _spawnStartTime;
 
-    public float SpawnInterval => _spawnInterval;
+    public AnimationCurve DifficultyCurve => _difficultyCurve;
+
+    public float CurveTimeMinutes => _curveTimeMinutes;
+
+    public float MinSpawnInterval => _minSpawnInterval;
+
+    public float MaxSpawnInterval => _maxSpawnInterval;
+
+    public float WaveSpawnChance => _waveSpawnChance;
+
+    public int MaxCountInWave => _maxCountInWave;
 
     #endregion
 

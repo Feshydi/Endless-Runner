@@ -64,7 +64,9 @@ public class LevelManager : MonoBehaviour
         InitPlayer(levelData);
 
         Instantiate(_spawnManagerPrefab, transform)
-            .Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
+            .Init(_player, _spawnManagerData,
+            levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight,
+            _logger);
 
         gameManager.ScoreManager.ResetScore();
         TimerController.Init();

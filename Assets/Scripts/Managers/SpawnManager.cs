@@ -9,69 +9,78 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
-    protected SpawnManagerData _spawnManagerData;
+    private SpawnManagerData _spawnManagerData;
 
     [SerializeField]
-    protected PlayerController _target;
+    private PlayerController _target;
+
+    [SerializeField]
+    private CurveValue _difficultyCurve;
+
+    [SerializeField]
+    private TimerController _timer;
 
     [Header("Generated Data")]
     [SerializeField]
-    protected float _borderWidth;
+    private float _borderWidth;
 
     [SerializeField]
-    protected float _borderHeight;
-
-    [SerializeField]
-    protected float _leftFOVBorder;
-
-    [SerializeField]
-    protected float _rightFOVBorder;
-
-    [SerializeField]
-    protected float _downFOVBorder;
-
-    [SerializeField]
-    protected float _upFOVBorder;
-
-    [SerializeField]
-    protected List<EntityController> _spawnedEntities;
+    private float _borderHeight;
 
     [Header("Additional")]
     [SerializeField]
-    protected Logger _logger;
+    private Logger _logger;
 
     #endregion
 
     #region Methods
 
-    private void OnDestroy()
+    public virtual void Init(PlayerController target,
+        SpawnManagerData spawnManagerData,
+        int borderWidth, int borderHeight,
+        Logger logger)
     {
-        foreach (var entity in _spawnedEntities)
-        {
-            if (entity != null)
-                Destroy(entity.gameObject);
-        }
-    }
-
-    public virtual void Init(PlayerController target, SpawnManagerData spawnManagerData, int borderWidth, int borderHeight, Logger logger)
-    {
-        _spawnedEntities = new List<EntityController>();
-
         _target = target;
         _spawnManagerData = spawnManagerData;
         _borderWidth = (float)borderWidth - _spawnManagerData.BorderOffset;
         _borderHeight = (float)borderHeight - _spawnManagerData.BorderOffset;
 
+        _difficultyCurve = new CurveValue();
+        _difficultyCurve.Init(_spawnManagerData.DifficultyCurve,
+            _spawnManagerData.MinSpawnInterval, _spawnManagerData.MaxSpawnInterval,
+            _spawnManagerData.CurveTimeMinutes);
+        _timer = GameManager.Instance.CurrentLevelManager.TimerController;
         _logger = logger;
 
-        Invoke("SpawnEnemy", _spawnManagerData.SpawnStartTime);
+        StartCoroutine(Spawn());
     }
 
-    protected virtual void SpawnEnemy()
+    private IEnumerator Spawn()
     {
-        if (_target.IsDead)
-            return;
+        yield return new WaitForSeconds(_spawnManagerData.SpawnStartTime);
 
+        while (!_target.IsDead)
+        {
+            var WaveChance = Random.Range(0, 1f);
+            if (WaveChance <= _spawnManagerData.WaveSpawnChance)
+            {
+                yield return StartCoroutine(SpawnWaveWithChance());
+            }
+            else
+            {
+                SpawnSingleEnemy();
+                _logger.Log($"Enemy spawned", this);
+            }
+
+            var time = _difficultyCurve.GetValue(_timer.Elapsedtime);
+            _logger.Log($"{time} before next spawn", this);
+
+            yield return new WaitForSeconds(time);
+        }
+    }
+
+    private void SpawnSingleEnemy()
+    {
         Vector2 spawnPosition = new Vector2();
         do
         {
@@ -81,13 +90,19 @@ public class SpawnManager : MonoBehaviour
                     Vector2.Distance(spawnPosition, _target.transform.position) <= _spawnManagerData.MinSpawnRadius);
 
         var enemyIndex = Random.Range(0, _spawnManagerData.EnemiesPrefabs.Count);
-        var enemy = Instantiate(_spawnManagerData.EnemiesPrefabs[enemyIndex], spawnPosition, Quaternion.identity);
-        enemy.Init(_target);
-        _spawnedEntities.Add(enemy);
+        Instantiate(_spawnManagerData.EnemiesPrefabs[enemyIndex], spawnPosition, Quaternion.identity, transform)
+            .Init(_target);
+    }
 
-        _logger.Log($"{gameObject} spawned {enemy.gameObject}", this);
-
-        Invoke("SpawnEnemy", _spawnManagerData.SpawnInterval);
+    private IEnumerator SpawnWaveWithChance()
+    {
+        var enemiesCount = _spawnManagerData.MaxCountInWave * _difficultyCurve.GetCurve(_timer.Elapsedtime);
+        _logger.Log($"Wave with {enemiesCount} enemies started", this);
+        for (int i = 0; i < enemiesCount; i++)
+        {
+            SpawnSingleEnemy();
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 
     #endregion
