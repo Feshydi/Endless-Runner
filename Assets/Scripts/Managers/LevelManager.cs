@@ -19,10 +19,10 @@ public class LevelManager : MonoBehaviour
 
     [Header("Entities")]
     [SerializeField]
-    private SpawnManager _spawnManagerPrefab;
+    private PlayerController _player;
 
     [SerializeField]
-    private PlayerController _player;
+    private SpawnManager _spawnManagerPrefab;
 
     [SerializeField]
     private SpawnManagerData _spawnManagerData;
@@ -61,6 +61,8 @@ public class LevelManager : MonoBehaviour
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
 
+        InitPlayer(levelData);
+
         Instantiate(_spawnManagerPrefab, transform)
             .Init(_player, _spawnManagerData, levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight, _logger);
 
@@ -68,6 +70,14 @@ public class LevelManager : MonoBehaviour
         TimerController.Init();
 
         _logger.Log($"{gameObject} completed, level created", this);
+    }
+
+    private void InitPlayer(LevelData levelData)
+    {
+        var offset = 15f;
+        var height = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);
+        var width = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);
+        _player.transform.position = new Vector2(height, width);
     }
 
     private void OnDestroy()
