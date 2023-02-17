@@ -16,6 +16,12 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField]
     private Slider _soundVolume;
 
+    [SerializeField]
+    private Slider _musicVolume;
+
+    [SerializeField]
+    private Slider _effectsVolume;
+
     #endregion
 
     #region Methods
@@ -27,16 +33,30 @@ public class SettingsMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        Settings settings;
-        settings.Username = _username.text;
-        settings.SoundVolume = _soundVolume.value;
-        GameManager.Instance.SettingsManager.UpdateSettingsData(settings);
+        ApplySettings();
     }
 
     private void UpdateUI(Settings settings)
     {
         _username.text = settings.Username;
-        _soundVolume.value = settings.SoundVolume;
+        _soundVolume.value = settings.MasterVolume;
+        _musicVolume.value = settings.MusicVolume;
+        _effectsVolume.value = settings.EffectsVolume;
+    }
+
+    private void ApplySettings()
+    {
+        Settings settings;
+        settings.Username = _username.text;
+        settings.MasterVolume = _soundVolume.value;
+        settings.MusicVolume = _musicVolume.value;
+        settings.EffectsVolume = _effectsVolume.value;
+        GameManager.Instance.SettingsManager.UpdateSettingsData(settings);
+    }
+
+    public void OnUIChange()
+    {
+        ApplySettings();
     }
 
     #endregion

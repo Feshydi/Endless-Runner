@@ -9,6 +9,12 @@ public class PlayerController : EntityController
 
     #region Fields
 
+    [SerializeField]
+    private AudioSource _explosionSound;
+
+    [SerializeField]
+    private AudioSource _rollSound;
+
     [Header("Player Data")]
     [SerializeField]
     private CharacterData _characterData;
@@ -131,6 +137,7 @@ public class PlayerController : EntityController
             _lastMoveInput = difference.normalized;     // choosing roll direction by mouse position
         }
 
+        _rollSound.Play();
         _entityAnimator.SetTrigger("Roll");
         _weaponAnimator.SetTrigger("Roll");
     }
@@ -155,6 +162,7 @@ public class PlayerController : EntityController
 
     private IEnumerator ExplosionHandle(Collider2D collider)
     {
+        _explosionSound.Play();
         if (collider.TryGetComponent(out Rigidbody2D rigidbody2D)
             && collider.TryGetComponent(out EnemyController entity)
             && collider.TryGetComponent(out IDamageable damageable))

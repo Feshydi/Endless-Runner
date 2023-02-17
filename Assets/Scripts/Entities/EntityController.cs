@@ -25,6 +25,10 @@ public class EntityController : MonoBehaviour
     [SerializeField]
     protected Animator _entityAnimator;
 
+    [Header("Sound")]
+    [SerializeField]
+    protected AudioSource _hitSound;
+
     #endregion
 
     #region Properties
@@ -69,6 +73,7 @@ public class EntityController : MonoBehaviour
     {
         _isHit = true;
         _rigidbody2D.velocity = Vector2.zero;
+        _hitSound.Play();
     }
 
     public void OnHitEnd()

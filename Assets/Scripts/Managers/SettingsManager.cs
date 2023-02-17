@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class SettingsManager : MonoBehaviour
     [Header("Data")]
     [SerializeField]
     private Settings _settings;
+
+    [SerializeField]
+    private AudioMixerGroup _mixer;
 
     [SerializeField]
     private string _savePath;
@@ -33,10 +37,12 @@ public class SettingsManager : MonoBehaviour
         if (!LoadData())
             _settings.SetDefaultValues();
 
+        ChangeVolume();
+
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool LoadData()
+    private bool LoadData()
     {
         if (!File.Exists(_savePath))
         {
@@ -47,16 +53,23 @@ public class SettingsManager : MonoBehaviour
         using (StreamReader stream = new StreamReader(_savePath))
         {
             string json = stream.ReadToEnd();
-            _settings = JsonConvert.DeserializeObject<Settings>(json);
-
-            if (_settings.IsNull())
+            if (string.IsNullOrEmpty(json))
                 return false;
+
+            try
+            {
+                _settings = JsonConvert.DeserializeObject<Settings>(json);
+            }
+            catch (JsonReaderException)
+            {
+                return false;
+            }
         }
 
         return true;
     }
 
-    public void SaveData()
+    private void SaveData()
     {
         using (StreamWriter stream = new StreamWriter(_savePath))
         {
@@ -70,6 +83,17 @@ public class SettingsManager : MonoBehaviour
         _settings = settings;
         SaveData();
         LoadData();
+
+        ChangeVolume();
+    }
+
+    private void ChangeVolume()
+    {
+        float _minVolume = -80f;
+        float _maxVolume = 0f;
+        _mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(_minVolume, _maxVolume, _settings.MasterVolume));
+        _mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(_minVolume, _maxVolume, _settings.MusicVolume));
+        _mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(_minVolume, _maxVolume, _settings.EffectsVolume));
     }
 
     #endregion

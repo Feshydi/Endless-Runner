@@ -7,17 +7,29 @@ using UnityEngine;
 public struct Settings
 {
 
-    [SerializeField]
+    #region Fields
+
     public string Username;
 
-    [SerializeField]
     [Range(0, 1)]
-    public float SoundVolume;
+    public float MasterVolume;
+
+    [Range(0, 1)]
+    public float MusicVolume;
+
+    [Range(0, 1)]
+    public float EffectsVolume;
+
+    #endregion
+
+    #region Methods
 
     public void SetDefaultValues()
     {
         Username = "player";
-        SoundVolume = 0.5f;
+        MasterVolume = 0.5f;
+        MusicVolume = 0.5f;
+        EffectsVolume = 0.5f;
     }
 
     public bool IsNull()
@@ -27,5 +39,7 @@ public struct Settings
         else
             return false;
     }
+
+    #endregion
 
 }

@@ -470,6 +470,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4979634646672071982, guid: 75fd5da25f5f34aa995c06c3a5d16fae, type: 3}
+      propertyPath: _mixer
+      value: 
+      objectReference: {fileID: 24300002, guid: aa27aca29df8c4a189e6d2f22266f12f, type: 2}
     - target: {fileID: 7441226376732818317, guid: 75fd5da25f5f34aa995c06c3a5d16fae, type: 3}
       propertyPath: m_Name
       value: Settings Manager

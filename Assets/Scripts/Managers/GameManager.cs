@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void Awake()
+    private void Start()
     {
         _instance = this;
         LoadingManager.Init();

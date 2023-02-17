@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    [Header("Projectile")]
     [SerializeField]
     private Projectile _projectilePrefab;
 
@@ -26,6 +27,10 @@ public class Gun : MonoBehaviour
 
     [SerializeField]
     private Transform _muzzlePosition;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioSource _shootSound;
 
     [Header("Generated Data")]
     [SerializeField]
@@ -70,6 +75,7 @@ public class Gun : MonoBehaviour
     private IEnumerator OnFire()
     {
         _muzzleSpriteRenderer.enabled = true;
+        _shootSound.Play();
         yield return new WaitForSeconds(0.05f);
         _muzzleSpriteRenderer.enabled = false;
     }
