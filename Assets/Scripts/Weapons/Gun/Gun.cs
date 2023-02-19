@@ -75,6 +75,7 @@ public class Gun : MonoBehaviour
     private IEnumerator OnFire()
     {
         _muzzleSpriteRenderer.enabled = true;
+        _shootSound.pitch = Random.Range(0.9f, 1.1f);
         _shootSound.Play();
         yield return new WaitForSeconds(0.05f);
         _muzzleSpriteRenderer.enabled = false;

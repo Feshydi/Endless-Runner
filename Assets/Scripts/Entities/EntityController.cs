@@ -73,6 +73,7 @@ public class EntityController : MonoBehaviour
     {
         _isHit = true;
         _rigidbody2D.velocity = Vector2.zero;
+        _hitSound.pitch = Random.Range(0.9f, 1.1f);
         _hitSound.Play();
     }
 
