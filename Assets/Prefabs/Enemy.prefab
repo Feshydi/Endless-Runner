@@ -232,9 +232,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1}
-  m_Size: {x: 3, y: 4}
-  m_Direction: 0
+  m_Offset: {x: 0, y: -2}
+  m_Size: {x: 4, y: 3}
+  m_Direction: 1
 --- !u!212 &7797848528001264901
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -286,7 +286,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &7797848528001264900
 Animator:
   serializedVersion: 4
