@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Player")]
+[CreateAssetMenu(menuName = "Data/Character")]
 public class CharacterData : EntityData
 {
 
     #region Fields
-
-    [SerializeField]
-    private float _projectileSpeed;
 
     [SerializeField]
     private float _explosionRadius;
@@ -29,8 +26,6 @@ public class CharacterData : EntityData
     #endregion
 
     #region Properties
-
-    public float ProjectileSpeed => _projectileSpeed;
 
     public float ExplosionRadius => _explosionRadius;
 

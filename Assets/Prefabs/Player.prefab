@@ -335,8 +335,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 286127377
-  m_SortingLayer: 2
+  m_SortingLayerID: -1870544563
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e63d67d56d5144545a289e3f0fe21434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -541,8 +541,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 286127377
-  m_SortingLayer: 2
+  m_SortingLayerID: -1870544563
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8b66cb2d343e942f5b158e88b476ee5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b4f6a909cf8474a93a2f70565c4072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
+  _weaponData: {fileID: 11400000, guid: df05b3fa7bc5e4bffa89fb946a3bb4a5, type: 2}
   _camera: {fileID: 0}
   _projectilePrefab: {fileID: 1859987578332313710, guid: a063aeff6301e47a6b68373b70f303a6, type: 3}
   _muzzleSpriteRenderer: {fileID: 1297815169355500787}
@@ -665,8 +665,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 363472101
-  m_SortingLayer: 0
+  m_SortingLayerID: -1870544563
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: a19c201c778f6472881c1a733d08d417, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_Intensity: 0.15
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 53de3cf600000000f1e80a8611f50d11e524aa15
+  m_ApplyToSortingLayers: 53de3cf600000000f1e80a8611f50d114dc181907f5f7737
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Intensity: 0.05
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 11f50d11
+  m_ApplyToSortingLayers: f1e80a8611f50d114dc181907f5f7737
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

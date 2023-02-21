@@ -19,14 +19,17 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float _flyDistance;
 
+    [SerializeField]
+    private float _maxFlyDistance = 20f;
+
     #endregion
 
     #region Methods
 
-    public void Init(CharacterData characterData, Vector2 direction)
+    public void Init(WeaponData weaponData, Vector2 direction)
     {
-        _damage = characterData.Damage;
-        _speed = characterData.ProjectileSpeed;
+        _damage = weaponData.Damage;
+        _speed = weaponData.ProjectileSpeed;
         _direction = direction;
         _flyDistance = 0f;
     }
@@ -35,7 +38,7 @@ public class Projectile : MonoBehaviour
     {
         var move = _direction * _speed * Time.deltaTime;
         _flyDistance += (move).magnitude;
-        if (_flyDistance > 20)
+        if (_flyDistance > _maxFlyDistance)
             Destroy(gameObject);
 
         transform.Translate(move);

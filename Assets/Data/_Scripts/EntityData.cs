@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EntityData : ScriptableObject
@@ -14,10 +15,7 @@ public class EntityData : ScriptableObject
     private float _healthPoints;
 
     [SerializeField]
-    private float _damage;
-
-    [SerializeField]
-    private float _damageRate;
+    private AnimatorController _animatorController;
 
     #endregion
 
@@ -27,9 +25,7 @@ public class EntityData : ScriptableObject
 
     public float HealthPoints => _healthPoints;
 
-    public float Damage => _damage;
-
-    public float DamageRate => _damageRate;
+    public AnimatorController AnimatorController => _animatorController;
 
     #endregion
 

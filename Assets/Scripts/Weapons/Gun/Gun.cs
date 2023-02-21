@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
-    private CharacterData _characterData;
+    private WeaponData _weaponData;
 
     [SerializeField]
     private PlayerControls _inputActions;
@@ -59,16 +59,23 @@ public class Gun : MonoBehaviour
         _muzzleSpriteRenderer.enabled = false;
     }
 
+    public void Init(WeaponData weaponData)
+    {
+        _weaponData = weaponData;
+        this.transform.position = _weaponData.WeaponPosition;
+        _muzzlePosition.position = _weaponData.MuzzlePosition;
+    }
+
     public void Shoot()
     {
         if (Time.time < _nextShotTime)
             return;
-        _nextShotTime = Time.time + 60 / _characterData.DamageRate;
+        _nextShotTime = Time.time + 60 / _weaponData.FireRate;
 
         Vector2 shootDirection = transform.right;
         StartCoroutine(OnFire());
         var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
-        projectile.Init(_characterData, shootDirection);
+        projectile.Init(_weaponData, shootDirection);
         _spawnedProjectiles.Add(projectile);
     }
 
