@@ -180,7 +180,7 @@ public class PlayerController : EntityController
         if (_isRolling || _isHit || GameManager.Instance.GameMode.Equals(GameMode.PauseMenu))
             return;
 
-        if (_inputActions.Player.Fire.IsPressed())
+        if (_inputActions.Player.Attack.IsPressed())
             _gun.Shoot();
     }
 
