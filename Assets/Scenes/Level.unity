@@ -4615,14 +4615,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1297815168768067438, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 1809394694}
-    - target: {fileID: 1297815168768067438, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
-      propertyPath: _shootSound
-      value: 
-      objectReference: {fileID: 1987378790}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
 --- !u!114 &1987378789 stripped
@@ -4636,11 +4628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d281e50c16b524f2fbcfdc94da95ad43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &1987378790 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8121179568187533207, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
-  m_PrefabInstance: {fileID: 1987378788}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1992676180
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,10 +23,10 @@ public class AnimationController : MonoBehaviour
         _weaponAnimator.SetFloat("Speed", 0f);
     }
 
-    public void PlayMoveAnimation(float magnitude)
+    public void PlayMoveAnimation()
     {
-        _playerAnimator.SetFloat("Speed", magnitude);
-        _weaponAnimator.SetFloat("Speed", magnitude);
+        _playerAnimator.SetFloat("Speed", 1f);
+        _weaponAnimator.SetFloat("Speed", 1f);
     }
 
     public void PlayRollAnimation()

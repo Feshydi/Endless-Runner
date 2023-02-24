@@ -7,11 +7,6 @@ public class AudioController : MonoBehaviour
 
     #region Fields
 
-    [Header("General")]
-    [SerializeField]
-    private PlayerControllerBehaviour _playerController;
-
-    [Header("Audio Sources")]
     [SerializeField]
     private AudioSource _moveSound;
 

@@ -14,7 +14,7 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField]
     private Rigidbody2D _rigidbody2D;
 
-    [Header("Gearated")]
+    [Header("Generated")]
     [SerializeField]
     private float _moveSpeed;
 
@@ -27,9 +27,9 @@ public class MoveBehaviour : MonoBehaviour
         _moveSpeed = _characterData.MoveSpeed;
     }
 
-    private void MoveHandle(Vector2 moveInput)
+    public void MoveHandle(Vector2 moveInput)
     {
-        _rigidbody2D.velocity = moveInput * _moveSpeed * Time.deltaTime;
+        _rigidbody2D.velocity = moveInput * _moveSpeed * Time.fixedDeltaTime;
     }
 
     #endregion
