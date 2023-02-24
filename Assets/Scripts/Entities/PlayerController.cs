@@ -87,7 +87,7 @@ public class PlayerController : EntityController
         _inputActions.Player.Enable();
         _inputActions.Player.Move.performed += Move_performed;
         _inputActions.Player.Roll.performed += Roll_performed;
-        _inputActions.Player.Skill.performed += Skill_performed;
+        _inputActions.Player.Ability.performed += Skill_performed;
     }
 
     protected override void OnDisable()
@@ -96,7 +96,7 @@ public class PlayerController : EntityController
 
         _inputActions.Player.Move.performed -= Move_performed;
         _inputActions.Player.Roll.performed -= Roll_performed;
-        _inputActions.Player.Skill.performed -= Skill_performed;
+        _inputActions.Player.Ability.performed -= Skill_performed;
         _inputActions.Player.Disable();
     }
 

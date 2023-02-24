@@ -10,11 +10,11 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
 
     #region Fields
 
-    public event UnityAction _attackEvent = delegate { };
-    public event UnityAction _lookEvent = delegate { };
-    public event UnityAction<Vector2> _moveEvent = delegate { };
-    public event UnityAction _rollEvent = delegate { };
-    public event UnityAction _skillEvent = delegate { };
+    public event UnityAction AttackEvent = delegate { };
+    public event UnityAction LookEvent = delegate { };
+    public event UnityAction<Vector2> MoveEvent = delegate { };
+    public event UnityAction RollEvent = delegate { };
+    public event UnityAction AbilityEvent = delegate { };
 
     private PlayerControls _inputActions;
 
@@ -41,31 +41,31 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _attackEvent?.Invoke();
+            AttackEvent?.Invoke();
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _lookEvent?.Invoke();
+            LookEvent?.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _moveEvent?.Invoke(context.ReadValue<Vector2>());
+            MoveEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnRoll(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _rollEvent.Invoke();
+            RollEvent.Invoke();
     }
 
-    public void OnSkill(InputAction.CallbackContext context)
+    public void OnAbility(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _skillEvent.Invoke();
+            AbilityEvent.Invoke();
     }
 
     public void EnableGameplayInput()
