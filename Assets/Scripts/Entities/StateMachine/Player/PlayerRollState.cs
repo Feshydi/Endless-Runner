@@ -34,12 +34,7 @@ public class PlayerRollState : PlayerBaseState
     public override void CheckSwitchState()
     {
         if (_playerController.HealthBehaviour.IsDamageAllowed)
-        {
-            if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
-                SwitchState(_stateFactory.Idle());
-            else
-                SwitchState(_stateFactory.Move());
-        }
+            SwitchState(_stateFactory.Idle());
     }
 
     #endregion

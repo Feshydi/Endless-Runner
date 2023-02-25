@@ -21,6 +21,9 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     [SerializeField]
     private bool _isDead;
 
+    [SerializeField]
+    private bool _isHitted;
+
     public event Action<float, float> OnHealthChanged;
 
     #endregion
@@ -35,11 +38,9 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         set => _isDamageAllowed = value;
     }
 
-    public bool IsDead
-    {
-        get => _isDead;
-        set => _isDead = value;
-    }
+    public bool IsDead => _isDead;
+
+    public bool IsHitted => _isHitted;
 
     #endregion
 
@@ -56,6 +57,7 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
             return;
 
         _healthPoints -= damage;
+        _isHitted = true;
         if (_healthPoints < 0)
         {
             _healthPoints = 0;
@@ -63,6 +65,11 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         }
 
         OnHealthChanged?.Invoke(_healthPoints, _entityData.HealthPoints);
+    }
+
+    public void AfterHit()
+    {
+        _isHitted = false;
     }
 
     #endregion
