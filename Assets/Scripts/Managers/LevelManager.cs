@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Entities")]
     [SerializeField]
-    private PlayerController _player;
+    private PlayerControllerBehaviour _player;
 
     [SerializeField]
     private SpawnManager _spawnManagerPrefab;

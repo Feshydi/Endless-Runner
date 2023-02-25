@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     private SpawnManagerData _spawnManagerData;
 
     [SerializeField]
-    private PlayerController _target;
+    private PlayerControllerBehaviour _target;
 
     [SerializeField]
     private CurveValue _difficultyCurve;
@@ -35,7 +35,7 @@ public class SpawnManager : MonoBehaviour
 
     #region Methods
 
-    public virtual void Init(PlayerController target,
+    public virtual void Init(PlayerControllerBehaviour target,
         SpawnManagerData spawnManagerData,
         int borderWidth, int borderHeight,
         Logger logger)
@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_spawnManagerData.SpawnStartTime);
 
-        while (!_target.IsDead)
+        while (!_target.HealthBehaviour.IsDead)
         {
             var WaveChance = Random.Range(0, 1f);
             if (WaveChance <= _spawnManagerData.WaveSpawnChance)

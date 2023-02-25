@@ -214,6 +214,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 686843730}
     - target: {fileID: 511823797447496350, guid: 5013811ebf10049308df9f21ee0903bd, type: 3}
+      propertyPath: _inputReader
+      value: 
+      objectReference: {fileID: 11400000, guid: 4981faa48ac874e64be1be4e7660036a, type: 2}
+    - target: {fileID: 511823797447496350, guid: 5013811ebf10049308df9f21ee0903bd, type: 3}
       propertyPath: CursorManager
       value: 
       objectReference: {fileID: 1713682086}

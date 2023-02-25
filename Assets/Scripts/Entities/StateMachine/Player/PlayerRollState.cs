@@ -12,7 +12,7 @@ public class PlayerRollState : PlayerBaseState
 
     public override void OnStateEnter()
     {
-        _playerController.RollBehaviour.SetUpRoll(_playerController.PreviousMoveInput);
+        _playerController.RollBehaviour.SetUpRoll(_playerController.PreviousMoveInput, _playerController.PreviousMouseInput);
         _playerController.AnimationController.PlayRollAnimation();
     }
 

@@ -58,7 +58,7 @@ public class RollBehaviour : MonoBehaviour
         _cooldownTime = _characterData.RollCooldownTime;
     }
 
-    public void SetUpRoll(Vector2 moveInput)
+    public void SetUpRoll(Vector2 moveInput, Vector2 mousePosition)
     {
         _nextRollTime = Time.time + _cooldownTime;
         _healthBehaviour.IsDamageAllowed = false;
@@ -67,7 +67,6 @@ public class RollBehaviour : MonoBehaviour
         // if input zero, then choose reverse direction by mouse position
         if (moveInput.Equals(Vector2.zero))
         {
-            var mousePosition = (Vector2)_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             var difference = mousePosition - (Vector2)transform.position;
             _rollDirection = -difference.normalized;
         }

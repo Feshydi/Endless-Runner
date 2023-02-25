@@ -6,7 +6,7 @@ using UnityEngine;
 public class EntityController : MonoBehaviour
 {
 
-    #region Fieldsw
+    #region Fields
 
     [Header("Entity Data")]
     [SerializeField]
@@ -14,12 +14,6 @@ public class EntityController : MonoBehaviour
 
     [SerializeField]
     protected HealthBehaviour _health;
-
-    [SerializeField]
-    protected bool _isHit;
-
-    [SerializeField]
-    protected bool _isDead;
 
     [Header("Animation")]
     [SerializeField]
@@ -31,36 +25,28 @@ public class EntityController : MonoBehaviour
 
     #endregion
 
-    #region Properties
-
-    public bool IsDead => _isDead;
-
-    #endregion
-
     #region Methods
 
     protected virtual void Awake()
     {
         if (_rigidbody2D == null) _rigidbody2D = GetComponent<Rigidbody2D>();
-        _isDead = false;
-        _isHit = false;
     }
 
     protected virtual void OnEnable()
     {
-        _health.OnHealthChanged += HealthEvent;
+        _health.OnHealthValueEvent += HealthEvent;
     }
 
     protected virtual void OnDisable()
     {
-        _health.OnHealthChanged -= HealthEvent;
+        _health.OnHealthValueEvent -= HealthEvent;
     }
 
     protected virtual void HealthEvent(float health, float maxHealth)
     {
         if (health <= 0)
         {
-            _isDead = true;
+            _health.SetIsDead(true);
             GetComponent<CapsuleCollider2D>().enabled = false;
             _rigidbody2D.velocity = Vector2.zero;
         }
@@ -71,7 +57,7 @@ public class EntityController : MonoBehaviour
 
     public void OnHitStart()
     {
-        _isHit = true;
+        _health.SetIsHitted(true);
         _rigidbody2D.velocity = Vector2.zero;
         _hitSound.pitch = Random.Range(0.9f, 1.1f);
         _hitSound.Play();
@@ -79,7 +65,7 @@ public class EntityController : MonoBehaviour
 
     public void OnHitEnd()
     {
-        _isHit = false;
+        _health.SetIsHitted(false);
     }
 
     #endregion

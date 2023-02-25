@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControllerBehaviour : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class PlayerControllerBehaviour : MonoBehaviour
     [SerializeField]
     private InputReader _inputReader;
 
+    [SerializeField]
+    private Camera _camera;
+
     [Header("Generated")]
     [SerializeField]
     private Vector2 _previousMoveInput;
+
+    [SerializeField]
+    private Vector2 _previousMouseInput;
 
     [SerializeField]
     private bool _isRollPressed;
@@ -69,6 +76,8 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     public Vector2 PreviousMoveInput => _previousMoveInput;
 
+    public Vector2 PreviousMouseInput => _previousMouseInput;
+
     public bool IsRollPressed
     {
         get => _isRollPressed;
@@ -114,6 +123,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private void OnEnable()
     {
         _inputReader.MoveEvent += OnMove;
+        _inputReader.MouseEvent += OnMouseMove;
         _inputReader.RollEvent += OnRoll;
         _inputReader.AbilityEvent += OnAbility;
         _inputReader.AttackEvent += OnAttackInitiated;
@@ -123,6 +133,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         _inputReader.MoveEvent -= OnMove;
+        _inputReader.MouseEvent += OnMouseMove;
         _inputReader.RollEvent -= OnRoll;
         _inputReader.AbilityEvent -= OnAbility;
         _inputReader.AttackEvent -= OnAttackInitiated;
@@ -142,6 +153,11 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private void OnMove(Vector2 moveInput)
     {
         _previousMoveInput = moveInput;
+    }
+
+    private void OnMouseMove(Vector2 mouseInput)
+    {
+        _previousMouseInput = _camera.ScreenToWorldPoint(mouseInput);
     }
 
     private void OnRoll()

@@ -232,8 +232,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2}
-  m_Size: {x: 4, y: 3}
+  m_Offset: {x: 0, y: 0.8}
+  m_Size: {x: 3, y: 2}
   m_Direction: 1
 --- !u!212 &7797848528001264901
 SpriteRenderer:
@@ -326,7 +326,6 @@ MonoBehaviour:
   _entityAnimator: {fileID: 7797848528001264900}
   _hitSound: {fileID: 29600066975108636}
   _enemyData: {fileID: 11400000, guid: f6d5a230fa4894823a1d1da484311716, type: 2}
-  _target: {fileID: 0}
   _targetHealth: {fileID: 0}
   _targetCollider: {fileID: 0}
   _nextHitTime: 0
@@ -344,3 +343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: f6d5a230fa4894823a1d1da484311716, type: 2}
   _healthPoints: 0
+  _isDamageAllowed: 1
+  _isDead: 0
+  _isHitted: 0

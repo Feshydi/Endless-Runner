@@ -18,7 +18,7 @@ public class PlayerMoveState : PlayerBaseState
     public override void OnUpdate()
     {
         CheckSwitchState();
-        _playerController.LookBehaviour.LookAtMouseHandle();
+        _playerController.LookBehaviour.LookAtMouseHandle(_playerController.PreviousMouseInput);
 
         if (_playerController.AttackInput)
             _playerController.AttackBehaviour.ShootHandle();

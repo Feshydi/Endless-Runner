@@ -12,7 +12,7 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
 
     public event UnityAction AttackEvent = delegate { };
     public event UnityAction AttackCanceledEvent = delegate { };
-    public event UnityAction LookEvent = delegate { };
+    public event UnityAction<Vector2> MouseEvent = delegate { };
     public event UnityAction<Vector2> MoveEvent = delegate { };
     public event UnityAction RollEvent = delegate { };
     public event UnityAction AbilityEvent = delegate { };
@@ -47,10 +47,10 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
             AttackCanceledEvent?.Invoke();
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnMouse(InputAction.CallbackContext context)
     {
         if (context.performed)
-            LookEvent?.Invoke();
+            MouseEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnMove(InputAction.CallbackContext context)

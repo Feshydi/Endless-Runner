@@ -12,15 +12,12 @@ public class EnemyController : EntityController
     private EnemyData _enemyData;
 
     [SerializeField]
-    private PlayerController _target;
-
-    [Header("Generated Data")]
-    [SerializeField]
     private HealthBehaviour _targetHealth;
 
     [SerializeField]
     private CapsuleCollider2D _targetCollider;
 
+    [Header("Generated Data")]
     [SerializeField]
     private float _nextHitTime;
 
@@ -28,10 +25,9 @@ public class EnemyController : EntityController
 
     #region Methods
 
-    public void Init(PlayerController target)
+    public void Init(PlayerControllerBehaviour target)
     {
         _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
-        _target = target;
         _targetHealth = target.GetComponent<HealthBehaviour>();
         _targetCollider = target.GetComponent<CapsuleCollider2D>();
     }
@@ -43,16 +39,16 @@ public class EnemyController : EntityController
 
     private void MoveHandle()
     {
-        if (_isDead || _isHit)
+        if (_health.IsDead || _health.IsHitted)
             return;
 
-        if (_target == null || _target.IsDead)
+        if (_targetHealth is null || _targetHealth.IsDead)
         {
             _rigidbody2D.velocity = Vector2.zero;
         }
         else
         {
-            var playerPos = _target.transform.position;
+            var playerPos = _targetCollider.transform.position;
             var distance = Vector2.Distance(transform.position, playerPos);
             if (distance > _targetCollider.bounds.extents.magnitude)
             {
@@ -84,9 +80,10 @@ public class EnemyController : EntityController
 
     private void AfterDeath()
     {
-        GameManager.Instance.ScoreManager.AddScore(1);
+        GameManager.Instance?.ScoreManager.AddScore(1);
         Destroy(gameObject);
     }
 
     #endregion
+
 }

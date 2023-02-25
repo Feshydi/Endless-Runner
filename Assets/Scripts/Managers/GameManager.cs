@@ -9,6 +9,8 @@ public enum GameMode
     MainMenu,
     PauseMenu,
     Playing,
+    // Paused exists for situations when game was accidentally collapsed
+    // or hidden by another window
     Paused
 }
 
@@ -47,6 +49,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Data")]
     public LevelData LevelData;
+
+    [SerializeField]
+    private InputReader _inputReader;
 
     [SerializeField]
     private GameMode _gameMode;
@@ -99,15 +104,19 @@ public class GameManager : MonoBehaviour
         switch (_gameMode)
         {
             case GameMode.MainMenu:
+                _inputReader.DisableAllInput();
                 Time.timeScale = 0;
                 break;
             case GameMode.PauseMenu:
+                _inputReader.DisableAllInput();
                 Time.timeScale = 0;
                 break;
             case GameMode.Playing:
+                _inputReader.EnableGameplayInput();
                 Time.timeScale = 1;
                 break;
             case GameMode.Paused:
+                _inputReader.DisableAllInput();
                 Time.timeScale = 0;
                 break;
         }

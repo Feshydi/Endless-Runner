@@ -20,7 +20,7 @@ public class PlayerUIManager : MonoBehaviour
     private PlayerControls _inputActions;
 
     [SerializeField]
-    private PlayerController _player;
+    private PlayerControllerBehaviour _player;
 
     [SerializeField]
     private TextMeshProUGUI _scoreText;
@@ -58,10 +58,10 @@ public class PlayerUIManager : MonoBehaviour
         _inputActions.UI.Enable();
         _inputActions.UI.PauseMenu.performed += PauseMenu_performed;
 
-        _player.OnHealthChanged += NewHealthPoints;
-        _player.OnRollTimeChanged += RollBarProgress;
-        _player.OnSkillTimeChanged += SkillBarProgress;
-        GameManager.Instance.ScoreManager.OnScorePointsChanged += NewScore;
+        _player.HealthBehaviour.OnHealthValueEvent += NewHealthPoints;
+        _player.RollBehaviour.OnRollTimeEvent += RollBarProgress;
+        _player.AbilityBehaviour.OnAbilityTimeEvent += SkillBarProgress;
+        GameManager.Instance.ScoreManager.OnScorePointsEvent += NewScore;
     }
 
     private void OnDisable()
@@ -69,10 +69,10 @@ public class PlayerUIManager : MonoBehaviour
         _inputActions.UI.PauseMenu.performed -= PauseMenu_performed;
         _inputActions.UI.Disable();
 
-        _player.OnHealthChanged -= NewHealthPoints;
-        _player.OnRollTimeChanged -= RollBarProgress;
-        _player.OnSkillTimeChanged -= SkillBarProgress;
-        GameManager.Instance.ScoreManager.OnScorePointsChanged -= NewScore;
+        _player.HealthBehaviour.OnHealthValueEvent -= NewHealthPoints;
+        _player.RollBehaviour.OnRollTimeEvent -= RollBarProgress;
+        _player.AbilityBehaviour.OnAbilityTimeEvent -= SkillBarProgress;
+        GameManager.Instance.ScoreManager.OnScorePointsEvent -= NewScore;
     }
 
     public void NewScore(int value)
