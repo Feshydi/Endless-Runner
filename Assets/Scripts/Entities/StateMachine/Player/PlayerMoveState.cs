@@ -15,14 +15,13 @@ public class PlayerMoveState : PlayerBaseState
         _playerController.AnimationController.PlayMoveAnimation();
     }
 
-    public override void OnStateExit()
-    {
-        _playerController.MoveBehaviour.MoveHandle(Vector2.zero);
-    }
-
     public override void OnUpdate()
     {
         CheckSwitchState();
+        _playerController.LookBehaviour.LookAtMouseHandle();
+
+        if (_playerController.AttackInput)
+            _playerController.AttackBehaviour.ShootHandle();
     }
 
     public override void OnFixedUpdate()
@@ -32,8 +31,17 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
+        if (_playerController.HealthBehaviour.IsDead)
+            SwitchState(_stateFactory.Death());
+
         if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
             SwitchState(_stateFactory.Idle());
+
+        if (_playerController.IsRollPressed)
+            SwitchState(_stateFactory.Roll());
+
+        if (_playerController.IsAbilityPressed)
+            SwitchState(_stateFactory.Ability());
     }
 
     #endregion

@@ -10,15 +10,19 @@ public class LookBehaviour : MonoBehaviour
 
     [Header("Generated")]
     [SerializeField]
+    private Camera _camera;
+
+    [SerializeField]
     private Transform _objectToRotate;
 
     #endregion
 
     #region Methods
 
-    public void LookAtHandle(Vector2 position)
+    public void LookAtMouseHandle()
     {
-        var difference = position - (Vector2)_objectToRotate.position;
+        var position = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        var difference = (Vector2)(position - _objectToRotate.position);
         var rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         _objectToRotate.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
     }

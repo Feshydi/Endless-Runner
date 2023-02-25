@@ -22,6 +22,10 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private AudioSource _rollSound;
 
+    [Header("Settings")]
+    [SerializeField]
+    private float _pitchRange;
+
     #endregion
 
     #region Methods
@@ -38,11 +42,13 @@ public class AudioController : MonoBehaviour
 
     public void PlayShootSound()
     {
+        _shootSound.pitch = Random.Range(1 - _pitchRange, 1 + _pitchRange);
         _shootSound.Play();
     }
 
     public void PlayHitSound()
     {
+        _hitSound.pitch = Random.Range(1 - _pitchRange, 1 + _pitchRange);
         _hitSound.Play();
     }
 
@@ -53,6 +59,7 @@ public class AudioController : MonoBehaviour
 
     public void PlayRollSound()
     {
+        _rollSound.pitch = Random.Range(1 - _pitchRange, 1 + _pitchRange);
         _rollSound.Play();
     }
 

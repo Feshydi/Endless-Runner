@@ -10,16 +10,36 @@ public class PlayerRollState : PlayerBaseState
     public PlayerRollState(PlayerControllerBehaviour playerController, PlayerStateFactory stateFactory)
         : base(playerController, stateFactory) { }
 
+    public override void OnStateEnter()
+    {
+        _playerController.RollBehaviour.SetUpRoll(_playerController.PreviousMoveInput);
+        _playerController.AnimationController.PlayRollAnimation();
+    }
+
+    public override void OnStateExit()
+    {
+        _playerController.IsRollPressed = false;
+    }
+
     public override void OnUpdate()
     {
-        //_playerController.
+        CheckSwitchState();
+    }
 
-        //_playerController.RollBehaviour.RollHandle();
+    public override void OnFixedUpdate()
+    {
+        _playerController.RollBehaviour.RollHandle();
     }
 
     public override void CheckSwitchState()
     {
-        throw new System.NotImplementedException();
+        if (_playerController.HealthBehaviour.IsDamageAllowed)
+        {
+            if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
+                SwitchState(_stateFactory.Idle());
+            else
+                SwitchState(_stateFactory.Move());
+        }
     }
 
     #endregion

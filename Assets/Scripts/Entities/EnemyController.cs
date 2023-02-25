@@ -16,7 +16,7 @@ public class EnemyController : EntityController
 
     [Header("Generated Data")]
     [SerializeField]
-    private Health _targetHealth;
+    private HealthBehaviour _targetHealth;
 
     [SerializeField]
     private CapsuleCollider2D _targetCollider;
@@ -32,7 +32,7 @@ public class EnemyController : EntityController
     {
         _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
         _target = target;
-        _targetHealth = target.GetComponent<Health>();
+        _targetHealth = target.GetComponent<HealthBehaviour>();
         _targetCollider = target.GetComponent<CapsuleCollider2D>();
     }
 
@@ -74,7 +74,7 @@ public class EnemyController : EntityController
 
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            if (damageable.Equals(_targetHealth) && other.gameObject.GetComponent<Health>().enabled)
+            if (damageable.Equals(_targetHealth))
             {
                 damageable.DoDamage(_enemyData.Damage);
                 _nextHitTime = Time.time + 60 / _enemyData.DamageRate;

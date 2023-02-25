@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RollBehaviour : MonoBehaviour
 {
@@ -12,7 +14,13 @@ public class RollBehaviour : MonoBehaviour
     private CharacterData _characterData;
 
     [SerializeField]
+    private HealthBehaviour _healthBehaviour;
+
+    [SerializeField]
     private Rigidbody2D _rigidbody2D;
+
+    [SerializeField]
+    private Camera _camera;
 
     [SerializeField]
     private float _speedModifier;
@@ -21,6 +29,25 @@ public class RollBehaviour : MonoBehaviour
     [SerializeField]
     private float _moveSpeed;
 
+    [SerializeField]
+    private Vector2 _rollDirection;
+
+    [SerializeField]
+    private float _cooldownTime;
+
+    [SerializeField]
+    private float _nextRollTime;
+
+    public event Action<float> OnRollTimeEvent;
+
+    #endregion
+
+    #region
+
+    public HealthBehaviour HealthBehaviour => _healthBehaviour;
+
+    public float NextRollTime => _nextRollTime;
+
     #endregion
 
     #region Methods
@@ -28,11 +55,34 @@ public class RollBehaviour : MonoBehaviour
     private void Start()
     {
         _moveSpeed = _characterData.MoveSpeed;
+        _cooldownTime = _characterData.RollCooldownTime;
     }
 
-    public void RollHandle(Vector2 rollDirection)
+    public void SetUpRoll(Vector2 moveInput)
     {
-        _rigidbody2D.velocity = rollDirection.normalized * _moveSpeed * _speedModifier * Time.deltaTime;
+        _nextRollTime = Time.time + _cooldownTime;
+        _healthBehaviour.IsDamageAllowed = false;
+        OnRollTimeEvent?.Invoke(_characterData.RollCooldownTime);
+
+        // if input zero, then choose reverse direction by mouse position
+        if (moveInput.Equals(Vector2.zero))
+        {
+            var mousePosition = (Vector2)_camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            var difference = mousePosition - (Vector2)transform.position;
+            _rollDirection = -difference.normalized;
+        }
+        else
+            _rollDirection = moveInput;
+    }
+
+    public void RollHandle()
+    {
+        _rigidbody2D.velocity = _rollDirection * _moveSpeed * _speedModifier * Time.fixedDeltaTime;
+    }
+
+    public void AfterRoll()
+    {
+        _healthBehaviour.IsDamageAllowed = true;
     }
 
     #endregion

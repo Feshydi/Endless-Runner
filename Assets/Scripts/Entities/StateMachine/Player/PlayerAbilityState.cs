@@ -10,14 +10,29 @@ public class PlayerAbilityState : PlayerBaseState
     public PlayerAbilityState(PlayerControllerBehaviour playerController, PlayerStateFactory stateFactory)
         : base(playerController, stateFactory) { }
 
+    public override void OnStateEnter()
+    {
+        _playerController.AudioController.PlayAbilitySound();
+        _playerController.AbilityBehaviour.SetUpAbility();
+        _playerController.AbilityBehaviour.AbilityHandle();
+    }
+
+    public override void OnStateExit()
+    {
+        _playerController.IsAbilityPressed = false;
+    }
+
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        CheckSwitchState();
     }
 
     public override void CheckSwitchState()
     {
-        throw new System.NotImplementedException();
+        if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
+            SwitchState(_stateFactory.Idle());
+        else
+            SwitchState(_stateFactory.Move());
     }
 
     #endregion

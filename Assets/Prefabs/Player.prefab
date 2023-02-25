@@ -468,8 +468,8 @@ MonoBehaviour:
   _smoothSpeed: 5
   _offset: {x: 0, y: 0, z: -10}
   _map: {fileID: 0}
-  _horizontalOffset: 0
-  _verticalOffset: 0
+  _horizontalOffset: 9
+  _verticalOffset: 5
 --- !u!1 &1297815168768067427
 GameObject:
   m_ObjectHideFlags: 0

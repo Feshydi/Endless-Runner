@@ -9,9 +9,6 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     [Header("General")]
     [SerializeField]
-    private Camera _camera;
-
-    [SerializeField]
     private InputReader _inputReader;
 
     [Header("Generated")]
@@ -24,6 +21,9 @@ public class PlayerControllerBehaviour : MonoBehaviour
     [SerializeField]
     private bool _isAbilityPressed;
 
+    [SerializeField]
+    private bool _attackInput;
+
     [Header("State Machine")]
     [SerializeField]
     private PlayerBaseState _currentState;
@@ -32,6 +32,9 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private PlayerStateFactory _stateFactory;
 
     [Header("Behaviours")]
+    [SerializeField]
+    private HealthBehaviour _healthBehaviour;
+
     [SerializeField]
     private MoveBehaviour _moveBehaviour;
 
@@ -66,11 +69,25 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     public Vector2 PreviousMoveInput => _previousMoveInput;
 
-    public bool IsRollPressed => _isRollPressed;
+    public bool IsRollPressed
+    {
+        get => _isRollPressed;
+        set => _isRollPressed = value;
+    }
 
-    public bool IsAbilityPressed => _isAbilityPressed;
+    public bool IsAbilityPressed
+    {
+        get => _isAbilityPressed;
+        set => _isAbilityPressed = value;
+    }
+
+    public bool AttackInput => _attackInput;
+
+    public HealthBehaviour HealthBehaviour => _healthBehaviour;
 
     public MoveBehaviour MoveBehaviour => _moveBehaviour;
+
+    public LookBehaviour LookBehaviour => _lookBehaviour;
 
     public AttackBehaviour AttackBehaviour => _attackBehaviour;
 
@@ -88,6 +105,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        CheckFields();
         _stateFactory = new PlayerStateFactory(this);
         _currentState = _stateFactory.Idle();
         _currentState.OnStateEnter();
@@ -97,12 +115,18 @@ public class PlayerControllerBehaviour : MonoBehaviour
     {
         _inputReader.MoveEvent += OnMove;
         _inputReader.RollEvent += OnRoll;
+        _inputReader.AbilityEvent += OnAbility;
+        _inputReader.AttackEvent += OnAttackInitiated;
+        _inputReader.AttackCanceledEvent += OnAttackCanceled;
     }
 
     private void OnDisable()
     {
         _inputReader.MoveEvent -= OnMove;
         _inputReader.RollEvent -= OnRoll;
+        _inputReader.AbilityEvent -= OnAbility;
+        _inputReader.AttackEvent -= OnAttackInitiated;
+        _inputReader.AttackCanceledEvent -= OnAttackCanceled;
     }
 
     private void Update()
@@ -122,7 +146,34 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     private void OnRoll()
     {
-        _isRollPressed = true;
+        if (Time.time > _rollBehaviour.NextRollTime)
+            _isRollPressed = true;
+    }
+
+    private void OnAbility()
+    {
+        if (Time.time > _abilityBehaviour.NextAbilityTime)
+            _isAbilityPressed = true;
+    }
+
+    private void OnAttackInitiated()
+    {
+        _attackInput = true;
+    }
+
+    private void OnAttackCanceled()
+    {
+        _attackInput = false;
+    }
+
+    private void CheckFields()
+    {
+        if (_healthBehaviour is null) _healthBehaviour = this.GetComponent<HealthBehaviour>();
+        if (_moveBehaviour is null) _moveBehaviour = this.GetComponent<MoveBehaviour>();
+        if (_lookBehaviour is null) _lookBehaviour = this.GetComponent<LookBehaviour>();
+        if (_rollBehaviour is null) _rollBehaviour = this.GetComponent<RollBehaviour>();
+        if (_attackBehaviour is null) _attackBehaviour = this.GetComponent<AttackBehaviour>();
+        if (_abilityBehaviour is null) _abilityBehaviour = this.GetComponent<AbilityBehaviour>();
     }
 
     #endregion

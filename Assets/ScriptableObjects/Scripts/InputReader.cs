@@ -11,6 +11,7 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     #region Fields
 
     public event UnityAction AttackEvent = delegate { };
+    public event UnityAction AttackCanceledEvent = delegate { };
     public event UnityAction LookEvent = delegate { };
     public event UnityAction<Vector2> MoveEvent = delegate { };
     public event UnityAction RollEvent = delegate { };
@@ -42,6 +43,8 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     {
         if (context.performed)
             AttackEvent?.Invoke();
+        if (context.canceled)
+            AttackCanceledEvent?.Invoke();
     }
 
     public void OnLook(InputAction.CallbackContext context)

@@ -228,9 +228,9 @@ public class PlayerController : EntityController
         _isRolling = false;
     }
 
-    protected override void HealthEvent(float health)
+    protected override void HealthEvent(float health, float maxHealth)
     {
-        base.HealthEvent(health);
+        base.HealthEvent(health, maxHealth);
 
         OnHealthChanged?.Invoke(health, _characterData.HealthPoints);
         _weaponAnimator.SetFloat("Health", health);

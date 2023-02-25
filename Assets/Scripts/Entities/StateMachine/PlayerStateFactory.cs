@@ -26,6 +26,8 @@ public class PlayerStateFactory
 
     public PlayerBaseState Ability() => new PlayerAbilityState(_playerController, this);
 
+    public PlayerBaseState Death() => new PlayerDeathState(_playerController, this);
+
     #endregion
 
 }

@@ -35,6 +35,10 @@ public class AnimationController : MonoBehaviour
         _weaponAnimator.SetTrigger("Roll");
     }
 
+    /// <summary>
+    /// if health <= 0, after play death animation
+    /// </summary>
+    /// <param name="health"></param>
     public void PlayHitAnimation(float health)
     {
         _playerAnimator.SetFloat("Health", health);

@@ -13,7 +13,7 @@ public class EntityController : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
 
     [SerializeField]
-    protected Health _health;
+    protected HealthBehaviour _health;
 
     [SerializeField]
     protected bool _isHit;
@@ -56,7 +56,7 @@ public class EntityController : MonoBehaviour
         _health.OnHealthChanged -= HealthEvent;
     }
 
-    protected virtual void HealthEvent(float health)
+    protected virtual void HealthEvent(float health, float maxHealth)
     {
         if (health <= 0)
         {

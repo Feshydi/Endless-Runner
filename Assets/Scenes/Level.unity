@@ -4559,14 +4559,6 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1809394695}
-    - target: {fileID: 1297815168539555347, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
-      propertyPath: _verticalOffset
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1297815168539555347, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
-      propertyPath: _horizontalOffset
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 1297815168539555349, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: _camera
       value: 
