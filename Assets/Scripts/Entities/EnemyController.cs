@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : EntityController
+public class EnemyController : MonoBehaviour
 {
 
     #region Fields
@@ -12,14 +12,26 @@ public class EnemyController : EntityController
     private EnemyData _enemyData;
 
     [SerializeField]
-    private HealthBehaviour _targetHealth;
+    private Rigidbody2D _rigidbody2D;
 
     [SerializeField]
-    private CapsuleCollider2D _targetCollider;
+    private HealthBehaviour _healthBehaviour;
+
+    [Header("Target Data")]
+    [SerializeField]
+    private HealthBehaviour _targetHealth;
 
     [Header("Generated Data")]
     [SerializeField]
     private float _nextHitTime;
+
+    [Header("Animation")]
+    [SerializeField]
+    private Animator _entityAnimator;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioSource _hitSound;
 
     #endregion
 
@@ -29,7 +41,21 @@ public class EnemyController : EntityController
     {
         _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
         _targetHealth = target.GetComponent<HealthBehaviour>();
-        _targetCollider = target.GetComponent<CapsuleCollider2D>();
+    }
+
+    private void Start()
+    {
+        if (_rigidbody2D is null) _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        _healthBehaviour.OnHealthValueEvent += HealthEvent;
+    }
+
+    private void OnDisable()
+    {
+        _healthBehaviour.OnHealthValueEvent -= HealthEvent;
     }
 
     private void FixedUpdate()
@@ -39,7 +65,7 @@ public class EnemyController : EntityController
 
     private void MoveHandle()
     {
-        if (_health.IsDead || _health.IsHitted)
+        if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
             return;
 
         if (_targetHealth is null || _targetHealth.IsDead)
@@ -48,19 +74,16 @@ public class EnemyController : EntityController
         }
         else
         {
-            var playerPos = _targetCollider.transform.position;
-            var distance = Vector2.Distance(transform.position, playerPos);
-            if (distance > _targetCollider.bounds.extents.magnitude)
+            var playerPos = _targetHealth.transform.position;
+            var distance = Vector2.Distance(transform.position, _targetHealth.transform.position);
+            if (distance > 0)
             {
                 Vector2 direction = (playerPos - transform.position).normalized;
                 _rigidbody2D.velocity = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
             }
         }
 
-        if (_rigidbody2D.velocity.sqrMagnitude > 0.01)
-            _entityAnimator.SetBool("Idle", false);
-        else
-            _entityAnimator.SetBool("Idle", true);
+        _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.sqrMagnitude < 0.01);
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -68,19 +91,44 @@ public class EnemyController : EntityController
         if (Time.time < _nextHitTime)
             return;
 
-        if (other.gameObject.TryGetComponent(out IDamageable damageable))
+        if (other.gameObject.TryGetComponent(out IDamageable damageable).Equals(_targetHealth))
         {
-            if (damageable.Equals(_targetHealth))
-            {
-                damageable.DoDamage(_enemyData.Damage);
-                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
-            }
+            damageable.DoDamage(_enemyData.Damage);
+            _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
         }
+    }
+
+    private void HealthEvent(float health, float maxHealth)
+    {
+        if (health <= 0)
+        {
+            _healthBehaviour.SetIsDead(true);
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            _rigidbody2D.velocity = Vector2.zero;
+
+            GameManager.Instance?.ScoreManager.AddScore(1);
+        }
+
+        _entityAnimator.SetFloat("Health", health);
+        _entityAnimator.SetTrigger("Hit");
+    }
+
+    public void OnHitStart()
+    {
+        _healthBehaviour.SetIsHitted(true);
+        _rigidbody2D.velocity = Vector2.zero;
+
+        _hitSound.pitch = Random.Range(0.9f, 1.1f);
+        _hitSound.Play();
+    }
+
+    private void OnHitEnd()
+    {
+        _healthBehaviour.SetIsHitted(false);
     }
 
     private void AfterDeath()
     {
-        GameManager.Instance?.ScoreManager.AddScore(1);
         Destroy(gameObject);
     }
 

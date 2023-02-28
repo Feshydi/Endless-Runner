@@ -13,6 +13,7 @@ public class PlayerDeathState : PlayerBaseState
     public override void OnStateEnter()
     {
         _playerController.HealthBehaviour.IsDamageAllowed = false;
+        _playerController.GetComponent<Collider2D>().enabled = false;
         _playerController.MoveBehaviour.MoveHandle(Vector2.zero);
 
         GameManager.Instance?.SetGameMode(GameMode.PauseMenu);

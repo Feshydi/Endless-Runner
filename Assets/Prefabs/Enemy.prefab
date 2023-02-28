@@ -320,15 +320,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 7797848528001264896}
-  _health: {fileID: 7797848528001264897}
-  _isHit: 0
-  _isDead: 0
-  _entityAnimator: {fileID: 7797848528001264900}
-  _hitSound: {fileID: 29600066975108636}
+  _healthBehaviour: {fileID: 7797848528001264897}
   _enemyData: {fileID: 11400000, guid: f6d5a230fa4894823a1d1da484311716, type: 2}
   _targetHealth: {fileID: 0}
-  _targetCollider: {fileID: 0}
   _nextHitTime: 0
+  _entityAnimator: {fileID: 7797848528001264900}
+  _hitSound: {fileID: 29600066975108636}
 --- !u!114 &7797848528001264897
 MonoBehaviour:
   m_ObjectHideFlags: 0
