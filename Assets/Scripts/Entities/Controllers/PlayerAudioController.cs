@@ -23,6 +23,7 @@ public class PlayerAudioController : MonoBehaviour
     private AudioSource _rollSound;
 
     [Header("Settings")]
+    [Range(0, 0.2f)]
     [SerializeField]
     private float _pitchRange;
 

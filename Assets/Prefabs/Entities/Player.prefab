@@ -993,7 +993,7 @@ MonoBehaviour:
   _hitSound: {fileID: 4323784518205029873}
   _abilitySound: {fileID: 6596308450972498905}
   _rollSound: {fileID: 4969810431061684683}
-  _pitchRange: 0
+  _pitchRange: 0.1
 --- !u!1 &4165594318096974890
 GameObject:
   m_ObjectHideFlags: 0
