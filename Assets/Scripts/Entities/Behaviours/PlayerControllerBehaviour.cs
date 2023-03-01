@@ -59,10 +59,10 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     [Header("Additional")]
     [SerializeField]
-    private AnimationController _animationController;
+    private PlayerAnimationController _animationController;
 
     [SerializeField]
-    private AudioController _audioController;
+    private PlayerAudioController _audioController;
 
     #endregion
 
@@ -104,9 +104,9 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     public AbilityBehaviour AbilityBehaviour => _abilityBehaviour;
 
-    public AnimationController AnimationController => _animationController;
+    public PlayerAnimationController AnimationController => _animationController;
 
-    public AudioController AudioController => _audioController;
+    public PlayerAudioController AudioController => _audioController;
 
     #endregion
 

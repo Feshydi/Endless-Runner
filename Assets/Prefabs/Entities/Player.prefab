@@ -489,7 +489,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 11400000, guid: 4981faa48ac874e64be1be4e7660036a, type: 2}
+  _camera: {fileID: 0}
   _previousMoveInput: {x: 0, y: 0}
+  _previousMouseInput: {x: 0, y: 0}
   _isRollPressed: 0
   _isAbilityPressed: 0
   _attackInput: 0
@@ -545,7 +547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6584b142b414ab1b10c2560bdb5f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
   _objectToRotate: {fileID: 1297815168768067425}
 --- !u!114 &1417447087
 MonoBehaviour:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+public class PlayerAnimationController : MonoBehaviour
 {
 
     #region Fields
@@ -19,14 +19,14 @@ public class AnimationController : MonoBehaviour
 
     public void PlayIdleAnimation()
     {
-        _playerAnimator.SetFloat("Speed", 0f);
-        _weaponAnimator.SetFloat("Speed", 0f);
+        _playerAnimator.SetBool("Idle", true);
+        _weaponAnimator.SetBool("Idle", true);
     }
 
     public void PlayMoveAnimation()
     {
-        _playerAnimator.SetFloat("Speed", 1f);
-        _weaponAnimator.SetFloat("Speed", 1f);
+        _playerAnimator.SetBool("Idle", false);
+        _weaponAnimator.SetBool("Idle", false);
     }
 
     public void PlayRollAnimation()
