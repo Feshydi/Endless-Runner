@@ -24,7 +24,12 @@ public class PlayerHitState : PlayerBaseState
     public override void CheckSwitchState()
     {
         if (!_playerController.HealthBehaviour.IsHitted)
-            SwitchState(_stateFactory.Idle());
+        {
+            if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
+                SwitchState(_stateFactory.Idle());
+            else
+                SwitchState(_stateFactory.Move());
+        }
     }
 
     #endregion

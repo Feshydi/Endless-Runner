@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c250f954725a4981a8c67b74a3ee848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 1297815168768067438}
+  _gun: {fileID: 0}
 --- !u!1 &1297815168768067427
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 1297815168768067425}
   - component: {fileID: 1297815168768067424}
   - component: {fileID: 1297815168768067426}
-  - component: {fileID: 1297815168768067438}
+  - component: {fileID: 5912983166178528868}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -707,7 +707,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1297815168768067438
+--- !u!114 &5912983166178528868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -716,11 +716,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1297815168768067427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b4f6a909cf8474a93a2f70565c4072, type: 3}
+  m_Script: {fileID: 11500000, guid: 1770b1bf98ecc4e9ea15e8109806b902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: df05b3fa7bc5e4bffa89fb946a3bb4a5, type: 2}
-  _projectilePrefab: {fileID: 1859987578332313710, guid: a063aeff6301e47a6b68373b70f303a6, type: 3}
+  _projectilePrefab: {fileID: 5709667036588299487, guid: a063aeff6301e47a6b68373b70f303a6, type: 3}
   _muzzleSpriteRenderer: {fileID: 1297815169355500787}
   _muzzlePosition: {fileID: 1297815169355500788}
   _shootSound: {fileID: 8121179568187533207}

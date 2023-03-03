@@ -1,40 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour
 {
 
     #region Fields
 
     [Header("Data")]
     [SerializeField]
-    private WeaponData _weaponData;
-
-    [SerializeField]
-    private PlayerControls _inputActions;
+    protected WeaponData _weaponData;
 
     [Header("Projectile")]
     [SerializeField]
-    private Projectile _projectilePrefab;
+    protected Projectile _projectilePrefab;
 
     [SerializeField]
     private SpriteRenderer _muzzleSpriteRenderer;
 
     [SerializeField]
-    private Transform _muzzlePosition;
+    protected Transform _muzzlePosition;
 
     [Header("Sound")]
     [SerializeField]
-    private AudioSource _shootSound;
+    protected AudioSource _shootSound;
 
     [Header("Generated Data")]
     [SerializeField]
-    private float _nextShotTime;
+    protected float _nextShotTime;
 
     [SerializeField]
-    private List<Projectile> _spawnedProjectiles;
+    protected List<Projectile> _spawnedProjectiles;
 
     #endregion
 
@@ -49,13 +45,13 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _spawnedProjectiles = new List<Projectile>();
         _muzzleSpriteRenderer.enabled = false;
     }
 
-    public void Init(WeaponData weaponData)
+    public virtual void Init(WeaponData weaponData)
     {
         _weaponData = weaponData;
         transform.localPosition = _weaponData.WeaponPosition;
@@ -63,20 +59,17 @@ public class Gun : MonoBehaviour
         _muzzlePosition.localScale = _weaponData.MuzzleScale;
     }
 
-    public void Shoot()
+    public abstract void Shoot();
+
+    protected bool ReadyToShoot()
     {
         if (Time.time < _nextShotTime)
-            return;
+            return false;
         _nextShotTime = Time.time + 60 / _weaponData.FireRate;
-
-        Vector2 shootDirection = transform.right;
-        StartCoroutine(OnFire());
-        var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
-        projectile.Init(_weaponData, shootDirection);
-        _spawnedProjectiles.Add(projectile);
+        return true;
     }
 
-    private IEnumerator OnFire()
+    protected IEnumerator OnFire()
     {
         _muzzleSpriteRenderer.enabled = true;
         _shootSound.pitch = Random.Range(0.9f, 1.1f);

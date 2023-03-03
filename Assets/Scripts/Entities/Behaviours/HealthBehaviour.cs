@@ -58,6 +58,7 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
 
         _healthPoints -= damage;
         _isHitted = true;
+        _isDamageAllowed = false;
         if (_healthPoints < 0)
         {
             _healthPoints = 0;
@@ -70,6 +71,7 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     public void AfterHit()
     {
         _isHitted = false;
+        _isDamageAllowed = true;
     }
 
     public void SetIsDead(bool value)
@@ -80,6 +82,7 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     public void SetIsHitted(bool value)
     {
         _isHitted = value;
+        _isDamageAllowed = !value;
     }
 
     #endregion

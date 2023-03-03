@@ -91,10 +91,13 @@ public class EnemyController : MonoBehaviour
         if (Time.time < _nextHitTime)
             return;
 
-        if (other.gameObject.TryGetComponent(out IDamageable damageable).Equals(_targetHealth))
+        if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            damageable.DoDamage(_enemyData.Damage);
-            _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
+            if (damageable.Equals(_targetHealth))
+            {
+                damageable.DoDamage(_enemyData.Damage);
+                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
+            }
         }
     }
 

@@ -4555,6 +4555,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1809394694}
+    - target: {fileID: 1417447093, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: _gun
+      value: 
+      objectReference: {fileID: 1987378790}
     - target: {fileID: 1297815168539555337, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4626,6 +4630,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67a7d35ab856e4d3581354f6761b3217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1987378790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5912983166178528868, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+  m_PrefabInstance: {fileID: 1987378788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1770b1bf98ecc4e9ea15e8109806b902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1992676180
