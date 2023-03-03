@@ -25,6 +25,9 @@ public class WeaponData : ScriptableObject
     private Vector2 _muzzlePosition;
 
     [SerializeField]
+    private Vector2 _muzzleScale;
+
+    [SerializeField]
     private AnimatorController _animatorController;
 
     #endregion
@@ -40,6 +43,8 @@ public class WeaponData : ScriptableObject
     public Vector2 WeaponPosition => _weaponPosition;
 
     public Vector2 MuzzlePosition => _muzzlePosition;
+
+    public Vector2 MuzzleScale => _muzzleScale;
 
     public AnimatorController AnimatorController => _animatorController;
 

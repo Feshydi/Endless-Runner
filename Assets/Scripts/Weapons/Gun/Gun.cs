@@ -15,9 +15,6 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private PlayerControls _inputActions;
 
-    [SerializeField]
-    private Camera _camera;
-
     [Header("Projectile")]
     [SerializeField]
     private Projectile _projectilePrefab;
@@ -52,18 +49,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         _spawnedProjectiles = new List<Projectile>();
-
         _muzzleSpriteRenderer.enabled = false;
     }
 
     public void Init(WeaponData weaponData)
     {
         _weaponData = weaponData;
-        this.transform.position = _weaponData.WeaponPosition;
-        _muzzlePosition.position = _weaponData.MuzzlePosition;
+        transform.localPosition = _weaponData.WeaponPosition;
+        _muzzlePosition.localPosition = _weaponData.MuzzlePosition;
+        _muzzlePosition.localScale = _weaponData.MuzzleScale;
     }
 
     public void Shoot()
