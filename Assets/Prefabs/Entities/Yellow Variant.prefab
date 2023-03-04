@@ -47,17 +47,21 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1297815168539555348, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: m_LinearDrag
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1297815168539555350, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1297815168539555350, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1297815168539555350, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.441
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1297815168539555350, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -212,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 8ad2e41b2d77c4042bfd7479600d9fc5, type: 2}
-  _projectilePrefab: {fileID: 5709667036588299487, guid: 336f89be4fe1348e599a90ac2a0cdd93, type: 3}
+  _projectilePrefab: {fileID: -235043439389213933, guid: a12245e24aac2493e8f0bb190f2d1b86, type: 3}
   _muzzleSpriteRenderer: {fileID: 9132558837407960237}
   _muzzlePosition: {fileID: 9132558837407960234}
   _shootSound: {fileID: 2020884983634749385}

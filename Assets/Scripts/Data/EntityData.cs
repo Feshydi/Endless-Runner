@@ -12,6 +12,9 @@ public class EntityData : ScriptableObject
     private float _moveSpeed;
 
     [SerializeField]
+    private float _maxMoveSpeed;
+
+    [SerializeField]
     private float _healthPoints;
 
     [SerializeField]
@@ -22,6 +25,8 @@ public class EntityData : ScriptableObject
     #region Properties
 
     public float MoveSpeed => _moveSpeed;
+
+    public float MaxMoveSpeed => _maxMoveSpeed;
 
     public float HealthPoints => _healthPoints;
 

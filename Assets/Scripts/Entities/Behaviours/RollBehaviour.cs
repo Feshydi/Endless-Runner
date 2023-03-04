@@ -76,7 +76,8 @@ public class RollBehaviour : MonoBehaviour
 
     public void RollHandle()
     {
-        _rigidbody2D.velocity = _rollDirection * _moveSpeed * _speedModifier * Time.fixedDeltaTime;
+        var move = _rollDirection * _moveSpeed * _speedModifier * Time.fixedDeltaTime;
+        _rigidbody2D.AddForce(move);
     }
 
     public void AfterRoll()

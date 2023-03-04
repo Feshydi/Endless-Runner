@@ -15,7 +15,7 @@ public class SlugGun : Gun
         StartCoroutine(OnFire());
 
         Vector2 shootDirection = transform.right;
-        var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.localRotation);
+        var projectile = Instantiate(_projectilePrefab, _muzzlePosition.position, _muzzlePosition.rotation);
         projectile.Init(_weaponData.Damage, _weaponData.ProjectileSpeed, shootDirection);
         _spawnedProjectiles.Add(projectile);
     }

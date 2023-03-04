@@ -79,11 +79,14 @@ public class EnemyController : MonoBehaviour
             if (distance > 0)
             {
                 Vector2 direction = (playerPos - transform.position).normalized;
-                _rigidbody2D.velocity = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
+                var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
+                _rigidbody2D.AddForce(move);
+                if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
+                    _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
             }
         }
 
-        _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.sqrMagnitude < 0.01);
+        _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.magnitude < float.Epsilon);
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -119,7 +122,6 @@ public class EnemyController : MonoBehaviour
     public void OnHitStart()
     {
         _healthBehaviour.SetIsHitted(true);
-        _rigidbody2D.velocity = Vector2.zero;
 
         _hitSound.pitch = Random.Range(0.9f, 1.1f);
         _hitSound.Play();

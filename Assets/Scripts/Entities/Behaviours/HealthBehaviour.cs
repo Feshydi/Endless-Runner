@@ -82,7 +82,7 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     public void SetIsHitted(bool value)
     {
         _isHitted = value;
-        _isDamageAllowed = !value;
+        _isDamageAllowed = true;
     }
 
     #endregion

@@ -34,10 +34,7 @@ public class FrangibleProjectile : Projectile
 
     protected override void DoOnCollision(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.DoDamage(_damage);
-        }
+        DoDamage(collision);
         CreateParticles(collision);
         Destroy(gameObject);
     }

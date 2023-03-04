@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cf189371aca4db88ebbf9aec590b2d, type: 3}
   m_Name: PurpleChar
   m_EditorClassIdentifier: 
-  _moveSpeed: 100
+  _moveSpeed: 2000
+  _maxMoveSpeed: 1
   _healthPoints: 100
   _animatorController: {fileID: 9100000, guid: 34d4b555a515d481b848e8ae68af5cb7, type: 2}
   _explosionRadius: 3

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5692283845952666974}
   - component: {fileID: 2646009972404835108}
   - component: {fileID: 6614250223815720530}
-  - component: {fileID: 5709667036588299487}
+  - component: {fileID: 6277043979897050056}
   m_Layer: 0
   m_Name: Simple Projectile
   m_TagString: Untagged
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5709667036588299487
+--- !u!114 &6277043979897050056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,4 +142,4 @@ MonoBehaviour:
   _speed: 0
   _direction: {x: 0, y: 0}
   _flyDistance: 0
-  _maxFlyDistance: 0
+  _maxFlyDistance: 20

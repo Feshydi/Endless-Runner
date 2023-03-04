@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5692283845952666974}
   - component: {fileID: 2646009972404835108}
   - component: {fileID: 6614250223815720530}
-  - component: {fileID: 5709667036588299487}
+  - component: {fileID: -235043439389213933}
   m_Layer: 0
-  m_Name: Small Simple Projectile
+  m_Name: Small Knockbacking Simple Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5709667036588299487
+--- !u!114 &-235043439389213933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +137,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 6614250223815720530}
+  _isKnockbacking: 1
+  _knockbackingStrength: 1
   _isCollided: 0
   _damage: 0
   _speed: 0
   _direction: {x: 0, y: 0}
   _flyDistance: 0
-  _maxFlyDistance: 0
+  _maxFlyDistance: 20

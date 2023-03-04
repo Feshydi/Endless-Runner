@@ -535,6 +535,7 @@ MonoBehaviour:
   _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
   _rigidbody2D: {fileID: 1297815168539555348}
   _moveSpeed: 0
+  _maxSpeed: 0
 --- !u!114 &1417447086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c250f954725a4981a8c67b74a3ee848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 0}
+  _gun: {fileID: 5912983166178528868}
 --- !u!1 &1297815168768067427
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: df05b3fa7bc5e4bffa89fb946a3bb4a5, type: 2}
-  _projectilePrefab: {fileID: 5709667036588299487, guid: a063aeff6301e47a6b68373b70f303a6, type: 3}
+  _projectilePrefab: {fileID: 6277043979897050056, guid: 90ae24abe344c420a933e895f32c970e, type: 3}
   _muzzleSpriteRenderer: {fileID: 1297815169355500787}
   _muzzlePosition: {fileID: 1297815169355500788}
   _shootSound: {fileID: 8121179568187533207}

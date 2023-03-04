@@ -287,6 +287,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1239344543}
     m_Modifications:
     - target: {fileID: 1140586428, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ad2e41b2d77c4042bfd7479600d9fc5, type: 2}
+    - target: {fileID: 1140586428, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
+      propertyPath: _projectilePrefab
+      value: 
+      objectReference: {fileID: -235043439389213933, guid: a12245e24aac2493e8f0bb190f2d1b86, type: 3}
+    - target: {fileID: 1140586428, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
       propertyPath: _projectileSpread
       value: 10
       objectReference: {fileID: 0}
@@ -294,6 +302,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1025740867}
+    - target: {fileID: 7836151086548158193, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
+      propertyPath: _speedModifier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7836151086548158198, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
       propertyPath: _camera
       value: 
@@ -851,6 +863,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7797848528001264902, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
   m_PrefabInstance: {fileID: 803886342}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &810609383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132558837699311183, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
+  m_PrefabInstance: {fileID: 408186035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5997dfeeb15b24a2a905cc654e05fbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &853135815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1234,6 +1257,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7797848528001264923, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
+      propertyPath: _targetHealth
+      value: 
+      objectReference: {fileID: 810609383}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bab9caa0dac284502a6653bf12e73763, type: 3}
 --- !u!4 &1484459297 stripped
