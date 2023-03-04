@@ -20,6 +20,9 @@ public class FrangibleProjectile : Projectile
     [SerializeField]
     private float _particleSpeedMultiply;
 
+    [SerializeField]
+    private float _particleFlyDistance;
+
     #endregion
 
     #region Methods
@@ -29,28 +32,26 @@ public class FrangibleProjectile : Projectile
         CreateParticles(null);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void DoOnCollision(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerControllerBehaviour pcb))
-            return;
-
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        if (collision.TryGetComponent(out IDamageable damageable))
         {
             damageable.DoDamage(_damage);
         }
         CreateParticles(collision);
-
         Destroy(gameObject);
     }
 
-    private void CreateParticles(Collision2D collision)
+    private void CreateParticles(Collider2D collision)
     {
         float angle = 360 / _particlesCount;
         for (int i = 1; i <= _particlesCount; i++)
         {
             Vector2 direction = Quaternion.Euler(0, 0, angle * i) * Vector2.right;
             var particleProjectile = Instantiate(_particlePrefab, transform.position, transform.rotation);
-            particleProjectile.Init(_damage * _particleDamageMultiply, _speed * _particleSpeedMultiply, direction);
+            particleProjectile.Init(_damage * _particleDamageMultiply, _speed * _particleSpeedMultiply,
+                direction, _particleFlyDistance);
+
             if (collision is not null)
                 if (collision.gameObject.TryGetComponent(out HealthBehaviour health))
                     particleProjectile.SetIgnored(health);

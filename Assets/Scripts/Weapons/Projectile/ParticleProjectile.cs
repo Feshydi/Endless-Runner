@@ -20,12 +20,9 @@ public class ParticleProjectile : Projectile
         _ignoredEnemy = enemy;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void DoOnCollision(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerControllerBehaviour pcb))
-            return;
-
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        if (collision.TryGetComponent(out IDamageable damageable))
         {
             if (_ignoredEnemy is null || !damageable.Equals(_ignoredEnemy))
             {

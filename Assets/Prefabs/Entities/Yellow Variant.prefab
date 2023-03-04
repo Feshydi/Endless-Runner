@@ -212,11 +212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 8ad2e41b2d77c4042bfd7479600d9fc5, type: 2}
-  _projectilePrefab: {fileID: -3491594045099439809, guid: 29a73c290e8b543bf8ef2bb945b0b815, type: 3}
+  _projectilePrefab: {fileID: 5709667036588299487, guid: 336f89be4fe1348e599a90ac2a0cdd93, type: 3}
   _muzzleSpriteRenderer: {fileID: 9132558837407960237}
   _muzzlePosition: {fileID: 9132558837407960234}
   _shootSound: {fileID: 2020884983634749385}
   _nextShotTime: 0
   _spawnedProjectiles: []
   _projectilesCount: 5
-  _angleBetweenProjectiles: 3
+  _projectileSpread: 0
