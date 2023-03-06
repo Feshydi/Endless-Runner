@@ -53,12 +53,13 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
 
     public void DoDamage(float damage)
     {
-        if (!_isDamageAllowed)
+        if (_isDead || !_isDamageAllowed)
             return;
 
         _healthPoints -= damage;
         _isHitted = true;
-        _isDamageAllowed = false;
+        if (TryGetComponent(out PlayerControllerBehaviour pcb))
+            _isDamageAllowed = false;
         if (_healthPoints < 0)
         {
             _healthPoints = 0;

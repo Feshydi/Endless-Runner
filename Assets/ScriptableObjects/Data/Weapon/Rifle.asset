@@ -15,7 +15,7 @@ MonoBehaviour:
   _damage: 25
   _fireRate: 600
   _projectileSpeed: 20
-  _weaponPosition: {x: 0, y: 1.5}
-  _muzzlePosition: {x: 7.2, y: 0}
+  _weaponPosition: {x: 0.4, y: 1.8}
+  _muzzlePosition: {x: 7.1, y: 0}
   _muzzleScale: {x: 0.3, y: 0.2}
   _animatorController: {fileID: 9100000, guid: 377f4cc23f61f4a80942987e5ae0b20e, type: 2}
