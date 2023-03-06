@@ -171,11 +171,43 @@ PrefabInstance:
       propertyPath: _projectilePrefab
       value: 
       objectReference: {fileID: -962651356614369502, guid: d2c536daf6b4b4d12bbfd0bbe460b5de, type: 3}
+    - target: {fileID: 6225352916609678804, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225352916609678804, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225352916609678804, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225352916609678810, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6977126673583160311, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187173928854821041, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575680464337486198, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575680464337486198, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575680464337486198, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575680464337486200, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

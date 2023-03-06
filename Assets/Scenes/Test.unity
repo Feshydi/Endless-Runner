@@ -368,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9132558837699311191, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
@@ -6434,6 +6434,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1239344543}
     m_Modifications:
+    - target: {fileID: 2014215669899844757, guid: 82dfc45a7c0bb4b9c956a8be656602b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645075584230760503, guid: 82dfc45a7c0bb4b9c956a8be656602b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6976941418849627108, guid: 82dfc45a7c0bb4b9c956a8be656602b4, type: 3}
       propertyPath: m_Name
       value: Blue Variant
@@ -6511,13 +6519,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1239344543}
     m_Modifications:
+    - target: {fileID: 914636926716100499, guid: 42bb1369775294d72ac8619119939296, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744652038732759857, guid: 42bb1369775294d72ac8619119939296, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5248751902526665792, guid: 42bb1369775294d72ac8619119939296, type: 3}
       propertyPath: m_Name
       value: Pink
       objectReference: {fileID: 0}
     - target: {fileID: 5248751902526665792, guid: 42bb1369775294d72ac8619119939296, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5248751902526665818, guid: 42bb1369775294d72ac8619119939296, type: 3}
       propertyPath: _map
