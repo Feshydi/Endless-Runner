@@ -56,3 +56,6 @@ TagManager:
   - name: Enemy
     uniqueID: 930570111
     locked: 0
+  - name: Shader
+    uniqueID: 1259178755
+    locked: 0
