@@ -11,6 +11,9 @@
 /[Uu]ser[Ss]ettings/
 /[Aa]ssets/Free 2D Animated Vector Game Character Sprites
 
+# Mac files
+.DS_Store
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
