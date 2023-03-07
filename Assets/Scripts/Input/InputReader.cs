@@ -16,6 +16,7 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     public event UnityAction<Vector2> MoveEvent = delegate { };
     public event UnityAction RollEvent = delegate { };
     public event UnityAction AbilityEvent = delegate { };
+    public event UnityAction BurstEvent = delegate { };
 
     private PlayerControls _inputActions;
 
@@ -69,6 +70,12 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     {
         if (context.performed)
             AbilityEvent.Invoke();
+    }
+
+    public void OnBurst(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            BurstEvent.Invoke();
     }
 
     public void EnableGameplayInput()
