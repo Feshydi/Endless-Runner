@@ -14,11 +14,14 @@ public class PlayerRollState : PlayerBaseState
     {
         _playerController.RollBehaviour.SetUpRoll(_playerController.PreviousMoveInput, _playerController.PreviousMouseInput);
         _playerController.AnimationController.PlayRollAnimation();
+        if (_playerController.BurstBehaviour.IsBurst)
+            _playerController.EffectController.EnableRollTrailEffect();
     }
 
     public override void OnStateExit()
     {
         _playerController.IsRollPressed = false;
+        _playerController.EffectController.DisableRollTrailEffect();
     }
 
     public override void OnUpdate()

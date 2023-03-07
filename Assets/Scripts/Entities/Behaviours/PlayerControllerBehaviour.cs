@@ -57,12 +57,18 @@ public class PlayerControllerBehaviour : MonoBehaviour
     [SerializeField]
     private AbilityBehaviour _abilityBehaviour;
 
+    [SerializeField]
+    private BurstBehaviour _burstBehaviour;
+
     [Header("Additional")]
     [SerializeField]
     private PlayerAnimationController _animationController;
 
     [SerializeField]
     private PlayerAudioController _audioController;
+
+    [SerializeField]
+    private PlayerEffectController _effectController;
 
     #endregion
 
@@ -104,9 +110,13 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     public AbilityBehaviour AbilityBehaviour => _abilityBehaviour;
 
+    public BurstBehaviour BurstBehaviour => _burstBehaviour;
+
     public PlayerAnimationController AnimationController => _animationController;
 
     public PlayerAudioController AudioController => _audioController;
+
+    public PlayerEffectController EffectController => _effectController;
 
     #endregion
 
@@ -126,6 +136,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
         _inputReader.MouseEvent += OnMouseMove;
         _inputReader.RollEvent += OnRoll;
         _inputReader.AbilityEvent += OnAbility;
+        _inputReader.BurstEvent += OnBurst;
         _inputReader.AttackEvent += OnAttackInitiated;
         _inputReader.AttackCanceledEvent += OnAttackCanceled;
     }
@@ -133,9 +144,10 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         _inputReader.MoveEvent -= OnMove;
-        _inputReader.MouseEvent += OnMouseMove;
+        _inputReader.MouseEvent -= OnMouseMove;
         _inputReader.RollEvent -= OnRoll;
         _inputReader.AbilityEvent -= OnAbility;
+        _inputReader.BurstEvent -= OnBurst;
         _inputReader.AttackEvent -= OnAttackInitiated;
         _inputReader.AttackCanceledEvent -= OnAttackCanceled;
     }
@@ -172,6 +184,12 @@ public class PlayerControllerBehaviour : MonoBehaviour
             _isAbilityPressed = true;
     }
 
+    private void OnBurst()
+    {
+        if (Time.time > _burstBehaviour.NextBurstTime)
+            _burstBehaviour.BurstHandle(_effectController);
+    }
+
     private void OnAttackInitiated()
     {
         _attackInput = true;
@@ -190,6 +208,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
         if (_rollBehaviour is null) _rollBehaviour = this.GetComponent<RollBehaviour>();
         if (_attackBehaviour is null) _attackBehaviour = this.GetComponent<AttackBehaviour>();
         if (_abilityBehaviour is null) _abilityBehaviour = this.GetComponent<AbilityBehaviour>();
+        if (_burstBehaviour is null) _burstBehaviour = this.GetComponent<BurstBehaviour>();
     }
 
     #endregion

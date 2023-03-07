@@ -13,6 +13,8 @@ public class PlayerAbilityState : PlayerBaseState
     public override void OnStateEnter()
     {
         _playerController.AudioController.PlayAbilitySound();
+        if (_playerController.BurstBehaviour.IsBurst)
+            _playerController.EffectController.EnableAbilityEffect();
         _playerController.AbilityBehaviour.SetUpAbility();
         _playerController.AbilityBehaviour.AbilityHandle();
     }
@@ -20,6 +22,7 @@ public class PlayerAbilityState : PlayerBaseState
     public override void OnStateExit()
     {
         _playerController.IsAbilityPressed = false;
+        _playerController.EffectController.DisableAbilityEffect();
     }
 
     public override void OnUpdate()

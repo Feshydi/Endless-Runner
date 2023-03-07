@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1417447086}
   - component: {fileID: 1417447087}
   - component: {fileID: 1417447092}
+  - component: {fileID: 7972255560981776677}
   - component: {fileID: 1417447093}
   m_Layer: 0
   m_Name: Player
@@ -502,8 +503,10 @@ MonoBehaviour:
   _lookBehaviour: {fileID: 1417447086}
   _rollBehaviour: {fileID: 1417447087}
   _abilityBehaviour: {fileID: 1417447092}
+  _burstBehaviour: {fileID: 7972255560981776677}
   _animationController: {fileID: 1999255860}
   _audioController: {fileID: 756840462}
+  _effectController: {fileID: 7625247875395380288}
 --- !u!114 &1297815168539555345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +591,23 @@ MonoBehaviour:
   _damage: 0
   _radius: 0
   _explosionForce: 0
+--- !u!114 &7972255560981776677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297815168539555337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f3b97f119754d2aa4a06834eb1495e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
+  _burstTime: 0
+  _cooldownTime: 0
+  _isBurst: 0
+  _nextBurstTime: 0
 --- !u!114 &1417447093
 MonoBehaviour:
   m_ObjectHideFlags: 0
