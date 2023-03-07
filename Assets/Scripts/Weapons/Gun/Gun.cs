@@ -11,6 +11,9 @@ public abstract class Gun : MonoBehaviour
     [SerializeField]
     protected WeaponData _weaponData;
 
+    [SerializeField]
+    protected CharacterStatsBuffData _statsBuffData;
+
     [Header("Projectile")]
     [SerializeField]
     protected Projectile _projectilePrefab;
@@ -65,7 +68,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (Time.time < _nextShotTime)
             return false;
-        _nextShotTime = Time.time + 60 / _weaponData.FireRate;
+        _nextShotTime = Time.time + 60 / (_weaponData.FireRate * _statsBuffData.FireRateMultiplier);
         return true;
     }
 

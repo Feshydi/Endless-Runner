@@ -10,10 +10,10 @@ public class SimpleProjectile : Projectile
     protected override void DoOnCollision(Collider2D collision)
     {
         DoDamage(collision);
-        Destroy(gameObject);
+        if (!_statsBuffData.IsBulletPenetrate)
+            Destroy(gameObject);
     }
 
     #endregion
 
 }
-

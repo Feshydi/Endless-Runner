@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 8ad2e41b2d77c4042bfd7479600d9fc5, type: 2}
+  _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _projectilePrefab: {fileID: -235043439389213933, guid: a12245e24aac2493e8f0bb190f2d1b86, type: 3}
   _muzzleSpriteRenderer: {fileID: 9132558837407960237}
   _muzzlePosition: {fileID: 9132558837407960234}

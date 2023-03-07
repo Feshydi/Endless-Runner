@@ -12,6 +12,12 @@ public class BurstBehaviour : MonoBehaviour
     [SerializeField]
     private CharacterData _characterData;
 
+    [SerializeField]
+    private CharacterStatsBuffData _statsBuffData;
+
+    [SerializeField]
+    private BurstType _burstType;
+
     [Header("Generated")]
     [SerializeField]
     private float _burstTime;
@@ -50,6 +56,7 @@ public class BurstBehaviour : MonoBehaviour
         _nextBurstTime = Time.time + _cooldownTime;
         _isBurst = true;
         effectController.EnableEyesEffect();
+        _statsBuffData.SetBurstEffect(_burstType);
         OnBurstTimeEvent?.Invoke(_cooldownTime);
         StartCoroutine(BurstTimer(effectController));
     }
@@ -59,6 +66,7 @@ public class BurstBehaviour : MonoBehaviour
         yield return new WaitForSeconds(_burstTime);
         _isBurst = false;
         effectController.DisableEyesEffect();
+        _statsBuffData.SetBurstEffect(BurstType.Disabled);
     }
 
     #endregion

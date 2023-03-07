@@ -9,6 +9,9 @@ public abstract class Projectile : MonoBehaviour
     #region Fields
 
     [SerializeField]
+    protected CharacterStatsBuffData _statsBuffData;
+
+    [SerializeField]
     private Rigidbody2D _rigidbody2D;
 
     [SerializeField]
@@ -49,17 +52,20 @@ public abstract class Projectile : MonoBehaviour
         if (_rigidbody2D is null) _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    public void Init(float damage, float speed, Vector2 direction)
+    public void Init(float damage, float speed, Vector2 direction,
+        CharacterStatsBuffData statsBuffData)
     {
         DataCheck();
         _damage = damage;
         _speed = speed;
         _direction = direction;
+        _statsBuffData = statsBuffData;
     }
 
-    public void Init(float damage, float speed, Vector2 direction, float maxFlyDistance)
+    public void Init(float damage, float speed, Vector2 direction,
+        CharacterStatsBuffData statsBuffData, float maxFlyDistance)
     {
-        Init(damage, speed, direction);
+        Init(damage, speed, direction, statsBuffData);
         _maxFlyDistance = maxFlyDistance;
     }
 
@@ -78,7 +84,7 @@ public abstract class Projectile : MonoBehaviour
             || collision.TryGetComponent(out Projectile p))
             return;
 
-        if (_isCollided)
+        if (_isCollided && !_statsBuffData.IsBulletPenetrate)
             return;
         _isCollided = true;
 

@@ -36,18 +36,20 @@ public class FrangibleProjectile : Projectile
     {
         DoDamage(collision);
         CreateParticles(collision);
-        Destroy(gameObject);
+        if (!_statsBuffData.IsBulletPenetrate)
+            Destroy(gameObject);
     }
 
     private void CreateParticles(Collider2D collision)
     {
-        float angle = 360 / _particlesCount;
-        for (int i = 1; i <= _particlesCount; i++)
+        var particlesCount = (int)(_particlesCount * _statsBuffData.BulletParticleMultiplier);
+        float angle = 360 / particlesCount;
+        for (int i = 1; i <= particlesCount; i++)
         {
             Vector2 direction = Quaternion.Euler(0, 0, angle * i) * Vector2.right;
             var particleProjectile = Instantiate(_particlePrefab, transform.position, transform.rotation);
             particleProjectile.Init(_damage * _particleDamageMultiply, _speed * _particleSpeedMultiply,
-                direction, _particleFlyDistance);
+                direction, _statsBuffData, _particleFlyDistance);
 
             if (collision is not null)
                 if (collision.gameObject.TryGetComponent(out HealthBehaviour health))
@@ -58,4 +60,3 @@ public class FrangibleProjectile : Projectile
     #endregion
 
 }
-

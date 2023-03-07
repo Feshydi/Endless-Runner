@@ -25,7 +25,8 @@ public class ParticleProjectile : Projectile
         if (_ignoredEnemy is null || !collision.Equals(_ignoredEnemy))
         {
             DoDamage(collision);
-            Destroy(gameObject);
+            if (!_statsBuffData.IsBulletPenetrate)
+                Destroy(gameObject);
         }
 
     }
@@ -33,4 +34,3 @@ public class ParticleProjectile : Projectile
     #endregion
 
 }
-
