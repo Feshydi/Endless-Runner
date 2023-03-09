@@ -29,6 +29,16 @@ public class CameraFollow : MonoBehaviour
 
     #endregion
 
+    #region Properties
+
+    public Tilemap Map
+    {
+        get => _map;
+        set => _map = value;
+    }
+
+    #endregion
+
     #region Methods
 
     private void Start()
@@ -36,6 +46,7 @@ public class CameraFollow : MonoBehaviour
         _smoothSpeed = 5f;
         _offset = new Vector3(0, 0, -10);
         _map.CompressBounds();
+        _camera = GetComponent<PlayerControllerBehaviour>().Camera.transform;
     }
 
     private void LateUpdate()

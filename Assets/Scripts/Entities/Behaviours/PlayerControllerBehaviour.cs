@@ -74,6 +74,12 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     #region Properties
 
+    public Camera Camera
+    {
+        get => _camera;
+        set => _camera = value;
+    }
+
     public PlayerBaseState CurrentState
     {
         get => _currentState;
@@ -202,6 +208,7 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     private void CheckFields()
     {
+        if (_camera is null) _camera = Camera.main;
         if (_healthBehaviour is null) _healthBehaviour = this.GetComponent<HealthBehaviour>();
         if (_moveBehaviour is null) _moveBehaviour = this.GetComponent<MoveBehaviour>();
         if (_lookBehaviour is null) _lookBehaviour = this.GetComponent<LookBehaviour>();

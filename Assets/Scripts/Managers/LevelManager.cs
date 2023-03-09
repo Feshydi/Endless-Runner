@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelManager : MonoBehaviour
 {
 
     #region Fields
+
+    [Header("Data")]
+    [SerializeField]
+    private LoadedLevelData _loadedLevelData;
 
     [Header("Map")]
     [SerializeField]
@@ -18,8 +23,7 @@ public class LevelManager : MonoBehaviour
     private PerlinNoiseMap _objectMap;
 
     [Header("Entities")]
-    [SerializeField]
-    private PlayerControllerBehaviour _player;
+    public PlayerControllerBehaviour Player;
 
     [SerializeField]
     private SpawnManager _spawnManagerPrefab;
@@ -28,6 +32,12 @@ public class LevelManager : MonoBehaviour
     private SpawnManagerData _spawnManagerData;
 
     [Header("Additional")]
+    [SerializeField]
+    private Camera _camera;
+
+    [SerializeField]
+    private PlayerUIManager _playerUIManager;
+
     public TimerController TimerController;
 
     [SerializeField]
@@ -47,16 +57,16 @@ public class LevelManager : MonoBehaviour
         var gameManager = GameManager.Instance;
         gameManager.CurrentLevelManager = this;
 
-        var levelData = gameManager.LevelData;
+        var levelData = _loadedLevelData.LevelData;
         if (levelData == null)
         {
             _logger.Log("No Level Data", this);
             return;
         }
 
-        if (gameManager.AutoSeedGeneration)
-            gameManager.Seed = Random.Range(0, int.MaxValue);
-        Random.InitState(gameManager.Seed);
+        if (_loadedLevelData.AutoSeedGeneration)
+            _loadedLevelData.Seed = Random.Range(0, int.MaxValue);
+        Random.InitState(_loadedLevelData.Seed);
 
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
@@ -64,9 +74,11 @@ public class LevelManager : MonoBehaviour
         InitPlayer(levelData);
 
         Instantiate(_spawnManagerPrefab, transform)
-            .Init(_player, _spawnManagerData,
+            .Init(Player, _spawnManagerData,
             levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight,
             _logger);
+
+        _playerUIManager.Init(Player);
 
         gameManager.ScoreManager.ResetScore();
         TimerController.Init();
@@ -76,15 +88,19 @@ public class LevelManager : MonoBehaviour
 
     private void InitPlayer(LevelData levelData)
     {
+        Player = Instantiate(_loadedLevelData.Player, transform.position, Quaternion.identity, transform.parent);
         var offset = 15f;
         var height = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);
         var width = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);
-        _player.transform.position = new Vector2(height, width);
+        Player.transform.position = new Vector2(height, width);
+        Player.Camera = _camera;
+        Player.GetComponent<CameraFollow>().Map = _groundMap.GetComponent<Tilemap>();
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.CurrentLevelManager = null;
+        Destroy(Player.gameObject);
     }
 
     #endregion

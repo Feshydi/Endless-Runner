@@ -52,15 +52,17 @@ public class PlayerUIManager : MonoBehaviour
         _healthBar.value = 1f;
         _rollBar.value = 1f;
         _skillBar.value = 1f;
+        _burstBar.value = 1f;
 
         _logger.Log($"{gameObject} created", this);
     }
 
-    private void OnEnable()
+    public void Init(PlayerControllerBehaviour player)
     {
         _inputActions.UI.Enable();
         _inputActions.UI.PauseMenu.performed += PauseMenu_performed;
 
+        _player = player;
         _player.HealthBehaviour.OnHealthValueEvent += NewHealthPoints;
         _player.RollBehaviour.OnRollTimeEvent += RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent += SkillBarProgress;
@@ -68,7 +70,7 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.ScoreManager.OnScorePointsEvent += NewScore;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _inputActions.UI.PauseMenu.performed -= PauseMenu_performed;
         _inputActions.UI.Disable();

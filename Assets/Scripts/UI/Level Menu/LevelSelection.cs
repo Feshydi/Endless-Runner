@@ -12,6 +12,9 @@ public class LevelSelection : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
+    private LoadedLevelData _loadedLevelData;
+
+    [SerializeField]
     private Transform _contextHolderTransform;
 
     [SerializeField]
@@ -80,11 +83,9 @@ public class LevelSelection : MonoBehaviour
         _selectedLevelButton = levelButton;
         _selectedLevel = levelData;
 
-        GameManager.Instance.LevelData = _selectedLevel;
+        _loadedLevelData.LevelData = _selectedLevel;
 
         _selectedLevelButton.interactable = false;
-        _playButton.interactable = true;
-        _playButton.Select();
 
         _logger.Log($"Level {_selectedLevel} selected", this);
     }
@@ -97,9 +98,9 @@ public class LevelSelection : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.AutoSeedGeneration = _toggle.isOn;
+        _loadedLevelData.AutoSeedGeneration = _toggle.isOn;
         if (!_toggle.isOn)
-            GameManager.Instance.Seed = int.Parse(_inputField.text);
+            _loadedLevelData.Seed = int.Parse(_inputField.text);
 
         GameManager.Instance.LoadingManager.LoadLevel();
     }

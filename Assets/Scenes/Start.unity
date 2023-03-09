@@ -431,6 +431,10 @@ PrefabInstance:
       value: Score Manager
       objectReference: {fileID: 0}
     - target: {fileID: 3484118730203470570, guid: ca271bb90647f4a1e9ef6c84025028cf, type: 3}
+      propertyPath: _loadedLevelData
+      value: 
+      objectReference: {fileID: 11400000, guid: 72e7e5e00ddab4f87a430b7f746a5c5c, type: 2}
+    - target: {fileID: 3484118730203470570, guid: ca271bb90647f4a1e9ef6c84025028cf, type: 3}
       propertyPath: _maxScoreboardRows
       value: 7
       objectReference: {fileID: 0}

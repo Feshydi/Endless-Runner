@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviour
     #region Fields
 
     [SerializeField]
+    private LoadedLevelData _loadedLevelData;
+
+    [SerializeField]
     private int _currentScorePoints;
 
     [SerializeField]
@@ -104,7 +107,7 @@ public class ScoreManager : MonoBehaviour
         return new ScoreboardRowData(gameManager.SettingsManager.Settings.Username,
             _currentScorePoints,
             gameManager.CurrentLevelManager.TimerController.Elapsedtime,
-            gameManager.Seed);
+            _loadedLevelData.Seed);
     }
 
     #endregion

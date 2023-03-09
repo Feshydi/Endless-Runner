@@ -56,6 +56,7 @@ public class RollBehaviour : MonoBehaviour
     {
         _moveSpeed = _characterData.MoveSpeed;
         _cooldownTime = _characterData.RollCooldownTime;
+        _camera = GetComponent<PlayerControllerBehaviour>().Camera;
     }
 
     public void SetUpRoll(Vector2 moveInput, Vector2 mousePosition)

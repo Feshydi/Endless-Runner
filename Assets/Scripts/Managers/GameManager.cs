@@ -48,8 +48,6 @@ public class GameManager : MonoBehaviour
     public LevelManager CurrentLevelManager;
 
     [Header("Data")]
-    public LevelData LevelData;
-
     [SerializeField]
     private InputReader _inputReader;
 
@@ -57,11 +55,6 @@ public class GameManager : MonoBehaviour
     private GameMode _gameMode;
 
     public event Action<GameMode> OnGameStatusChanged;
-
-    [Header("Generation Data")]
-    public bool AutoSeedGeneration;
-
-    public int Seed;
 
     #endregion
 
