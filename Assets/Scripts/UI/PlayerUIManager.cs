@@ -35,6 +35,9 @@ public class PlayerUIManager : MonoBehaviour
     private Slider _skillBar;
 
     [SerializeField]
+    private Slider _burstBar;
+
+    [SerializeField]
     private Logger _logger;
 
     #endregion
@@ -61,6 +64,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.HealthBehaviour.OnHealthValueEvent += NewHealthPoints;
         _player.RollBehaviour.OnRollTimeEvent += RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent += SkillBarProgress;
+        _player.BurstBehaviour.OnBurstTimeEvent += BurstBarProgress;
         GameManager.Instance.ScoreManager.OnScorePointsEvent += NewScore;
     }
 
@@ -72,6 +76,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.HealthBehaviour.OnHealthValueEvent -= NewHealthPoints;
         _player.RollBehaviour.OnRollTimeEvent -= RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent -= SkillBarProgress;
+        _player.BurstBehaviour.OnBurstTimeEvent -= BurstBarProgress;
         GameManager.Instance.ScoreManager.OnScorePointsEvent -= NewScore;
     }
 
@@ -118,6 +123,19 @@ public class PlayerUIManager : MonoBehaviour
 
         if (_skillBar.value == 1)
             _logger.Log("Skill is ready", this);
+    }
+
+    void BurstBarProgress(float value)
+    {
+        LeanTween.value(gameObject, SetBurstBarProgress, 0, 1, value);
+    }
+
+    public void SetBurstBarProgress(float value)
+    {
+        _burstBar.value = value;
+
+        if (_burstBar.value == 1)
+            _logger.Log("Burst is ready", this);
     }
 
     private void PauseMenu_performed(InputAction.CallbackContext obj)

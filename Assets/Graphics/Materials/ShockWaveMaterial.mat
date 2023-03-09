@@ -126,13 +126,13 @@ Material:
     - _NumLayersCount: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 5
-    - _Size: 0.1
+    - _ScrollSpeed: 0.4
+    - _Size: 0.3
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
-    - _Speed: 1
+    - _Speed: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _FocalPoint: {r: 0.5, g: 0.5, b: 0, a: 0}

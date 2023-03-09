@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04cf189371aca4db88ebbf9aec590b2d, type: 3}
-  m_Name: PurpleChar
+  m_Name: DefaultCharacter
   m_EditorClassIdentifier: 
   _moveSpeed: 2000
   _maxMoveSpeed: 1
