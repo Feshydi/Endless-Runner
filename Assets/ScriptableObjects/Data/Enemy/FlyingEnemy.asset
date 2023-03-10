@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10000
   _maxMoveSpeed: 0.7
-  _healthPoints: 70
+  _healthPoints: 75
   _animatorController: {fileID: 9100000, guid: 9debf6e4d6d174792b830b19c1dbddce, type: 2}
   _damage: 33
-  _damageRate: 60
+  _damageRate: 120
