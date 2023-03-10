@@ -17,7 +17,7 @@ public class PlayerUIManager : MonoBehaviour
     private GameObject _gameoverMenu;
 
     [SerializeField]
-    private PlayerControls _inputActions;
+    private InputReader _inputReader;
 
     [SerializeField]
     private PlayerControllerBehaviour _player;
@@ -46,8 +46,6 @@ public class PlayerUIManager : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new PlayerControls();
-
         _scoreText.text = "Score: 0";
         _healthBar.value = 1f;
         _rollBar.value = 1f;
@@ -59,10 +57,8 @@ public class PlayerUIManager : MonoBehaviour
 
     public void Init(PlayerControllerBehaviour player)
     {
-        _inputActions.UI.Enable();
-        _inputActions.UI.PauseMenu.performed += PauseMenu_performed;
-
         _player = player;
+        _inputReader.PauseMenuEvent += PauseMenu_performed;
         _player.HealthBehaviour.OnHealthValueEvent += NewHealthPoints;
         _player.RollBehaviour.OnRollTimeEvent += RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent += SkillBarProgress;
@@ -72,9 +68,7 @@ public class PlayerUIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _inputActions.UI.PauseMenu.performed -= PauseMenu_performed;
-        _inputActions.UI.Disable();
-
+        _inputReader.PauseMenuEvent -= PauseMenu_performed;
         _player.HealthBehaviour.OnHealthValueEvent -= NewHealthPoints;
         _player.RollBehaviour.OnRollTimeEvent -= RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent -= SkillBarProgress;
@@ -140,7 +134,7 @@ public class PlayerUIManager : MonoBehaviour
             _logger.Log("Burst is ready", this);
     }
 
-    private void PauseMenu_performed(InputAction.CallbackContext obj)
+    private void PauseMenu_performed()
     {
         GameManager.Instance.SetGameMode(GameMode.PauseMenu);
         _pauseMenu.SetActive(true);

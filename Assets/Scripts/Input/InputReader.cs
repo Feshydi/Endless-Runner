@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "Game/Input Reader")]
-public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
+public class InputReader : ScriptableObject, PlayerControls.IGameplayActions
 {
 
     #region Fields
@@ -17,6 +17,7 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     public event UnityAction RollEvent = delegate { };
     public event UnityAction AbilityEvent = delegate { };
     public event UnityAction BurstEvent = delegate { };
+    public event UnityAction PauseMenuEvent = delegate { };
 
     private PlayerControls _inputActions;
 
@@ -29,7 +30,7 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
         if (_inputActions is null)
         {
             _inputActions = new PlayerControls();
-            _inputActions.Player.SetCallbacks(this);
+            _inputActions.Gameplay.SetCallbacks(this);
         }
 
         EnableGameplayInput();
@@ -78,14 +79,20 @@ public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
             BurstEvent.Invoke();
     }
 
+    public void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            PauseMenuEvent.Invoke();
+    }
+
     public void EnableGameplayInput()
     {
-        _inputActions.Player.Enable();
+        _inputActions.Gameplay.Enable();
     }
 
     public void DisableAllInput()
     {
-        _inputActions.Player.Disable();
+        _inputActions.Gameplay.Disable();
     }
 
     #endregion

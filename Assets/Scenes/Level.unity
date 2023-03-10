@@ -1817,6 +1817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseMenu: {fileID: 34642490}
   _gameoverMenu: {fileID: 947780517}
+  _inputReader: {fileID: 11400000, guid: 4981faa48ac874e64be1be4e7660036a, type: 2}
   _player: {fileID: 0}
   _scoreText: {fileID: 1295035658}
   _healthBar: {fileID: 1753414556}
