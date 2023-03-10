@@ -2,36 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
 
     #region Fields
 
     [Header("Enemy Data")]
     [SerializeField]
-    private EnemyData _enemyData;
+    protected EnemyData _enemyData;
 
     [SerializeField]
-    private Rigidbody2D _rigidbody2D;
+    protected Rigidbody2D _rigidbody2D;
 
     [SerializeField]
-    private HealthBehaviour _healthBehaviour;
+    protected HealthBehaviour _healthBehaviour;
+
+    [SerializeField]
+    protected float _chasingDistance;
 
     [Header("Target Data")]
     [SerializeField]
-    private HealthBehaviour _targetHealth;
+    protected HealthBehaviour _targetHealth;
 
     [Header("Generated Data")]
     [SerializeField]
-    private float _nextHitTime;
+    protected float _nextHitTime;
 
     [Header("Animation")]
     [SerializeField]
-    private Animator _entityAnimator;
+    protected Animator _entityAnimator;
 
     [Header("Sound")]
     [SerializeField]
-    private AudioSource _hitSound;
+    protected AudioSource _hitSound;
 
     #endregion
 
@@ -43,9 +46,9 @@ public class EnemyController : MonoBehaviour
         _targetHealth = target.GetComponent<HealthBehaviour>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        if (_rigidbody2D is null) _rigidbody2D = GetComponent<Rigidbody2D>();
+        CheckVariables();
     }
 
     private void OnEnable()
@@ -58,12 +61,7 @@ public class EnemyController : MonoBehaviour
         _healthBehaviour.OnHealthValueEvent -= HealthEvent;
     }
 
-    private void FixedUpdate()
-    {
-        MoveHandle();
-    }
-
-    private void MoveHandle()
+    protected void MoveHandle()
     {
         if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
             return;
@@ -74,34 +72,29 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            var playerPos = _targetHealth.transform.position;
+            Vector2 playerPos = _targetHealth.transform.position;
             var distance = Vector2.Distance(transform.position, _targetHealth.transform.position);
-            if (distance > 0)
+            if (distance >= _chasingDistance)
             {
-                Vector2 direction = (playerPos - transform.position).normalized;
+                var direction = (playerPos - (Vector2)transform.position).normalized;
                 var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
                 _rigidbody2D.AddForce(move);
                 if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
                     _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
+            }
+            else
+            {
+                var offset = _rigidbody2D.position - playerPos;
+                _rigidbody2D.position = Vector2.ClampMagnitude(offset, _chasingDistance);
             }
         }
 
         _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.magnitude < float.Epsilon);
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+    protected virtual void CheckVariables()
     {
-        if (Time.time < _nextHitTime)
-            return;
-
-        if (other.gameObject.TryGetComponent(out IDamageable damageable))
-        {
-            if (damageable.Equals(_targetHealth))
-            {
-                damageable.DoDamage(_enemyData.Damage);
-                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
-            }
-        }
+        if (_rigidbody2D is null) _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void HealthEvent(float health, float maxHealth)
