@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         {
             case GameMode.MainMenu:
                 _inputReader.DisableAllInput();
-                Time.timeScale = 0;
+                Time.timeScale = 1;
                 break;
             case GameMode.PauseMenu:
                 _inputReader.DisableAllInput();

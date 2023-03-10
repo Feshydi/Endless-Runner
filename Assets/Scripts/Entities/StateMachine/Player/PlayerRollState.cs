@@ -20,7 +20,6 @@ public class PlayerRollState : PlayerBaseState
 
     public override void OnStateExit()
     {
-        _playerController.IsRollPressed = false;
         _playerController.EffectController.DisableRollTrailEffect();
     }
 
@@ -36,7 +35,7 @@ public class PlayerRollState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (_playerController.HealthBehaviour.IsDamageAllowed)
+        if (!_playerController.RollBehaviour.IsRollPressed)
             SwitchState(_stateFactory.Idle());
     }
 

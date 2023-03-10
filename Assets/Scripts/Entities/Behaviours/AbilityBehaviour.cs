@@ -5,7 +5,6 @@ public abstract class AbilityBehaviour : MonoBehaviour
 {
 
     #region Fields
-
     [SerializeField]
     protected float _nextAbilityTime;
 
@@ -26,9 +25,7 @@ public abstract class AbilityBehaviour : MonoBehaviour
         OnAbilityTimeEvent?.Invoke(time);
     }
 
-    public abstract void SetUpAbility();
-
-    public abstract void AbilityHandle();
+    public abstract void AbilityHandle(PlayerEffectController effectController);
 
     #endregion
 }

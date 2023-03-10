@@ -24,8 +24,6 @@ public class PlayerStateFactory
 
     public PlayerBaseState Roll() => new PlayerRollState(_playerController, this);
 
-    public PlayerBaseState Ability() => new PlayerAbilityState(_playerController, this);
-
     public PlayerBaseState Death() => new PlayerDeathState(_playerController, this);
 
     public PlayerBaseState Hit() => new PlayerHitState(_playerController, this);

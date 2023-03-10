@@ -32,24 +32,22 @@ public class ExplosionAbilityBehaviour : AbilityBehaviour
         _explosionForce = _characterData.ExplosionForce;
     }
 
-    public override void SetUpAbility()
+    public override void AbilityHandle(PlayerEffectController effectController)
     {
         _nextAbilityTime = Time.time + _characterData.ExplosionCooldownTime;
         OnAbilityTimeChanged(_characterData.ExplosionCooldownTime);
-    }
 
-    public override void AbilityHandle()
-    {
         var explosionPos = (Vector2)transform.position;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, _radius);
         foreach (var hit in colliders)
         {
-            StartCoroutine(ExplosionHandle(hit));
+            StartCoroutine(ExplosionHandle(hit, effectController));
         }
     }
 
-    private IEnumerator ExplosionHandle(Collider2D collider)
+    private IEnumerator ExplosionHandle(Collider2D collider, PlayerEffectController effectController)
     {
+        effectController.EnableAbilityEffect();
         if (collider.TryGetComponent(out Rigidbody2D rigidbody2D)
             && collider.TryGetComponent(out EnemyController enemy)
             && collider.TryGetComponent(out IDamageable damageable))
@@ -60,6 +58,9 @@ public class ExplosionAbilityBehaviour : AbilityBehaviour
             yield return new WaitForSeconds(0.2f);
             damageable.DoDamage(_damage);
         }
+
+        yield return new WaitForSeconds(2f);
+        effectController.DisableAbilityEffect();
     }
 
     #endregion

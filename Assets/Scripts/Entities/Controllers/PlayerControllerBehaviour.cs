@@ -23,12 +23,6 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private Vector2 _previousMouseInput;
 
     [SerializeField]
-    private bool _isRollPressed;
-
-    [SerializeField]
-    private bool _isAbilityPressed;
-
-    [SerializeField]
     private bool _attackInput;
 
     [Header("State Machine")]
@@ -89,18 +83,6 @@ public class PlayerControllerBehaviour : MonoBehaviour
     public Vector2 PreviousMoveInput => _previousMoveInput;
 
     public Vector2 PreviousMouseInput => _previousMouseInput;
-
-    public bool IsRollPressed
-    {
-        get => _isRollPressed;
-        set => _isRollPressed = value;
-    }
-
-    public bool IsAbilityPressed
-    {
-        get => _isAbilityPressed;
-        set => _isAbilityPressed = value;
-    }
 
     public bool AttackInput => _attackInput;
 
@@ -181,13 +163,16 @@ public class PlayerControllerBehaviour : MonoBehaviour
     private void OnRoll()
     {
         if (Time.time > _rollBehaviour.NextRollTime)
-            _isRollPressed = true;
+            _rollBehaviour.IsRollPressed = true;
     }
 
     private void OnAbility()
     {
         if (Time.time > _abilityBehaviour.NextAbilityTime)
-            _isAbilityPressed = true;
+        {
+            _audioController.PlayAbilitySound();
+            _abilityBehaviour.AbilityHandle(_effectController);
+        }
     }
 
     private void OnBurst()
@@ -208,14 +193,14 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
     private void CheckFields()
     {
-        if (_camera is null) _camera = Camera.main;
-        if (_healthBehaviour is null) _healthBehaviour = this.GetComponent<HealthBehaviour>();
-        if (_moveBehaviour is null) _moveBehaviour = this.GetComponent<MoveBehaviour>();
-        if (_lookBehaviour is null) _lookBehaviour = this.GetComponent<LookBehaviour>();
-        if (_rollBehaviour is null) _rollBehaviour = this.GetComponent<RollBehaviour>();
-        if (_attackBehaviour is null) _attackBehaviour = this.GetComponent<AttackBehaviour>();
-        if (_abilityBehaviour is null) _abilityBehaviour = this.GetComponent<AbilityBehaviour>();
-        if (_burstBehaviour is null) _burstBehaviour = this.GetComponent<BurstBehaviour>();
+        if (_camera == null) _camera = Camera.main;
+        if (_healthBehaviour == null) _healthBehaviour = this.GetComponent<HealthBehaviour>();
+        if (_moveBehaviour == null) _moveBehaviour = this.GetComponent<MoveBehaviour>();
+        if (_lookBehaviour == null) _lookBehaviour = this.GetComponent<LookBehaviour>();
+        if (_rollBehaviour == null) _rollBehaviour = this.GetComponent<RollBehaviour>();
+        if (_attackBehaviour == null) _attackBehaviour = this.GetComponent<AttackBehaviour>();
+        if (_abilityBehaviour == null) _abilityBehaviour = this.GetComponent<AbilityBehaviour>();
+        if (_burstBehaviour == null) _burstBehaviour = this.GetComponent<BurstBehaviour>();
     }
 
     #endregion

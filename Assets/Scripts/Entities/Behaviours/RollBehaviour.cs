@@ -33,6 +33,9 @@ public class RollBehaviour : MonoBehaviour
     private Vector2 _rollDirection;
 
     [SerializeField]
+    private bool _isRollPressed;
+
+    [SerializeField]
     private float _cooldownTime;
 
     [SerializeField]
@@ -47,6 +50,16 @@ public class RollBehaviour : MonoBehaviour
     public HealthBehaviour HealthBehaviour => _healthBehaviour;
 
     public float NextRollTime => _nextRollTime;
+
+    #endregion
+
+    #region Properties
+
+    public bool IsRollPressed
+    {
+        get => _isRollPressed;
+        set => _isRollPressed = value;
+    }
 
     #endregion
 
@@ -84,6 +97,7 @@ public class RollBehaviour : MonoBehaviour
     public void AfterRoll()
     {
         _healthBehaviour.IsDamageAllowed = true;
+        _isRollPressed = false;
     }
 
     #endregion
