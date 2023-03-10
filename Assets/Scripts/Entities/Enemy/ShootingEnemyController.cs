@@ -92,6 +92,9 @@ public class ShootingEnemyController : EnemyController
 
     private void ShootHandle()
     {
+        if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
+            return;
+
         var direction = ((Vector2)_targetHealth.transform.position - _rigidbody2D.position).normalized;
         Instantiate(_projectilePrefab, transform.position, Quaternion.identity)
             .Init(_targetHealth, _enemyData.Damage, direction);
