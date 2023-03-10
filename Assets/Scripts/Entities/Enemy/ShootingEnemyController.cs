@@ -64,18 +64,30 @@ public class ShootingEnemyController : EnemyController
 
     private void MoveCircular()
     {
-        _angle += Time.fixedDeltaTime * _angularSpeed;
+        if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
+            return;
 
-        var positionOffset = new Vector2(
-            Mathf.Cos(_angle) * _chasingDistance,
-            Mathf.Sin(_angle) * _chasingDistance);
+        if (_targetHealth is null || _targetHealth.IsDead)
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+        }
+        else
+        {
+            _angle += Time.fixedDeltaTime * _angularSpeed;
 
-        var newPosition = (Vector2)_targetHealth.transform.position + positionOffset;
-        var direction = (newPosition - _rigidbody2D.position).normalized;
-        var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
-        _rigidbody2D.AddForce(move);
-        if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
-            _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
+            var positionOffset = new Vector2(
+                Mathf.Cos(_angle) * _chasingDistance,
+                Mathf.Sin(_angle) * _chasingDistance);
+
+            var newPosition = (Vector2)_targetHealth.transform.position + positionOffset;
+            var direction = (newPosition - _rigidbody2D.position).normalized;
+            var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
+            _rigidbody2D.AddForce(move);
+            if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
+                _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
+        }
+
+        _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.magnitude < float.Epsilon);
     }
 
     private void ShootHandle()

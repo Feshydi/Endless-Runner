@@ -5985,6 +5985,17 @@ PrefabInstance:
       objectReference: {fileID: 1025740867}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42bb1369775294d72ac8619119939296, type: 3}
+--- !u!114 &2129740714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132558837699311183, guid: 8cbaa1fd577774a6397201c517379640, type: 3}
+  m_PrefabInstance: {fileID: 1690905377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5997dfeeb15b24a2a905cc654e05fbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1314095645081150058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5993,12 +6004,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 985198991}
     m_Modifications:
     - target: {fileID: 1314095643651375663, guid: 121fabc6bcbf84dd6b619c11b581201c, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: c294c0ee499384a4688e4492d22424fd, type: 2}
+    - target: {fileID: 1314095643651375663, guid: 121fabc6bcbf84dd6b619c11b581201c, type: 3}
       propertyPath: _targetHealth
       value: 
-      objectReference: {fileID: 836157651}
+      objectReference: {fileID: 2129740714}
     - target: {fileID: 9082387078783844687, guid: 121fabc6bcbf84dd6b619c11b581201c, type: 3}
       propertyPath: m_Name
-      value: Flying Enemy
+      value: Shooting Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 9082387078783844691, guid: 121fabc6bcbf84dd6b619c11b581201c, type: 3}
       propertyPath: m_RootOrder
