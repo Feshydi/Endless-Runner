@@ -174,8 +174,9 @@ GameObject:
   - component: {fileID: 7797848528001264901}
   - component: {fileID: 7797848528001264900}
   - component: {fileID: 7797848528001264897}
+  - component: {fileID: -7069283852373728631}
   m_Layer: 0
-  m_Name: Enemy Red
+  m_Name: Charging Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,8 +319,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5997dfeeb15b24a2a905cc654e05fbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityData: {fileID: 0}
+  _entityData: {fileID: 11400000, guid: ac4cf9af3aa534d4fb6670941d0d403b, type: 2}
   _healthPoints: 0
   _isDamageAllowed: 1
   _isDead: 0
   _isHitted: 0
+--- !u!114 &-7069283852373728631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797848528001264922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1ce84be58c342cd967b1b41dab8ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyData: {fileID: 11400000, guid: ac4cf9af3aa534d4fb6670941d0d403b, type: 2}
+  _rigidbody2D: {fileID: 7797848528001264896}
+  _healthBehaviour: {fileID: 7797848528001264897}
+  _chasingDistance: 0
+  _targetHealth: {fileID: 0}
+  _nextHitTime: 5
+  _entityAnimator: {fileID: 7797848528001264900}
+  _hitSound: {fileID: 29600066975108636}
+  _minChargeDistance: 4.5
+  _maxChargeDistance: 10
+  _chargeSpeed: 50
+  _chargeForce: 12
+  _chargeDamage: 60
+  _chargeCooldownTime: 5
+  _nextChargeTime: 0
+  _isCharging: 0

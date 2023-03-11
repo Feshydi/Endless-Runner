@@ -494,8 +494,6 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _previousMoveInput: {x: 0, y: 0}
   _previousMouseInput: {x: 0, y: 0}
-  _isRollPressed: 0
-  _isAbilityPressed: 0
   _attackInput: 0
   _healthBehaviour: {fileID: 1297815168539555345}
   _moveBehaviour: {fileID: 1417447081}
@@ -572,6 +570,7 @@ MonoBehaviour:
   _speedModifier: 5
   _moveSpeed: 0
   _rollDirection: {x: 0, y: 0}
+  _isRollPressed: 0
   _cooldownTime: 0
   _nextRollTime: 0
 --- !u!114 &1417447092
@@ -973,6 +972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838757976253919983}
   - component: {fileID: 756840462}
+  - component: {fileID: 3125158572224552050}
   m_Layer: 0
   m_Name: Audio Controller
   m_TagString: Untagged
@@ -1018,6 +1018,14 @@ MonoBehaviour:
   _abilitySound: {fileID: 6596308450972498905}
   _rollSound: {fileID: 4969810431061684683}
   _pitchRange: 0.1
+--- !u!81 &3125158572224552050
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243804599948446245}
+  m_Enabled: 1
 --- !u!1 &4165594318096974890
 GameObject:
   m_ObjectHideFlags: 0

@@ -120,12 +120,12 @@ public abstract class EnemyController : MonoBehaviour
         _hitSound.Play();
     }
 
-    private void OnHitEnd()
+    public void OnHitEnd()
     {
         _healthBehaviour.SetIsHitted(false);
     }
 
-    private void AfterDeath()
+    public void AfterDeath()
     {
         Destroy(gameObject);
     }

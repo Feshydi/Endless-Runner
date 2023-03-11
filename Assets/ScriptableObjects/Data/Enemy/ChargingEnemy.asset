@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa000599a9444432ba816ac38c618fb4, type: 3}
+  m_Name: ChargingEnemy
+  m_EditorClassIdentifier: 
+  _moveSpeed: 2000
+  _maxMoveSpeed: 0.6
+  _healthPoints: 100
+  _animatorController: {fileID: 9100000, guid: 920add06986a74501b1bdf1c1d65c625, type: 2}
+  _damage: 20
+  _damageRate: 60
