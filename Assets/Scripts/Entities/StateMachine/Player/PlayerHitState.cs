@@ -25,6 +25,9 @@ public class PlayerHitState : PlayerBaseState
     {
         if (!_playerController.HealthBehaviour.IsHitted)
         {
+            if (_playerController.HealthBehaviour.IsDead)
+                SwitchState(_stateFactory.Death());
+
             if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
                 SwitchState(_stateFactory.Idle());
             else

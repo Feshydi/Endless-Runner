@@ -31,17 +31,14 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (_playerController.HealthBehaviour.IsDead)
-            SwitchState(_stateFactory.Death());
+        if (_playerController.HealthBehaviour.IsHitted)
+            SwitchState(_stateFactory.Hit());
 
         if (_playerController.RollBehaviour.IsRollPressed)
             SwitchState(_stateFactory.Roll());
 
         if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
             SwitchState(_stateFactory.Idle());
-
-        if (_playerController.HealthBehaviour.IsHitted)
-            SwitchState(_stateFactory.Hit());
     }
 
     #endregion
