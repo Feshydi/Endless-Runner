@@ -298,7 +298,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 920add06986a74501b1bdf1c1d65c625, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -341,11 +341,10 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 7797848528001264897}
   _chasingDistance: 0
   _targetHealth: {fileID: 0}
-  _nextHitTime: 5
+  _nextHitTime: 0
   _entityAnimator: {fileID: 7797848528001264900}
   _hitSound: {fileID: 29600066975108636}
   _minChargeDistance: 4.5
-  _maxChargeDistance: 10
   _chargeSpeed: 50
   _chargeForce: 12
   _chargeDamage: 60
