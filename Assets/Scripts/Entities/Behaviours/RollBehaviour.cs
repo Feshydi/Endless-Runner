@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class RollBehaviour : MonoBehaviour
 {
@@ -45,15 +44,11 @@ public class RollBehaviour : MonoBehaviour
 
     #endregion
 
-    #region
+    #region Properties
 
     public HealthBehaviour HealthBehaviour => _healthBehaviour;
 
     public float NextRollTime => _nextRollTime;
-
-    #endregion
-
-    #region Properties
 
     public bool IsRollPressed
     {

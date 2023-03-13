@@ -2498,7 +2498,10 @@ MonoBehaviour:
   _objectMap: {fileID: 0}
   Player: {fileID: 0}
   _spawnManagerPrefab: {fileID: 1001394973496473823, guid: 13a45dc57c87e4d209cfbf95c9fc282d, type: 3}
-  _spawnManagerData: {fileID: 11400000, guid: 8c7f75e6ec69d4a26a91ec6d9690edfa, type: 2}
+  _spawnManagersData:
+  - {fileID: 11400000, guid: 8c7f75e6ec69d4a26a91ec6d9690edfa, type: 2}
+  - {fileID: 11400000, guid: abc0bbee91021466f977252b9a74042e, type: 2}
+  - {fileID: 11400000, guid: fbc6216aac33e4516be239c3eb42deff, type: 2}
   _camera: {fileID: 1809394694}
   _playerUIManager: {fileID: 848412961}
   TimerController: {fileID: 2105239344}
@@ -4410,7 +4413,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1809394695}
   - component: {fileID: 1809394694}
-  - component: {fileID: 1809394693}
   - component: {fileID: 1809394696}
   m_Layer: 0
   m_Name: Main Camera
@@ -4419,14 +4421,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1809394693
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809394692}
-  m_Enabled: 1
 --- !u!20 &1809394694
 Camera:
   m_ObjectHideFlags: 0
@@ -5338,6 +5332,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.0627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
+      propertyPath: m_Color.r
+      value: 0.0627451
+      objectReference: {fileID: 0}
     - target: {fileID: 7598691912285609577, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
       propertyPath: m_Name
       value: Light

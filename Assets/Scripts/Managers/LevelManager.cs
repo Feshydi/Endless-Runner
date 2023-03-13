@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     private SpawnManager _spawnManagerPrefab;
 
     [SerializeField]
-    private SpawnManagerData _spawnManagerData;
+    private List<SpawnManagerData> _spawnManagersData;
 
     [Header("Additional")]
     [SerializeField]
@@ -72,13 +72,9 @@ public class LevelManager : MonoBehaviour
         _perimeterBuilder.Init(levelData.TerrainMapData);
 
         InitPlayer(levelData);
-
-        Instantiate(_spawnManagerPrefab, transform)
-            .Init(Player, _spawnManagerData,
-            levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight,
-            _logger);
-
         _playerUIManager.Init(Player);
+
+        InitSpawners(levelData);
 
         gameManager.ScoreManager.ResetScore();
         TimerController.Init();
@@ -95,6 +91,17 @@ public class LevelManager : MonoBehaviour
         Player.transform.position = new Vector2(height, width);
         Player.Camera = _camera;
         Player.GetComponent<CameraFollow>().Map = _groundMap.GetComponent<Tilemap>();
+    }
+
+    private void InitSpawners(LevelData levelData)
+    {
+        foreach (var spawnerData in _spawnManagersData)
+        {
+            Instantiate(_spawnManagerPrefab, transform)
+                .Init(Player, spawnerData,
+                levelData.TerrainMapData.MapWidth, levelData.TerrainMapData.MapHeight,
+                _logger);
+        }
     }
 
     private void OnDestroy()
