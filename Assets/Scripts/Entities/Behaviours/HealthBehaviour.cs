@@ -26,6 +26,9 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
 
     public event Action<float, float> OnHealthValueEvent;
 
+    [SerializeField]
+    private List<SpriteRenderer> _spritesToBlink;
+
     #endregion
 
     #region Properties
@@ -72,6 +75,25 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     public void AfterHit()
     {
         _isHitted = false;
+
+        StartCoroutine(BlinkingAnimation());
+    }
+
+    private IEnumerator BlinkingAnimation()
+    {
+        var invincibilityTime = 2.4f;
+        var blinkInterval = invincibilityTime / 6;
+        var invincibilityTimer = 0.0f;
+        while (invincibilityTimer < invincibilityTime)
+        {
+            foreach (var sprite in _spritesToBlink)
+            {
+                sprite.enabled = !sprite.enabled;
+            }
+            invincibilityTimer += blinkInterval;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
         _isDamageAllowed = true;
     }
 

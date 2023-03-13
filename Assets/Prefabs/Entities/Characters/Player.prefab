@@ -522,6 +522,9 @@ MonoBehaviour:
   _isDamageAllowed: 1
   _isDead: 0
   _isHitted: 0
+  _spritesToBlink:
+  - {fileID: 1297815168539555359}
+  - {fileID: 1297815168768067424}
 --- !u!114 &1417447081
 MonoBehaviour:
   m_ObjectHideFlags: 0
