@@ -40,6 +40,9 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField]
     private Logger _logger;
 
+    [Header("Events")]
+    public FloatEventChannel OnScorePointsEvent;
+
     #endregion
 
     #region Methods
@@ -63,7 +66,7 @@ public class PlayerUIManager : MonoBehaviour
         _player.RollBehaviour.OnRollTimeEvent += RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent += SkillBarProgress;
         _player.BurstBehaviour.OnBurstTimeEvent += BurstBarProgress;
-        GameManager.Instance.ScoreManager.OnScorePointsEvent += NewScore;
+        OnScorePointsEvent.OnEventRaised += NewScore;
     }
 
     private void OnDestroy()
@@ -73,10 +76,10 @@ public class PlayerUIManager : MonoBehaviour
         _player.RollBehaviour.OnRollTimeEvent -= RollBarProgress;
         _player.AbilityBehaviour.OnAbilityTimeEvent -= SkillBarProgress;
         _player.BurstBehaviour.OnBurstTimeEvent -= BurstBarProgress;
-        GameManager.Instance.ScoreManager.OnScorePointsEvent -= NewScore;
+        OnScorePointsEvent.OnEventRaised -= NewScore;
     }
 
-    public void NewScore(int value)
+    public void NewScore(float value)
     {
         _scoreText.text = string.Concat("Score: ", value);
 

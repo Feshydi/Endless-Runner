@@ -676,12 +676,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 848412960}
-  m_RootOrder: 1
+  m_Father: {fileID: 2105239345}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 1080}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &265389650
@@ -1535,7 +1535,7 @@ Transform:
   - {fileID: 983699398}
   - {fileID: 210381226}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740817825
 GameObject:
@@ -1584,7 +1584,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742293852
 GameObject:
@@ -1788,7 +1788,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1295035657}
-  - {fileID: 265389649}
+  - {fileID: 2105239345}
   - {fileID: 271988785}
   - {fileID: 1084653027}
   - {fileID: 1891851880}
@@ -1825,6 +1825,7 @@ MonoBehaviour:
   _skillBar: {fileID: 343431018}
   _burstBar: {fileID: 1032192080}
   _logger: {fileID: 1811024661}
+  OnScorePointsEvent: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
 --- !u!1 &848603245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,7 +2752,7 @@ RectTransform:
   m_Children:
   - {fileID: 848412960}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3065,7 +3066,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1143630225
 MonoBehaviour:
@@ -3127,7 +3128,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1176793345
 AudioSource:
@@ -4101,7 +4102,7 @@ Transform:
   - {fileID: 1052292211}
   - {fileID: 1811024660}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1720679922
 GameObject:
@@ -4477,7 +4478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1809394696
 MonoBehaviour:
@@ -5289,7 +5290,7 @@ GameObject:
   - component: {fileID: 2105239345}
   - component: {fileID: 2105239344}
   m_Layer: 0
-  m_Name: Timer Controller
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5310,6 +5311,7 @@ MonoBehaviour:
   _timerCounter: {fileID: 265389650}
   _elapsedTime: 0
   _timerGoing: 0
+  OnTimeEvent: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}
 --- !u!4 &2105239345
 Transform:
   m_ObjectHideFlags: 0
@@ -5317,12 +5319,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105239343}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
+  m_Children:
+  - {fileID: 265389649}
+  m_Father: {fileID: 848412960}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7598691911876407210
@@ -5350,7 +5353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7598691912285609582, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7598691912285609582, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
       propertyPath: m_LocalPosition.x

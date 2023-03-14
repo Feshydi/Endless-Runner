@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
   m_Name: Time Mode Behaviour
   m_EditorClassIdentifier: 
-  id: Timer
+  Id: 
   Description: Stay alive until timer runs out
   GoalValue: 0
   CurrentValue: 0
   IsEnabled: 0
-  _gameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}
+  GameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}

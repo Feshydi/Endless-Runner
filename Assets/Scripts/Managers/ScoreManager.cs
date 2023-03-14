@@ -24,7 +24,7 @@ public class ScoreManager : MonoBehaviour
 
     public List<ScoreboardRowData> Highscores;
 
-    public event Action<int> OnScorePointsEvent;
+    public FloatEventChannel OnScorePointsEvent;
 
     #endregion
 
@@ -39,12 +39,12 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         _currentScorePoints = 0;
-        OnScorePointsEvent?.Invoke(_currentScorePoints);
+        OnScorePointsEvent.RaiseEvent(_currentScorePoints);
     }
     public void AddScore(int value)
     {
         _currentScorePoints += value;
-        OnScorePointsEvent?.Invoke(_currentScorePoints);
+        OnScorePointsEvent.RaiseEvent(_currentScorePoints);
     }
 
     public void UpdateHighscores()

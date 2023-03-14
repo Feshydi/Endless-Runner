@@ -18,6 +18,8 @@ public class TimerController : MonoBehaviour
     [SerializeField]
     private bool _timerGoing;
 
+    public FloatEventChannel OnTimeEvent;
+
     #endregion
 
     #region Properties
@@ -45,6 +47,7 @@ public class TimerController : MonoBehaviour
                 _elapsedTime += Time.deltaTime;
                 var timeSpan = TimeSpan.FromSeconds(_elapsedTime);
                 _timerCounter.text = timeSpan.ToString("mm':'ss'.'ff");
+                OnTimeEvent.RaiseEvent(_elapsedTime);
             }
             yield return null;
         }

@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22355acf839945f1b211e7e86baf34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreCount: 0
+  _loadedLevelData: {fileID: 0}
+  _currentScorePoints: 0
+  _maxScoreboardRows: 0
+  _savePath: 
+  Highscores: []
+  OnScorePointsEvent: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
