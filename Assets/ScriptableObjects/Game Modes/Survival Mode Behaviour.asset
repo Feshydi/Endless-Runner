@@ -16,5 +16,5 @@ MonoBehaviour:
   Description: Stay alive as long as you can
   GoalValue: 0
   CurrentValue: 0
-  IsEnabled: 0
+  IsEnabled: 1
   GameplayEventChannel: {fileID: 11400000, guid: 95121528343504c6798741ec90f6b906, type: 2}

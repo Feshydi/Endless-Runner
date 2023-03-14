@@ -16,3 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9576a3d99a7d74e41881b5a64c389db0, type: 2}
   - {fileID: 11400000, guid: 3429668bc8eb142ef898b0ac2b1ef0f4, type: 2}
   - {fileID: 11400000, guid: d9179bbeb8ebb4bcdb2c41e6d08cc72d, type: 2}
+  CurrentGameplayMode: 0
+  CurrentDifficulty: 0

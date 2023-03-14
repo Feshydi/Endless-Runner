@@ -2494,6 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadedLevelData: {fileID: 11400000, guid: 72e7e5e00ddab4f87a430b7f746a5c5c, type: 2}
+  _gameplayModeManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _groundMap: {fileID: 983699399}
   _perimeterBuilder: {fileID: 210381227}
   _objectMap: {fileID: 0}

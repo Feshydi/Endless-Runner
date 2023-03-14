@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private LoadedLevelData _loadedLevelData;
 
+    [SerializeField]
+    private GameplayModeManager _gameplayModeManager;
+
     [Header("Map")]
     [SerializeField]
     private PerlinNoiseMap _groundMap;
@@ -70,6 +73,8 @@ public class LevelManager : MonoBehaviour
 
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
+
+        _gameplayModeManager.InitModes();
 
         InitPlayer(levelData);
         _playerUIManager.Init(Player);

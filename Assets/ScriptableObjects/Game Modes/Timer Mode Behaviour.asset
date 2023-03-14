@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
-  m_Name: Score Mode Behaviour
+  m_Name: Timer Mode Behaviour
   m_EditorClassIdentifier: 
   Id: 
-  Description: Get the highest score
+  Description: Stay alive until timer runs out
   GoalValue: 0
   CurrentValue: 0
-  IsEnabled: 0
-  GameplayEventChannel: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
+  Mode: 2
+  IsEnabled: 1
+  GameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}

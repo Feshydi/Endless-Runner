@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Mode
+{
+    Survival,
+    Scoring,
+    Timer
+}
+
 public abstract class GameplayMode<T> : ScriptableObject, IGoalable
 {
 
@@ -12,6 +19,7 @@ public abstract class GameplayMode<T> : ScriptableObject, IGoalable
     [SerializeField] protected T GoalValue;
     [SerializeField] protected T CurrentValue;
 
+    public Mode Mode;
     public bool IsEnabled;
     public GenericEventChannel<T> GameplayEventChannel;
 
