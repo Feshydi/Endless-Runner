@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
+  m_Name: Score Mode Behaviour
+  m_EditorClassIdentifier: 
+  id: Scoring
+  Description: Get the highest score
+  GoalValue: 0
+  CurrentValue: 0
+  IsEnabled: 0
+  _gameplayEventChannel: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
