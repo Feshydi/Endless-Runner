@@ -14,7 +14,6 @@ public abstract class GameplayMode<T> : ScriptableObject, IGoalable
 
     #region Fields
 
-    [SerializeField] protected string Id;
     [SerializeField] protected string Description;
     [SerializeField] protected T GoalValue;
     [SerializeField] protected T CurrentValue;

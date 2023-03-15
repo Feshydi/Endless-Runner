@@ -320,10 +320,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: ac4cf9af3aa534d4fb6670941d0d403b, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _healthPoints: 0
   _isDamageAllowed: 1
   _isDead: 0
   _isHitted: 0
+  _spritesToBlink: []
 --- !u!114 &-7069283852373728631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +342,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 7797848528001264896}
   _healthBehaviour: {fileID: 7797848528001264897}
   _chasingDistance: 0
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _targetHealth: {fileID: 0}
   _nextHitTime: 0
   _entityAnimator: {fileID: 7797848528001264900}

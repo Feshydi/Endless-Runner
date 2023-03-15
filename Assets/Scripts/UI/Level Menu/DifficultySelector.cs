@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DifficultySelector : EnumSelector<Difficulty>
 {
-    public GameplayModeManager _gameplayModeManager;
+    public GameplayManager _gameplayManager;
 
     private void OnEnable()
     {
@@ -18,6 +18,6 @@ public class DifficultySelector : EnumSelector<Difficulty>
 
     private void OnDifficultyChanged(Difficulty difficulty)
     {
-        _gameplayModeManager.CurrentDifficulty = difficulty;
+        _gameplayManager.CurrentDifficulty = difficulty;
     }
 }

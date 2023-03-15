@@ -43,7 +43,7 @@ public class ShootingEnemyController : EnemyController
         if (Time.time > _nextShootTime &&
             (_rigidbody2D.position - (Vector2)_targetHealth.transform.position).magnitude <= _shootDistance)
         {
-            _nextShootTime = Time.time + 60 / _enemyData.DamageRate;
+            _nextShootTime = Time.time + 60 / (_enemyData.DamageRate * _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply);
             ShootHandle();
         }
     }
@@ -84,7 +84,8 @@ public class ShootingEnemyController : EnemyController
             var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
             _rigidbody2D.AddForce(move);
             if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
-                _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
+                _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity,
+                    _enemyData.MaxMoveSpeed * _gameplayManager.GetGameplayDifficulty().EnemyMaxMoveSpeedMultiply);
         }
 
         _entityAnimator.SetBool("Idle", _rigidbody2D.velocity.magnitude < float.Epsilon);

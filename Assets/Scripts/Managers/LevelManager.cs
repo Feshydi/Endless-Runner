@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     private LoadedLevelData _loadedLevelData;
 
     [SerializeField]
-    private GameplayModeManager _gameplayModeManager;
+    private GameplayManager _gameplayManager;
 
     [Header("Map")]
     [SerializeField]
@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
 
-        _gameplayModeManager.InitModes();
+        _gameplayManager.InitModes();
 
         InitPlayer(levelData);
         _playerUIManager.Init(Player);

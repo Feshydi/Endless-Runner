@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
-  m_Name: Timer Mode Behaviour
+  m_Name: Survival Mode Behaviour
   m_EditorClassIdentifier: 
-  Id: 
-  Description: Stay alive until timer runs out
-  GoalValue: 0
+  Description: No rules, just stay alive as long as you can!
+  GoalValue: 999999
   CurrentValue: 0
-  Mode: 2
-  IsEnabled: 1
-  GameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}
+  Mode: 0
+  IsEnabled: 0
+  GameplayEventChannel: {fileID: 11400000, guid: 95121528343504c6798741ec90f6b906, type: 2}

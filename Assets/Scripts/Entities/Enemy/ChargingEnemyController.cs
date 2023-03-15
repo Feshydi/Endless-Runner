@@ -79,7 +79,7 @@ public class ChargingEnemyController : EnemyController
             if (damageable.Equals(_targetHealth))
             {
                 damageable.DoDamage(_enemyData.Damage);
-                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
+                _nextHitTime = Time.time + 60 / (_enemyData.DamageRate * _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply);
             }
         }
     }
@@ -99,7 +99,8 @@ public class ChargingEnemyController : EnemyController
             }
             collision.rigidbody.AddForce(move, ForceMode2D.Impulse);
 
-            yield return new WaitUntil(() => collision.rigidbody.velocity.magnitude > _enemyData.MaxMoveSpeed);
+            yield return new WaitUntil(() => collision.rigidbody.velocity.magnitude >
+                _enemyData.MaxMoveSpeed * _gameplayManager.GetGameplayDifficulty().EnemyMaxMoveSpeedMultiply);
 
             if (healthBehaviour.Equals(_healthBehaviour))
             {

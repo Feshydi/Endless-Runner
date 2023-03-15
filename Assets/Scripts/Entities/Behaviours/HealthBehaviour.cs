@@ -13,6 +13,9 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     private EntityData _entityData;
 
     [SerializeField]
+    private GameplayManager _gameplayManager;
+
+    [SerializeField]
     private float _healthPoints;
 
     [SerializeField]
@@ -52,6 +55,8 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     private void Start()
     {
         _healthPoints = _entityData.HealthPoints;
+        if (TryGetComponent(out EnemyController ec))
+            _healthPoints *= _gameplayManager.GetGameplayDifficulty().EnemyHealthMultiply;
     }
 
     public void DoDamage(float damage)
@@ -59,6 +64,8 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         if (_isDead || !_isDamageAllowed)
             return;
 
+        if (TryGetComponent(out EnemyController ec))
+            damage *= _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply;
         _healthPoints -= damage;
         _isHitted = true;
         if (TryGetComponent(out PlayerControllerBehaviour pcb))

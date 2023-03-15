@@ -11,6 +11,9 @@ public class ExplosionAbilityBehaviour : AbilityBehaviour
     [SerializeField]
     private CharacterData _characterData;
 
+    [SerializeField]
+    private GameplayManager _gameplayManager;
+
     [Header("Generated")]
     [SerializeField]
     private float _damage;
@@ -34,8 +37,9 @@ public class ExplosionAbilityBehaviour : AbilityBehaviour
 
     public override void AbilityHandle(PlayerEffectController effectController)
     {
-        _nextAbilityTime = Time.time + _characterData.ExplosionCooldownTime;
-        OnAbilityTimeChanged(_characterData.ExplosionCooldownTime);
+        var cooldown = _characterData.ExplosionCooldownTime * _gameplayManager.GetGameplayDifficulty().ExplosionCooldownMultiply;
+        _nextAbilityTime = Time.time + cooldown;
+        OnAbilityTimeChanged(cooldown);
 
         var explosionPos = (Vector2)transform.position;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, _radius);

@@ -22,7 +22,7 @@ public class ChasingEnemyController : EnemyController
             if (damageable.Equals(_targetHealth))
             {
                 damageable.DoDamage(_enemyData.Damage);
-                _nextHitTime = Time.time + 60 / _enemyData.DamageRate;
+                _nextHitTime = Time.time + 60 / (_enemyData.DamageRate * _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply);
             }
         }
     }

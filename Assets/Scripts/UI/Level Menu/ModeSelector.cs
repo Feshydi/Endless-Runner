@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayModeSelector : EnumSelector<Mode>
+public class ModeSelector : EnumSelector<Mode>
 {
-    public GameplayModeManager _gameplayModeManager;
+    public GameplayManager _gameplayManager;
 
     private void OnEnable()
     {
@@ -18,6 +18,6 @@ public class GameplayModeSelector : EnumSelector<Mode>
 
     private void OnModeChanged(Mode mode)
     {
-        _gameplayModeManager.CurrentGameplayMode = mode;
+        _gameplayManager.CurrentGameplayMode = mode;
     }
 }

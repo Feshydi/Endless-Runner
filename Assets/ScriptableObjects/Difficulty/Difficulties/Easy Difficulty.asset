@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27438149a1974458af465c8eb60222d, type: 3}
+  m_Name: Easy Difficulty
+  m_EditorClassIdentifier: 
+  _difficulty: 0
+  _spawnIntervalMultiply: 1.25
+  _waveSpawnChanceMultiply: 0.6
+  _enemyHealthMultiply: 0.8
+  _enemyMaxMoveSpeedMultiply: 0.8
+  _enemyDamageMultiply: 0.75
+  _enemyDamageRateMultiply: 0.9
+  _explosionCooldownMultiply: 0.8
+  _burstCooldownMultiply: 0.8

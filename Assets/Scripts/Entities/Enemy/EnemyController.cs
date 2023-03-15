@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
@@ -19,6 +20,9 @@ public abstract class EnemyController : MonoBehaviour
 
     [SerializeField]
     protected float _chasingDistance;
+
+    [SerializeField]
+    protected GameplayManager _gameplayManager;
 
     [Header("Target Data")]
     [SerializeField]
@@ -42,7 +46,7 @@ public abstract class EnemyController : MonoBehaviour
 
     public void Init(PlayerControllerBehaviour target)
     {
-        _entityAnimator.SetFloat("Health", _enemyData.HealthPoints);
+        _entityAnimator.SetFloat("Health", _enemyData.HealthPoints * _gameplayManager.GetGameplayDifficulty().EnemyHealthMultiply);
         _targetHealth = target.GetComponent<HealthBehaviour>();
     }
 
@@ -80,7 +84,8 @@ public abstract class EnemyController : MonoBehaviour
                 var move = direction * _enemyData.MoveSpeed * Time.fixedDeltaTime;
                 _rigidbody2D.AddForce(move);
                 if (_rigidbody2D.velocity.magnitude > _enemyData.MaxMoveSpeed)
-                    _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity, _enemyData.MaxMoveSpeed);
+                    _rigidbody2D.velocity = Vector2.ClampMagnitude(_rigidbody2D.velocity,
+                        _enemyData.MaxMoveSpeed * _gameplayManager.GetGameplayDifficulty().EnemyMaxMoveSpeedMultiply);
             }
             else
             {

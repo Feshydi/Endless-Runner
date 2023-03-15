@@ -18,6 +18,9 @@ public class BurstBehaviour : MonoBehaviour
     [SerializeField]
     private BurstType _burstType;
 
+    [SerializeField]
+    private GameplayManager _gameplayManager;
+
     [Header("Generated")]
     [SerializeField]
     private float _burstTime;
@@ -48,7 +51,7 @@ public class BurstBehaviour : MonoBehaviour
     private void Start()
     {
         _burstTime = _characterData.BurstTime;
-        _cooldownTime = _characterData.BurstCooldownTime;
+        _cooldownTime = _characterData.BurstCooldownTime * _gameplayManager.GetGameplayDifficulty().BurstCooldownMultiply;
     }
 
     public void BurstHandle(PlayerEffectController effectController)

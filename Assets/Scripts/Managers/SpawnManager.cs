@@ -20,6 +20,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private TimerController _timer;
 
+    [SerializeField]
+    private GameplayManager _gameplayManager;
+
     [Header("Generated Data")]
     [SerializeField]
     private float _borderWidth;
@@ -47,7 +50,8 @@ public class SpawnManager : MonoBehaviour
 
         _difficultyCurve = new CurveValue();
         _difficultyCurve.Init(_spawnManagerData.DifficultyCurve,
-            _spawnManagerData.MinSpawnInterval, _spawnManagerData.MaxSpawnInterval,
+            _spawnManagerData.MinSpawnInterval * _gameplayManager.GetGameplayDifficulty().SpawnIntervalMultiply,
+            _spawnManagerData.MaxSpawnInterval * _gameplayManager.GetGameplayDifficulty().SpawnIntervalMultiply,
             _spawnManagerData.CurveTimeMinutes);
         _timer = GameManager.Instance.CurrentLevelManager.TimerController;
         _logger = logger;
@@ -62,7 +66,7 @@ public class SpawnManager : MonoBehaviour
         while (!_target.HealthBehaviour.IsDead)
         {
             var WaveChance = Random.Range(0, 1f);
-            if (WaveChance <= _spawnManagerData.WaveSpawnChance)
+            if (WaveChance <= _spawnManagerData.WaveSpawnChance * _gameplayManager.GetGameplayDifficulty().WaveSpawnChanceMultiply)
             {
                 yield return StartCoroutine(SpawnWaveWithChance());
             }

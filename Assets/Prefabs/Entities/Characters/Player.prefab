@@ -518,6 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _healthPoints: 0
   _isDamageAllowed: 1
   _isDead: 0
@@ -590,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextAbilityTime: 0
   _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _damage: 0
   _radius: 0
   _explosionForce: 0
@@ -608,6 +610,7 @@ MonoBehaviour:
   _characterData: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
   _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _burstType: 2
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _burstTime: 0
   _cooldownTime: 0
   _isBurst: 0

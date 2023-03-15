@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecc0705385d24651931671a9ec9e046, type: 3}
-  m_Name: Gameplay Mode Manager
+  m_Name: Gameplay Manager
   m_EditorClassIdentifier: 
-  _modes:
-  - {fileID: 11400000, guid: 9576a3d99a7d74e41881b5a64c389db0, type: 2}
-  - {fileID: 11400000, guid: 3429668bc8eb142ef898b0ac2b1ef0f4, type: 2}
-  - {fileID: 11400000, guid: d9179bbeb8ebb4bcdb2c41e6d08cc72d, type: 2}
-  CurrentGameplayMode: 0
-  CurrentDifficulty: 0
+  _modesList: {fileID: 11400000, guid: 25ab709b0982e455787d43da18737e04, type: 2}
+  _difficultiesList: {fileID: 11400000, guid: c9f43b05e77e142ae963a84dfb367637, type: 2}
+  CurrentGameplayMode: 2
+  CurrentDifficulty: 2

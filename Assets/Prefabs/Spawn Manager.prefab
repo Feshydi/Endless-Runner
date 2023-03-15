@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnManagerData: {fileID: 0}
   _target: {fileID: 0}
+  _timer: {fileID: 0}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _borderWidth: 0
   _borderHeight: 0
   _logger: {fileID: 0}
