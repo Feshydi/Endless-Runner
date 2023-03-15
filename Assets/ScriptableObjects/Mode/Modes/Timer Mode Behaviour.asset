@@ -17,6 +17,7 @@ MonoBehaviour:
   Mode: 2
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}
+  GameCompletedEventChannel: {fileID: 11400000, guid: 9c0d4f55ac5ed4d47a223ec63b535937, type: 2}
   Description: '"Timer" is a game mode where the player must survive for a 15 minutes.
     The clock is ticking, and enemies will come from all directions, increasing in
     difficulty as the timer counts down.'

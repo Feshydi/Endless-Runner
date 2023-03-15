@@ -20,6 +20,7 @@ public abstract class GameplayMode<T> : ScriptableObject, IGoalable
     public Mode Mode;
     public bool IsEnabled;
     public GenericEventChannel<T> GameplayEventChannel;
+    public VoidEventChannel GameCompletedEventChannel;
 
     [TextArea(3, 6)]
     public string Description;
@@ -41,7 +42,8 @@ public abstract class GameplayMode<T> : ScriptableObject, IGoalable
     public void UpdateCurrentValue(T value)
     {
         CurrentValue = value;
-        IsGoalCompleted();
+        if (IsGoalCompleted())
+            GameCompletedEventChannel?.RaiseEvent();
     }
 
     public abstract bool IsGoalCompleted();

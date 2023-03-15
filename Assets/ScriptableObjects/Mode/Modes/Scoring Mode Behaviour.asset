@@ -17,5 +17,6 @@ MonoBehaviour:
   Mode: 1
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
+  GameCompletedEventChannel: {fileID: 11400000, guid: 9c0d4f55ac5ed4d47a223ec63b535937, type: 2}
   Description: '"Scoring" is a game mode where the player must reach a 250 score
     to win. Take out enemies and earn points for each kill!'

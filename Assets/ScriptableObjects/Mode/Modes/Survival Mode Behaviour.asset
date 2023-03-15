@@ -17,6 +17,7 @@ MonoBehaviour:
   Mode: 0
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 95121528343504c6798741ec90f6b906, type: 2}
+  GameCompletedEventChannel: {fileID: 11400000, guid: 9c0d4f55ac5ed4d47a223ec63b535937, type: 2}
   Description: '"Survival" is a game mode where the player must survive for as long
     as possible against an endless horde of enemies. The enemies will continue to
     come in waves, becoming progressively more challenging as the player survives
