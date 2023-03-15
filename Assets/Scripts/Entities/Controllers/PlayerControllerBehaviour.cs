@@ -15,6 +15,8 @@ public class PlayerControllerBehaviour : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    public CharacterData CharacterData;
+
     [Header("Generated")]
     [SerializeField]
     private Vector2 _previousMoveInput;

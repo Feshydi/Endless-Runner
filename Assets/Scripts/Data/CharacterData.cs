@@ -9,6 +9,10 @@ public class CharacterData : EntityData
     #region Fields
 
     [SerializeField]
+    [TextArea(3, 5)]
+    private string _explosionDescription;
+
+    [SerializeField]
     private float _explosionRadius;
 
     [SerializeField]
@@ -21,7 +25,15 @@ public class CharacterData : EntityData
     private float _explosionCooldownTime;
 
     [SerializeField]
+    [TextArea(3, 5)]
+    private string _rollDescription;
+
+    [SerializeField]
     private float _rollCooldownTime;
+
+    [SerializeField]
+    [TextArea(3, 5)]
+    private string _burstDescription;
 
     [SerializeField]
     private float _burstTime;
@@ -33,6 +45,8 @@ public class CharacterData : EntityData
 
     #region Properties
 
+    public string ExplosionDescription => _explosionDescription;
+
     public float ExplosionRadius => _explosionRadius;
 
     public float ExplosionForce => _explosionForce;
@@ -41,7 +55,11 @@ public class CharacterData : EntityData
 
     public float ExplosionCooldownTime => _explosionCooldownTime;
 
+    public string RollDescription => _rollDescription;
+
     public float RollCooldownTime => _rollCooldownTime;
+
+    public string BurstDescription => _burstDescription;
 
     public float BurstTime => _burstTime;
 

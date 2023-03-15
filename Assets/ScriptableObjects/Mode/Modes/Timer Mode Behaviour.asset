@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
   m_Name: Timer Mode Behaviour
   m_EditorClassIdentifier: 
-  Description: Stay alive for 15 minutes!
   GoalValue: 900
   CurrentValue: 0
   Mode: 2
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 86ae7806087a343bc84fb3d8c34ced37, type: 2}
+  Description: '"Timer" is a game mode where the player must survive for a 15 minutes.
+    The clock is ticking, and enemies will come from all directions, increasing in
+    difficulty as the timer counts down.'

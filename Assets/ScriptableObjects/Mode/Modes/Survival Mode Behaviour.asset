@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
   m_Name: Survival Mode Behaviour
   m_EditorClassIdentifier: 
-  Description: No rules, just stay alive as long as you can!
   GoalValue: 999999
   CurrentValue: 0
   Mode: 0
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 95121528343504c6798741ec90f6b906, type: 2}
+  Description: '"Survival" is a game mode where the player must survive for as long
+    as possible against an endless horde of enemies. The enemies will continue to
+    come in waves, becoming progressively more challenging as the player survives
+    longer.'

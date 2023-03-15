@@ -22,6 +22,9 @@ public class SceneLoadingManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _loadingText;
 
+    [SerializeField]
+    private LevelLoadingDescription _levelLoadingDescription;
+
     #endregion
 
     #region Methods
@@ -65,6 +68,18 @@ public class SceneLoadingManager : MonoBehaviour
 
     private IEnumerator SceneLoadProgress(GameMode afterLoad)
     {
+        _loadingText.text = "loading...";
+
+        if (afterLoad.Equals(GameMode.Playing))
+        {
+            _levelLoadingDescription.UpdateText();
+            _levelLoadingDescription.gameObject.SetActive(true);
+
+            foreach (var scene in _scenesLoading)
+            {
+                scene.allowSceneActivation = false;
+            }
+        }
         _loadingScreen.gameObject.SetActive(true);
 
         for (int i = 0; i < _scenesLoading.Count; i++)
@@ -78,10 +93,31 @@ public class SceneLoadingManager : MonoBehaviour
                 }
                 _progressBar.value = progressValue / _scenesLoading.Count;
 
+                if (afterLoad.Equals(GameMode.Playing) && _progressBar.value >= 0.9f)
+                {
+                    _loadingText.text = "press any key to continue";
+
+                    bool pressedKey = false;
+                    while (!pressedKey)
+                    {
+                        if (Input.anyKeyDown)
+                        {
+                            pressedKey = Input.anyKeyDown;
+                            foreach (var scene in _scenesLoading)
+                            {
+                                scene.allowSceneActivation = true;
+                            }
+                        }
+                        yield return null;
+                    }
+                }
+
                 yield return null;
             }
         }
 
+        if (afterLoad.Equals(GameMode.Playing))
+            _levelLoadingDescription.gameObject.SetActive(false);
         _loadingScreen.gameObject.SetActive(false);
         GameManager.Instance.SetGameMode(afterLoad);
     }

@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1417447080, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: CharacterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ac0f3df608df497ca0b568bd3bc9b8d, type: 2}
     - target: {fileID: 1417447086, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: _camera
       value: 

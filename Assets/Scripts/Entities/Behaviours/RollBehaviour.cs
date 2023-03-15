@@ -46,8 +46,6 @@ public class RollBehaviour : MonoBehaviour
 
     #region Properties
 
-    public HealthBehaviour HealthBehaviour => _healthBehaviour;
-
     public float NextRollTime => _nextRollTime;
 
     public bool IsRollPressed

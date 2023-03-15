@@ -14,13 +14,15 @@ public abstract class GameplayMode<T> : ScriptableObject, IGoalable
 
     #region Fields
 
-    [SerializeField] protected string Description;
     [SerializeField] protected T GoalValue;
     [SerializeField] protected T CurrentValue;
 
     public Mode Mode;
     public bool IsEnabled;
     public GenericEventChannel<T> GameplayEventChannel;
+
+    [TextArea(3, 6)]
+    public string Description;
 
     #endregion
 
