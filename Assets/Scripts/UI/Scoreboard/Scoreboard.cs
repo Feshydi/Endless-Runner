@@ -47,13 +47,18 @@ public class Scoreboard : MonoBehaviour
 
     private void OnEnable()
     {
+        UpdateData();
+        UpdateUI();
+    }
+
+    public void UpdateData()
+    {
         var scoreManager = GameManager.Instance.ScoreManager;
         scoreManager.UpdateHighscores();
         _highscores = scoreManager.Highscores;
-        UpdateUI(_highscores);
     }
 
-    private void UpdateUI(List<ScoreboardRowData> scoreboardRowDatas)
+    public void UpdateUI()
     {
         foreach (Transform child in _contextHolderTransform)
         {
@@ -62,7 +67,7 @@ public class Scoreboard : MonoBehaviour
 
         Instantiate(_scoreboardTitlePrefab, _contextHolderTransform);
 
-        foreach (var scoreboardRowData in scoreboardRowDatas)
+        foreach (var scoreboardRowData in _highscores)
         {
             Instantiate(_scoreboardRowPrefab, _contextHolderTransform)
                 .Init(scoreboardRowData);

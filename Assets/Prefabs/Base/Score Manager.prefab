@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22355acf839945f1b211e7e86baf34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadedLevelData: {fileID: 0}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
+  _loadedLevelData: {fileID: 11400000, guid: 72e7e5e00ddab4f87a430b7f746a5c5c, type: 2}
   _currentScorePoints: 0
-  _maxScoreboardRows: 0
+  _maxScoreboardRows: 7
   _savePath: 
   Highscores: []
   OnScorePointsEvent: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}

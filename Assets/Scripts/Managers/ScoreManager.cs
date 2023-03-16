@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviour
     #region Fields
 
     [SerializeField]
+    private GameplayManager _gameplayManager;
+
+    [SerializeField]
     private LoadedLevelData _loadedLevelData;
 
     [SerializeField]
@@ -30,9 +33,14 @@ public class ScoreManager : MonoBehaviour
 
     #region Methods
 
+    private void Start()
+    {
+        if (!Directory.Exists(DataPath.ScoreboardFolder))
+            Directory.CreateDirectory(DataPath.ScoreboardFolder);
+    }
+
     public void Init()
     {
-        _savePath = DataPath.Scoreboard;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -77,6 +85,7 @@ public class ScoreManager : MonoBehaviour
 
     private List<ScoreboardRowData> GetSavedScores()
     {
+        _savePath = GetSavePath();
         if (!File.Exists(_savePath))
             File.Create(_savePath).Dispose();
 
@@ -94,6 +103,7 @@ public class ScoreManager : MonoBehaviour
 
     private void SaveScores(List<ScoreboardRowData> scoreboardRowDatas)
     {
+        _savePath = GetSavePath();
         using (StreamWriter stream = new StreamWriter(_savePath))
         {
             string json = JsonConvert.SerializeObject(scoreboardRowDatas);
@@ -108,6 +118,13 @@ public class ScoreManager : MonoBehaviour
             _currentScorePoints,
             gameManager.CurrentLevelManager.TimerController.Elapsedtime,
             _loadedLevelData.Seed);
+    }
+
+    private string GetSavePath()
+    {
+        return DataPath.ScoreboardFolder + "/"
+           + _gameplayManager.CurrentGameplayMode + "_"
+            + _gameplayManager.CurrentDifficulty + ".json";
     }
 
     #endregion
