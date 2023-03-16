@@ -4,20 +4,8 @@ using UnityEngine;
 
 public class ModeSelector : EnumSelector<Mode>
 {
-    public GameplayManager _gameplayManager;
-
-    private void OnEnable()
+    protected override void OnSelectorChanged(Mode value)
     {
-        onValueChanged += OnModeChanged;
-    }
-
-    private void OnDisable()
-    {
-        onValueChanged -= OnModeChanged;
-    }
-
-    private void OnModeChanged(Mode mode)
-    {
-        _gameplayManager.CurrentGameplayMode = mode;
+        gameplayManager.CurrentGameplayMode = value;
     }
 }

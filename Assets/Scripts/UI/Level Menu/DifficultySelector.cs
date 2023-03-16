@@ -4,20 +4,8 @@ using UnityEngine;
 
 public class DifficultySelector : EnumSelector<Difficulty>
 {
-    public GameplayManager _gameplayManager;
-
-    private void OnEnable()
+    protected override void OnSelectorChanged(Difficulty value)
     {
-        onValueChanged += OnDifficultyChanged;
-    }
-
-    private void OnDisable()
-    {
-        onValueChanged -= OnDifficultyChanged;
-    }
-
-    private void OnDifficultyChanged(Difficulty difficulty)
-    {
-        _gameplayManager.CurrentDifficulty = difficulty;
+        gameplayManager.CurrentDifficulty = value;
     }
 }
