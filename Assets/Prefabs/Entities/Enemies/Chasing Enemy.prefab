@@ -585,7 +585,8 @@ MonoBehaviour:
   _targetHealth: {fileID: 0}
   _nextHitTime: 0
   _entityAnimator: {fileID: 7797848528001264900}
-  _hitSound: {fileID: 0}
+  _hitSound: {fileID: 1923006503970389473}
+  _attackSound: {fileID: 8621528662720810738}
 --- !u!114 &7797848528001264897
 MonoBehaviour:
   m_ObjectHideFlags: 0

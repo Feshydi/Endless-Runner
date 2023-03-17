@@ -14,6 +14,7 @@ public class PlayerHitState : PlayerBaseState
     {
         _playerController.MoveBehaviour.MoveHandle(Vector2.zero);
         _playerController.AnimationController.PlayHitAnimation(_playerController.HealthBehaviour.HealthPoints);
+        _playerController.AudioController.PlayHitSound();
     }
 
     public override void OnUpdate()

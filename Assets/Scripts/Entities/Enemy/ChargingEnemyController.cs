@@ -28,6 +28,12 @@ public class ChargingEnemyController : EnemyController
     [SerializeField]
     private bool _isCharging;
 
+    [SerializeField]
+    private AudioSource _attackSound;
+
+    [SerializeField]
+    private AudioSource _chargeSound;
+
     #endregion
 
     #region Methods
@@ -49,6 +55,8 @@ public class ChargingEnemyController : EnemyController
     {
         if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
             yield return null;
+
+        _chargeSound.Play();
 
         _isCharging = true;
         _entityAnimator.SetBool("isCharging", true);
@@ -78,6 +86,8 @@ public class ChargingEnemyController : EnemyController
         {
             if (damageable.Equals(_targetHealth))
             {
+                _attackSound.Play();
+
                 damageable.DoDamage(_enemyData.Damage);
                 _nextHitTime = Time.time + 60 / (_enemyData.DamageRate * _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply);
             }

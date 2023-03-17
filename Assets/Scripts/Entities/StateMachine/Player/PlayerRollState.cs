@@ -14,6 +14,7 @@ public class PlayerRollState : PlayerBaseState
     {
         _playerController.RollBehaviour.SetUpRoll(_playerController.PreviousMoveInput, _playerController.PreviousMouseInput);
         _playerController.AnimationController.PlayRollAnimation();
+        _playerController.AudioController.PlayRollSound();
         if (_playerController.BurstBehaviour.IsBurst)
             _playerController.EffectController.EnableRollTrailEffect();
     }

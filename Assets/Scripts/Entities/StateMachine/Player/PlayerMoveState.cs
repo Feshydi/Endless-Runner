@@ -13,6 +13,12 @@ public class PlayerMoveState : PlayerBaseState
     public override void OnStateEnter()
     {
         _playerController.AnimationController.PlayMoveAnimation();
+        _playerController.AudioController.EnableMoveSound();
+    }
+
+    public override void OnStateExit()
+    {
+        _playerController.AudioController.DisableMoveSound();
     }
 
     public override void OnUpdate()

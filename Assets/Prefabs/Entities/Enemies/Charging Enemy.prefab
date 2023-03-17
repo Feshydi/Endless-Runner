@@ -698,7 +698,7 @@ MonoBehaviour:
   _targetHealth: {fileID: 0}
   _nextHitTime: 0
   _entityAnimator: {fileID: 7797848528001264900}
-  _hitSound: {fileID: 0}
+  _hitSound: {fileID: 6940184706018472527}
   _minChargeDistance: 4.5
   _chargeSpeed: 50
   _chargeForce: 12
@@ -706,6 +706,8 @@ MonoBehaviour:
   _chargeCooldownTime: 5
   _nextChargeTime: 0
   _isCharging: 0
+  _attackSound: {fileID: 7842626265225048702}
+  _chargeSound: {fileID: 926457905355423135}
 --- !u!1 &8998595454869133022
 GameObject:
   m_ObjectHideFlags: 0

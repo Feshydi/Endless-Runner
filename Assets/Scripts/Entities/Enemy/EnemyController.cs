@@ -104,6 +104,9 @@ public abstract class EnemyController : MonoBehaviour
 
     private void HealthEvent(float health, float maxHealth)
     {
+        _entityAnimator.SetFloat("Health", health);
+        _entityAnimator.SetTrigger("Hit");
+
         if (health <= 0)
         {
             _healthBehaviour.SetIsDead(true);
@@ -112,9 +115,6 @@ public abstract class EnemyController : MonoBehaviour
 
             GameManager.Instance?.ScoreManager.AddScore(1);
         }
-
-        _entityAnimator.SetFloat("Health", health);
-        _entityAnimator.SetTrigger("Hit");
     }
 
     public void OnHitStart()

@@ -28,6 +28,9 @@ public class ShootingEnemyController : EnemyController
 
     private float _nextShootTime;
 
+    [SerializeField]
+    private AudioSource _shootSound;
+
     #endregion
 
     #region Methods
@@ -96,6 +99,7 @@ public class ShootingEnemyController : EnemyController
         if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
             return;
 
+        _shootSound.Play();
         var direction = ((Vector2)_targetHealth.transform.position - _rigidbody2D.position).normalized;
         Instantiate(_projectilePrefab, transform.position, Quaternion.identity)
             .Init(_targetHealth, _enemyData.Damage, direction);

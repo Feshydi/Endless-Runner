@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 924511371939375357}
   - component: {fileID: 7643366713034319342}
   m_Layer: 0
-  m_Name: Attack Sound
+  m_Name: Shoot Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,3 +642,4 @@ MonoBehaviour:
   _angularSpeed: 0
   _projectilePrefab: {fileID: 7066520986413955558, guid: 39d5ccf08014d4812a4d85eb64cc2b6a, type: 3}
   _shootDistance: 4
+  _shootSound: {fileID: 7643366713034319342}
