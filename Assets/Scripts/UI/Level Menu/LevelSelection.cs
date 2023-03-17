@@ -11,98 +11,85 @@ public class LevelSelection : MonoBehaviour
     #region Fields
 
     [Header("Data")]
-    [SerializeField]
-    private LoadedLevelData _loadedLevelData;
+    [SerializeField] private LoadedLevelData _loadedLevelData;
+    [SerializeField] private List<LevelUI> _levels;
+    [SerializeField] private int _selectedLevelIndex;
 
-    [SerializeField]
-    private Transform _contextHolderTransform;
+    [Header("Init")]
+    [SerializeField] private Transform _levelsHolder;
+    [SerializeField] private List<LevelData> _levelsData;
+    [SerializeField] private LevelUI _levelPrefab;
 
-    [SerializeField]
-    private List<LevelData> _levelDatas;
-
-    [SerializeField]
-    private Button _levelPrefab;
-
-    [SerializeField]
-    private Toggle _toggle;
-
-    [SerializeField]
-    private TMP_InputField _inputField;
-
-    [SerializeField]
-    private Button _playButton;
-
-    [Header("Generated")]
-    [SerializeField]
-    private LevelData _selectedLevel;
-
-    [SerializeField]
-    private Button _selectedLevelButton;
+    [Header("Seed")]
+    [SerializeField] private Toggle _seedToggle;
+    [SerializeField] private TMP_InputField _seedInputField;
 
     [Header("Additional")]
-    [SerializeField]
-    private Logger _logger;
+    [SerializeField] private Logger _logger;
 
     #endregion
 
     #region Methods
 
-    private void Awake()
+    private void Start()
     {
-        _selectedLevel = null;
-        _selectedLevelButton = null;
-
         CreateLevelSelectors();
+        SetDefaultLevel();
     }
 
     private void CreateLevelSelectors()
     {
-        foreach (var levelData in _levelDatas)
+        for (int i = 0; i < _levelsData.Count; i++)
         {
-            var level = Instantiate(_levelPrefab, _contextHolderTransform);
-            level.GetComponent<Level>().Init(this, levelData);
+            var level = Instantiate(_levelPrefab, _levelsHolder);
+            level.GetComponent<LevelUI>().Init(_levelsData[i]);
+            _levels.Add(level);
 
-            if (_selectedLevel == null)
-                SelectLevel(level, levelData);
+            level.gameObject.SetActive(false);
+        }
+
+        if (_levels.Count <= 0)
+        {
+            _logger.Log("Zero Levels initialized", this);
+            Destroy(gameObject);
         }
     }
 
-    public void SelectLevel(Button levelButton, LevelData levelData)
+    private void SetDefaultLevel()
     {
-        if (levelButton == null || levelData == null)
-        {
-            _logger.Log("Unexpected error when trying to select level", this);
-            return;
-        }
+        _loadedLevelData.LevelData = _levelsData[0];
+        _levels[0].gameObject.SetActive(true);
+    }
 
-        if (_selectedLevelButton != null)
-        {
-            _selectedLevelButton.interactable = true;
-        }
+    public void NextLevel()
+    {
+        _levels[_selectedLevelIndex].gameObject.SetActive(false);
+        _selectedLevelIndex = (_selectedLevelIndex + 1) % _levels.Count;
+        _levels[_selectedLevelIndex].gameObject.SetActive(true);
+        _loadedLevelData.LevelData = _levelsData[_selectedLevelIndex];
+    }
 
-        _selectedLevelButton = levelButton;
-        _selectedLevel = levelData;
-
-        _loadedLevelData.LevelData = _selectedLevel;
-
-        _selectedLevelButton.interactable = false;
-
-        _logger.Log($"Level {_selectedLevel} selected", this);
+    public void PreviousLevel()
+    {
+        _levels[_selectedLevelIndex].gameObject.SetActive(false);
+        _selectedLevelIndex--;
+        if (_selectedLevelIndex < 0)
+            _selectedLevelIndex += _levels.Count;
+        _levels[_selectedLevelIndex].gameObject.SetActive(true);
+        _loadedLevelData.LevelData = _levelsData[_selectedLevelIndex];
     }
 
     public void LoadLevel()
     {
-        if (_selectedLevel == null)
-        {
-            _logger.Log("No level selected", this);
-            return;
-        }
-
-        _loadedLevelData.AutoSeedGeneration = _toggle.isOn;
-        if (!_toggle.isOn)
-            _loadedLevelData.Seed = int.Parse(_inputField.text);
-
+        SetSeed();
         GameManager.Instance.LoadingManager.LoadLevel();
+    }
+
+    private void SetSeed()
+    {
+        _loadedLevelData.AutoSeedGeneration = _seedToggle.isOn;
+        if (!_seedToggle.isOn)
+            _loadedLevelData.Seed = int.Parse(_seedInputField.text);
     }
 
     #endregion
