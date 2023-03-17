@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Difficulty
-{
-    Easy,
-    Medium,
-    Hard,
-    ChildOfTheBelarus
-}
-
 [CreateAssetMenu(menuName = "Game/Gameplay Manager")]
 public class GameplayManager : ScriptableObject
 {
@@ -19,6 +11,13 @@ public class GameplayManager : ScriptableObject
     [SerializeField] private ModesList _modesList;
     [SerializeField] private DifficultiesList _difficultiesList;
 
+    [Header("Data")]
+    public PlayerControllerBehaviour Player;
+    public LevelData LevelData;
+
+    public bool AutoSeedGeneration;
+    public int Seed;
+
     public Mode CurrentGameplayMode;
     public Difficulty CurrentDifficulty;
 
@@ -26,34 +25,15 @@ public class GameplayManager : ScriptableObject
 
     #region Methods
 
-    public void InitModes()
-    {
-        foreach (var mode in _modesList.Modes)
-        {
-            mode.IsEnabled = mode.Mode.Equals(CurrentGameplayMode);
-            mode.Init();
-        }
-    }
+    public void InitModes() =>
+        _modesList.Init(CurrentGameplayMode);
 
-    public GameplayMode<float> GetGameplayModeStats()
-    {
-        foreach (var mode in _modesList.Modes)
-        {
-            if (mode.Mode.Equals(CurrentGameplayMode))
-                return mode;
-        }
-        return null;
-    }
+    public GameplayMode<float> GetGameplayModeStats() =>
+        _modesList.GetGameplayModeStats(CurrentGameplayMode);
 
-    public GameplayDifficulty GetGameplayDifficulty()
-    {
-        foreach (var difficulty in _difficultiesList.Difficulties)
-        {
-            if (difficulty.Difficulty.Equals(CurrentDifficulty))
-                return difficulty;
-        }
-        return null;
-    }
+    public GameplayDifficulty GetGameplayDifficulty() =>
+        _difficultiesList.GetGameplayDifficulty(CurrentDifficulty);
+
     #endregion
 
 }

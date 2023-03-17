@@ -5,7 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Difficulties/Difficulties List")]
 public class DifficultiesList : ScriptableObject
 {
+
+    #region Fields
+
     [SerializeField] private List<GameplayDifficulty> _difficulties;
 
-    public List<GameplayDifficulty> Difficulties => _difficulties;
+    #endregion
+
+    #region Methods
+
+    public GameplayDifficulty GetGameplayDifficulty(Difficulty difficulty)
+    {
+        foreach (var gDifficulty in _difficulties)
+        {
+            if (gDifficulty.Difficulty.Equals(difficulty))
+                return gDifficulty;
+        }
+        return null;
+    }
+
+    #endregion
+
 }

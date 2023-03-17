@@ -10,9 +10,6 @@ public class LevelLoadingDescription : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
-    private LoadedLevelData _loadedLevelData;
-
-    [SerializeField]
     private GameplayManager _gameplayManager;
 
     [SerializeField]
@@ -34,9 +31,9 @@ public class LevelLoadingDescription : MonoBehaviour
     public void UpdateText()
     {
         _modeRulesText.text = _gameplayManager.GetGameplayModeStats().Description;
-        _rollText.text = _loadedLevelData.Player.CharacterData.RollDescription;
-        _abilityText.text = _loadedLevelData.Player.CharacterData.ExplosionDescription;
-        _burstText.text = _loadedLevelData.Player.CharacterData.BurstDescription;
+        _rollText.text = _gameplayManager.Player.CharacterData.RollDescription;
+        _abilityText.text = _gameplayManager.Player.CharacterData.ExplosionDescription;
+        _burstText.text = _gameplayManager.Player.CharacterData.BurstDescription;
     }
 
     #endregion

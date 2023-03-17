@@ -11,7 +11,7 @@ public class LevelSelection : MonoBehaviour
     #region Fields
 
     [Header("Data")]
-    [SerializeField] private LoadedLevelData _loadedLevelData;
+    [SerializeField] private GameplayManager _gameplayManager;
     [SerializeField] private List<LevelUI> _levels;
     [SerializeField] private int _selectedLevelIndex;
 
@@ -57,7 +57,7 @@ public class LevelSelection : MonoBehaviour
 
     private void SetDefaultLevel()
     {
-        _loadedLevelData.LevelData = _levelsData[0];
+        _gameplayManager.LevelData = _levelsData[0];
         _levels[0].gameObject.SetActive(true);
     }
 
@@ -66,7 +66,7 @@ public class LevelSelection : MonoBehaviour
         _levels[_selectedLevelIndex].gameObject.SetActive(false);
         _selectedLevelIndex = (_selectedLevelIndex + 1) % _levels.Count;
         _levels[_selectedLevelIndex].gameObject.SetActive(true);
-        _loadedLevelData.LevelData = _levelsData[_selectedLevelIndex];
+        _gameplayManager.LevelData = _levelsData[_selectedLevelIndex];
     }
 
     public void PreviousLevel()
@@ -76,7 +76,7 @@ public class LevelSelection : MonoBehaviour
         if (_selectedLevelIndex < 0)
             _selectedLevelIndex += _levels.Count;
         _levels[_selectedLevelIndex].gameObject.SetActive(true);
-        _loadedLevelData.LevelData = _levelsData[_selectedLevelIndex];
+        _gameplayManager.LevelData = _levelsData[_selectedLevelIndex];
     }
 
     public void LoadLevel()
@@ -87,9 +87,9 @@ public class LevelSelection : MonoBehaviour
 
     private void SetSeed()
     {
-        _loadedLevelData.AutoSeedGeneration = _seedToggle.isOn;
+        _gameplayManager.AutoSeedGeneration = _seedToggle.isOn;
         if (!_seedToggle.isOn)
-            _loadedLevelData.Seed = int.Parse(_seedInputField.text);
+            _gameplayManager.Seed = int.Parse(_seedInputField.text);
     }
 
     #endregion

@@ -10,9 +10,6 @@ public class LevelManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField]
-    private LoadedLevelData _loadedLevelData;
-
-    [SerializeField]
     private GameplayManager _gameplayManager;
 
     [Header("Map")]
@@ -60,16 +57,16 @@ public class LevelManager : MonoBehaviour
         var gameManager = GameManager.Instance;
         gameManager.CurrentLevelManager = this;
 
-        var levelData = _loadedLevelData.LevelData;
+        var levelData = _gameplayManager.LevelData;
         if (levelData == null)
         {
             _logger.Log("No Level Data", this);
             return;
         }
 
-        if (_loadedLevelData.AutoSeedGeneration)
-            _loadedLevelData.Seed = Random.Range(0, int.MaxValue);
-        Random.InitState(_loadedLevelData.Seed);
+        if (_gameplayManager.AutoSeedGeneration)
+            _gameplayManager.Seed = Random.Range(0, int.MaxValue);
+        Random.InitState(_gameplayManager.Seed);
 
         _groundMap.Init(levelData.TerrainMapData);
         _perimeterBuilder.Init(levelData.TerrainMapData);
@@ -89,7 +86,7 @@ public class LevelManager : MonoBehaviour
 
     private void InitPlayer(LevelData levelData)
     {
-        Player = Instantiate(_loadedLevelData.Player, transform.position, Quaternion.identity, transform.parent);
+        Player = Instantiate(_gameplayManager.Player, transform.position, Quaternion.identity, transform.parent);
         var offset = 15f;
         var height = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);
         var width = Random.Range(offset, levelData.TerrainMapData.MapHeight - offset);

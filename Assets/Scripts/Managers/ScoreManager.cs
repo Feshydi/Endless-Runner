@@ -14,9 +14,6 @@ public class ScoreManager : MonoBehaviour
     private GameplayManager _gameplayManager;
 
     [SerializeField]
-    private LoadedLevelData _loadedLevelData;
-
-    [SerializeField]
     private int _currentScorePoints;
 
     [SerializeField]
@@ -117,7 +114,7 @@ public class ScoreManager : MonoBehaviour
         return new ScoreboardRowData(gameManager.SettingsManager.Settings.Username,
             _currentScorePoints,
             gameManager.CurrentLevelManager.TimerController.Elapsedtime,
-            _loadedLevelData.Seed);
+            _gameplayManager.Seed);
     }
 
     private string GetSavePath()

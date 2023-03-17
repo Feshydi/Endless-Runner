@@ -15,7 +15,7 @@ public class CharacterSelection : MonoBehaviour
     #region Fields
 
     [SerializeField]
-    private LoadedLevelData _loadedLevelData;
+    private GameplayManager _gameplayManager;
 
     [SerializeField]
     private CharacterModel[] _characterModels;
@@ -39,7 +39,7 @@ public class CharacterSelection : MonoBehaviour
             item.Model.gameObject.SetActive(false);
         }
         _selectedCharacterIndex = 0;
-        _loadedLevelData.Player = _characterModels[_selectedCharacterIndex].Character;
+        _gameplayManager.Player = _characterModels[_selectedCharacterIndex].Character;
         _characterModels[_selectedCharacterIndex].Model.gameObject.SetActive(true);
     }
 
@@ -48,7 +48,7 @@ public class CharacterSelection : MonoBehaviour
         _characterModels[_selectedCharacterIndex].Model.gameObject.SetActive(false);
         _selectedCharacterIndex = (_selectedCharacterIndex + 1) % _characterModels.Length;
         _characterModels[_selectedCharacterIndex].Model.gameObject.SetActive(true);
-        _loadedLevelData.Player = _characterModels[_selectedCharacterIndex].Character;
+        _gameplayManager.Player = _characterModels[_selectedCharacterIndex].Character;
     }
 
     public void PreviousCharacter()
@@ -58,7 +58,7 @@ public class CharacterSelection : MonoBehaviour
         if (_selectedCharacterIndex < 0)
             _selectedCharacterIndex += _characterModels.Length;
         _characterModels[_selectedCharacterIndex].Model.gameObject.SetActive(true);
-        _loadedLevelData.Player = _characterModels[_selectedCharacterIndex].Character;
+        _gameplayManager.Player = _characterModels[_selectedCharacterIndex].Character;
     }
 
     #endregion

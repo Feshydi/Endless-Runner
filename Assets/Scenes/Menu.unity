@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b0b90ea1bf54d87ab41d4753b3ea86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadedLevelData: {fileID: 11400000, guid: 72e7e5e00ddab4f87a430b7f746a5c5c, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _characterModels:
   - Model: {fileID: 558675005}
     Character: {fileID: 8273630677877431109, guid: 82dfc45a7c0bb4b9c956a8be656602b4, type: 3}
@@ -3144,7 +3144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5835a68d164d2455fa3f7aa6aaef3cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadedLevelData: {fileID: 11400000, guid: 72e7e5e00ddab4f87a430b7f746a5c5c, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
   _levels: []
   _selectedLevelIndex: 0
   _levelsHolder: {fileID: 1459777052}

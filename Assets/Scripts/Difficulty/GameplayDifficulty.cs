@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard,
+    ChildOfTheBelarus
+}
+
 [CreateAssetMenu(menuName = "Game/Difficulties/Gameplay Difficulty")]
 public class GameplayDifficulty : ScriptableObject
 {
