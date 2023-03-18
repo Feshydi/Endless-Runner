@@ -88,14 +88,15 @@ public class PlayerUIManager : MonoBehaviour
 
     public void NewHealthPoints(float currentHP, float maxHP)
     {
+        _logger.Log($"New Health Points: {currentHP}", this);
+
         if (currentHP == 0)
         {
             _gameoverMenu.SetActive(true);
+            return;
         }
 
         _healthBar.value = currentHP / maxHP;
-
-        _logger.Log($"New Health Points: {currentHP}", this);
     }
 
     void RollBarProgress(float value)

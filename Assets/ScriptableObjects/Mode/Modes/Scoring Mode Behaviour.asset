@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5eb59c00d7e4eb890f33b8e49dccb8, type: 3}
   m_Name: Scoring Mode Behaviour
   m_EditorClassIdentifier: 
-  GoalValue: 250
+  GoalValue: 500
   CurrentValue: 0
   Mode: 1
   IsEnabled: 0
   GameplayEventChannel: {fileID: 11400000, guid: 344108123889b42d489a123a7e42e7e7, type: 2}
   GameCompletedEventChannel: {fileID: 11400000, guid: 9c0d4f55ac5ed4d47a223ec63b535937, type: 2}
-  Description: '"Scoring" is a game mode where the player must reach a 250 score
-    to win. Take out enemies and earn points for each kill!'
+  Description: '"Scoring" is a game mode where the player must reach a 500 points
+    to win. Take out enemies and earn points for each kill.'

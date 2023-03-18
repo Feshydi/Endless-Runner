@@ -37,7 +37,12 @@ public class PlayerRollState : PlayerBaseState
     public override void CheckSwitchState()
     {
         if (!_playerController.RollBehaviour.IsRollPressed)
-            SwitchState(_stateFactory.Idle());
+        {
+            if (_playerController.PreviousMoveInput.Equals(Vector2.zero))
+                SwitchState(_stateFactory.Idle());
+            else
+                SwitchState(_stateFactory.Move());
+        }
     }
 
     #endregion

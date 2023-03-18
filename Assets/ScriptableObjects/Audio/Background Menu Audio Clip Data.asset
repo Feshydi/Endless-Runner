@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fddb9120ef0464293fd5091bb78fe2, type: 3}
   m_Name: Background Menu Audio Clip Data
   m_EditorClassIdentifier: 
-  AudioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: 7f02f6143d1fd4835bcc41a5d1f2e249, type: 3}

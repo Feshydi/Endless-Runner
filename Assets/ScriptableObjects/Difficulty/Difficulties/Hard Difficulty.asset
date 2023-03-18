@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Hard Difficulty
   m_EditorClassIdentifier: 
   _difficulty: 2
-  _spawnIntervalMultiply: 0.8
-  _waveSpawnChanceMultiply: 1.3
-  _enemyHealthMultiply: 1.25
-  _enemyMaxMoveSpeedMultiply: 1.25
-  _enemyDamageMultiply: 1.2
-  _enemyDamageRateMultiply: 1.2
-  _explosionCooldownMultiply: 1.1
-  _burstCooldownMultiply: 1.1
+  _spawnIntervalMultiply: 1
+  _waveSpawnChanceMultiply: 2.5
+  _enemyHealthMultiply: 1.15
+  _enemyMaxMoveSpeedMultiply: 1.15
+  _enemyDamageMultiply: 1.25
+  _enemyDamageRateMultiply: 1
+  _explosionCooldownMultiply: 1.2
+  _burstCooldownMultiply: 1.15

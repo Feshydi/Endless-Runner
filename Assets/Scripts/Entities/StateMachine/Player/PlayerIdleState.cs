@@ -29,12 +29,14 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (_playerController.HealthBehaviour.IsHitted)
             SwitchState(_stateFactory.Hit());
+        else
+        {
+            if (_playerController.RollBehaviour.IsRollPressed)
+                SwitchState(_stateFactory.Roll());
 
-        if (_playerController.RollBehaviour.IsRollPressed)
-            SwitchState(_stateFactory.Roll());
-
-        if (!_playerController.PreviousMoveInput.Equals(Vector2.zero))
-            SwitchState(_stateFactory.Move());
+            else if (!_playerController.PreviousMoveInput.Equals(Vector2.zero))
+                SwitchState(_stateFactory.Move());
+        }
     }
 
     #endregion

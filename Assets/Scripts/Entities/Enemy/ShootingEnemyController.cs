@@ -96,7 +96,8 @@ public class ShootingEnemyController : EnemyController
 
     private void ShootHandle()
     {
-        if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted)
+        if (_healthBehaviour.IsDead || _healthBehaviour.IsHitted ||
+            _targetHealth is null || _targetHealth.IsDead)
             return;
 
         _shootSound.Play();

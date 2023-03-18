@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Easy Difficulty
   m_EditorClassIdentifier: 
   _difficulty: 0
-  _spawnIntervalMultiply: 1.25
-  _waveSpawnChanceMultiply: 0.6
+  _spawnIntervalMultiply: 1.15
+  _waveSpawnChanceMultiply: 0.7
   _enemyHealthMultiply: 0.8
   _enemyMaxMoveSpeedMultiply: 0.8
-  _enemyDamageMultiply: 0.75
-  _enemyDamageRateMultiply: 0.9
+  _enemyDamageMultiply: 0.8
+  _enemyDamageRateMultiply: 0.85
   _explosionCooldownMultiply: 0.8
-  _burstCooldownMultiply: 0.8
+  _burstCooldownMultiply: 0.75

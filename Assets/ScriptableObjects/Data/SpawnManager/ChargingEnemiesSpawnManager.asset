@@ -78,8 +78,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _curveTimeMinutes: 7
-  _minSpawnInterval: 6
-  _maxSpawnInterval: 3
+  _curveTimeMinutes: 11
+  _minSpawnInterval: 5
+  _maxSpawnInterval: 3.3
   _waveSpawnChance: 0.05
-  _maxCountInWave: 10
+  _maxCountInWave: 15

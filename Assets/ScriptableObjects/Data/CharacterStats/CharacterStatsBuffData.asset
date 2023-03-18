@@ -15,7 +15,7 @@ MonoBehaviour:
   _isBulletsPenetrate: 0
   _defaultBulletParticleMultiplier: 1
   _defaultFireRateMultiplier: 1
-  _buffedBulletParticleMultiplier: 2
-  _buffedFireRateMultiplier: 2
+  _buffedBulletParticleMultiplier: 2.5
+  _buffedFireRateMultiplier: 2.2
   _currentBulletParticleMultiplier: 1
   _currentFireRateMultiplier: 1

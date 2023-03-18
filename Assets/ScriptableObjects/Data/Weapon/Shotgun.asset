@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f24c26ecf0644ea94822abc26f80bb, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 30
   _fireRate: 60
   _projectileSpeed: 20
   _weaponPosition: {x: 1, y: 1.8}

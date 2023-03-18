@@ -3192,7 +3192,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -4177,10 +4177,6 @@ PrefabInstance:
     - target: {fileID: 4392995733516029097, guid: 70cefe3c8f05c4544a029175d1c9f58b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4392995733516029098, guid: 70cefe3c8f05c4544a029175d1c9f58b, type: 3}
-      propertyPath: m_audioClip
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70cefe3c8f05c4544a029175d1c9f58b, type: 3}
@@ -6076,18 +6072,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
-      propertyPath: m_Color.b
-      value: 0.0627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
-      propertyPath: m_Color.g
-      value: 0.0627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598691911014023900, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
-      propertyPath: m_Color.r
-      value: 0.0627451
-      objectReference: {fileID: 0}
     - target: {fileID: 7598691912285609577, guid: 244815d42e4124a3c957f5c71cb397cc, type: 3}
       propertyPath: m_Name
       value: Light

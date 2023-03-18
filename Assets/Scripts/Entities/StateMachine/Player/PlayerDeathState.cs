@@ -19,7 +19,10 @@ public class PlayerDeathState : PlayerBaseState
         GameManager.Instance?.SetGameMode(GameMode.PauseMenu);
     }
 
-    public override void OnUpdate() { }
+    public override void OnUpdate()
+    {
+        CheckSwitchState();
+    }
 
     public override void CheckSwitchState() { }
 

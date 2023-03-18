@@ -16,5 +16,5 @@ MonoBehaviour:
   _maxMoveSpeed: 0.6
   _healthPoints: 100
   _animatorController: {fileID: 9100000, guid: 920add06986a74501b1bdf1c1d65c625, type: 2}
-  _damage: 20
+  _damage: 25
   _damageRate: 60

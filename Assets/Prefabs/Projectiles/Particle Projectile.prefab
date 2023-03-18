@@ -136,11 +136,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5e4fa28bd584e6cac8f4e4b3c79d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statsBuffData: {fileID: 0}
   _rigidbody2D: {fileID: 6614250223815720530}
+  _isKnockbacking: 0
+  _knockbackingStrength: 0
   _isCollided: 0
   _damage: 0
   _speed: 0
   _direction: {x: 0, y: 0}
   _flyDistance: 0
-  _maxFlyDistance: 20
+  _maxFlyDistance: 10
   _ignoredEnemy: {fileID: 0}

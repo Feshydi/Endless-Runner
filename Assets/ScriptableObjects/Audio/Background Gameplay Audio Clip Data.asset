@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fddb9120ef0464293fd5091bb78fe2, type: 3}
   m_Name: Background Gameplay Audio Clip Data
   m_EditorClassIdentifier: 
-  audioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: d38ff950139cd496ba44f1e7c78f10bf, type: 3}
+  - {fileID: 8300000, guid: 8fbd2bb01c59842b19ee92a8522d242c, type: 3}
+  - {fileID: 8300000, guid: dd944015ae2cf4ac099dfd5295d90f45, type: 3}

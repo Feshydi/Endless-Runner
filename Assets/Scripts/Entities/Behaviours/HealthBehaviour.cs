@@ -64,13 +64,15 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         if (_isDead || !_isDamageAllowed)
             return;
 
+        _isHitted = true;
         if (TryGetComponent(out EnemyController ec))
             damage *= _gameplayManager.GetGameplayDifficulty().EnemyDamageMultiply;
         _healthPoints -= damage;
-        _isHitted = true;
+
         if (TryGetComponent(out PlayerControllerBehaviour pcb))
             _isDamageAllowed = false;
-        if (_healthPoints < 0)
+
+        if (_healthPoints <= 0)
         {
             _healthPoints = 0;
             _isDead = true;
@@ -82,8 +84,8 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     public void AfterHit()
     {
         _isHitted = false;
-
-        StartCoroutine(BlinkingAnimation());
+        if (!_isDead)
+            StartCoroutine(BlinkingAnimation());
     }
 
     private IEnumerator BlinkingAnimation()
