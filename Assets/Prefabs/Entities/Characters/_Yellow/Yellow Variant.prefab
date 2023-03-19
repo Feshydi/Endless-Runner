@@ -264,9 +264,9 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8121179568187533207, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
   m_PrefabInstance: {fileID: 7836151087278194782}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &9132558837407960234 stripped
+--- !u!4 &3275943801512668419 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1297815169355500788, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4740571194670722397, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
   m_PrefabInstance: {fileID: 7836151087278194782}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &9132558837407960237 stripped
@@ -295,7 +295,7 @@ MonoBehaviour:
   _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _projectilePrefab: {fileID: -235043439389213933, guid: a12245e24aac2493e8f0bb190f2d1b86, type: 3}
   _muzzleSpriteRenderer: {fileID: 9132558837407960237}
-  _muzzlePosition: {fileID: 9132558837407960234}
+  _bulletStartPosition: {fileID: 3275943801512668419}
   _shootSound: {fileID: 2020884983634749385}
   _nextShotTime: 0
   _spawnedProjectiles: []

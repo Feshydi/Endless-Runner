@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: _projectilePrefab
       value: 
       objectReference: {fileID: 6277043979897050056, guid: 90ae24abe344c420a933e895f32c970e, type: 3}
+    - target: {fileID: 5912983166178528868, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+      propertyPath: _bulletStartPosition
+      value: 
+      objectReference: {fileID: 3681748937084514480}
     - target: {fileID: 6225352916609678805, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.25
@@ -281,3 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1770b1bf98ecc4e9ea15e8109806b902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3681748937084514480 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4740571194670722397, guid: b2636123fea1e4db7a4da891969e9ed9, type: 3}
+  m_PrefabInstance: {fileID: 8273630678618480109}
+  m_PrefabAsset: {fileID: 0}

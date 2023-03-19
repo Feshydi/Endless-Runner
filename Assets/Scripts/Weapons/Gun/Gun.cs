@@ -22,7 +22,7 @@ public abstract class Gun : MonoBehaviour
     private SpriteRenderer _muzzleSpriteRenderer;
 
     [SerializeField]
-    protected Transform _muzzlePosition;
+    protected Transform _bulletStartPosition;
 
     [Header("Sound")]
     [SerializeField]
