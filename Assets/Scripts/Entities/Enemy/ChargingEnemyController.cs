@@ -40,6 +40,9 @@ public class ChargingEnemyController : EnemyController
 
     private void FixedUpdate()
     {
+        if (_targetHealth is null || _targetHealth.IsDead)
+            return;
+
         if (!_isCharging)
             MoveHandle();
 

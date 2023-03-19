@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5e4fa28bd584e6cac8f4e4b3c79d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statsBuffData: {fileID: 0}
+  _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _rigidbody2D: {fileID: 6614250223815720530}
   _isKnockbacking: 0
   _knockbackingStrength: 0

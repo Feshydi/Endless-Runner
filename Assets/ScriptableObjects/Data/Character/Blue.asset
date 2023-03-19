@@ -23,7 +23,7 @@ MonoBehaviour:
   _explosionForce: 15
   _explosionDamage: 50
   _explosionCooldownTime: 15
-  _rollDescription: '"Roll" is a defensive skill that allows to quickly dodge incoming
+  _rollDescription: '"Dodge" is a defensive skill that allows to quickly dodge incoming
     attacks by rolling in any direction. While rolling, the player is invulnerable
     to damage.'
   _rollCooldownTime: 3

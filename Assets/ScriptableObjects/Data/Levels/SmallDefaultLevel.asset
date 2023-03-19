@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: SmallDefaultLevel
   m_EditorClassIdentifier: 
   _name: Small
-  _icon: {fileID: 21300000, guid: fe34d352a702a4561a1970964e9485df, type: 3}
+  _icon: {fileID: 21300000, guid: f2dc49c9f3209401b9ea74f0f4fd4f8f, type: 3}
   _terrainMapData: {fileID: 11400000, guid: 582921d9a1fe049ae9aacea4854383d1, type: 2}
-  _autoSeedGeneration: 1
-  _seed: 666

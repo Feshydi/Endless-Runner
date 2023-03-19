@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameplayManager _gameplayManager;
 
+    [SerializeField]
+    private CharacterStatsBuffData _statsBuffData;
+
     [Header("Map")]
     [SerializeField]
     private PerlinNoiseMap _groundMap;
@@ -54,6 +57,7 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        _statsBuffData.Init();
         var gameManager = GameManager.Instance;
         gameManager.CurrentLevelManager = this;
 

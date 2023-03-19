@@ -54,12 +54,12 @@ public class CameraFollow : MonoBehaviour
         Vector3 desiredPosition = transform.position + _offset;
         if (desiredPosition.x < _horizontalOffset)
             desiredPosition.x = _horizontalOffset;
-        else if (desiredPosition.x > _map.size.x - _horizontalOffset)
-            desiredPosition.x = _map.size.x - _horizontalOffset;
+        else if (desiredPosition.x > _map.size.x - _horizontalOffset + 1)
+            desiredPosition.x = _map.size.x - _horizontalOffset + 1;
         if (desiredPosition.y < _verticalOffset)
             desiredPosition.y = _verticalOffset;
-        else if (desiredPosition.y > _map.size.y - _verticalOffset)
-            desiredPosition.y = _map.size.y - _verticalOffset;
+        else if (desiredPosition.y > _map.size.y - _verticalOffset + 1)
+            desiredPosition.y = _map.size.y - _verticalOffset + 1;
 
         Vector3 smoothedPosition = Vector3.Lerp(_camera.position, desiredPosition, _smoothSpeed * Time.fixedDeltaTime);
         _camera.position = smoothedPosition;

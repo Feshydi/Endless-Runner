@@ -22,13 +22,16 @@ public class ParticleProjectile : Projectile
 
     protected override void DoOnCollision(Collider2D collision)
     {
-        if (_ignoredEnemy is null || !collision.Equals(_ignoredEnemy))
+        if (_ignoredEnemy is not null)
         {
-            DoDamage(collision);
-            if (!_statsBuffData.IsBulletPenetrate)
-                Destroy(gameObject);
+            if (collision.TryGetComponent(out HealthBehaviour health))
+                if (health.Equals(_ignoredEnemy))
+                    return;
         }
 
+        DoDamage(collision);
+        if (!_statsBuffData.IsBulletPenetrate)
+            Destroy(gameObject);
     }
 
     #endregion

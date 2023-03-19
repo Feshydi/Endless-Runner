@@ -2976,6 +2976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameplayManager: {fileID: 11400000, guid: 7a302f6629e0f4e97b6fb298cc953661, type: 2}
+  _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _groundMap: {fileID: 983699399}
   _perimeterBuilder: {fileID: 210381227}
   _objectMap: {fileID: 0}

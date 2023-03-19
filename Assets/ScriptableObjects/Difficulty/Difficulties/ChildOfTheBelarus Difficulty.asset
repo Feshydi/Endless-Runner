@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ChildOfTheBelarus Difficulty
   m_EditorClassIdentifier: 
   _difficulty: 3
-  _spawnIntervalMultiply: 0.6
-  _waveSpawnChanceMultiply: 2
+  _spawnIntervalMultiply: 0.9
+  _waveSpawnChanceMultiply: 3
   _enemyHealthMultiply: 1.5
-  _enemyMaxMoveSpeedMultiply: 2
-  _enemyDamageMultiply: 1.5
-  _enemyDamageRateMultiply: 1.4
-  _explosionCooldownMultiply: 1.5
-  _burstCooldownMultiply: 1.5
+  _enemyMaxMoveSpeedMultiply: 1.3
+  _enemyDamageMultiply: 1.4
+  _enemyDamageRateMultiply: 1.2
+  _explosionCooldownMultiply: 2
+  _burstCooldownMultiply: 1.25

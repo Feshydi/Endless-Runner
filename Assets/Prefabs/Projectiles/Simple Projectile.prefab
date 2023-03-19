@@ -111,7 +111,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631159640871785779}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -136,7 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0409aac2c548d47bbb5964ba26a84221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statsBuffData: {fileID: 11400000, guid: f36567e48a2c346ccae31770653de4ba, type: 2}
   _rigidbody2D: {fileID: 6614250223815720530}
+  _isKnockbacking: 0
+  _knockbackingStrength: 0
   _isCollided: 0
   _damage: 0
   _speed: 0

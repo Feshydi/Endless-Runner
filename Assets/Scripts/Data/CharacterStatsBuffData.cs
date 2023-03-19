@@ -51,14 +51,9 @@ public class CharacterStatsBuffData : ScriptableObject
 
     #region Methods
 
-    private void OnEnable()
+    public void Init()
     {
-        _currentBulletParticleMultiplier = _defaultBulletParticleMultiplier;
-        _currentFireRateMultiplier = _defaultFireRateMultiplier;
-    }
-
-    private void OnDisable()
-    {
+        _isBulletsPenetrate = false;
         _currentBulletParticleMultiplier = _defaultBulletParticleMultiplier;
         _currentFireRateMultiplier = _defaultFireRateMultiplier;
     }

@@ -54,14 +54,6 @@ public abstract class Gun : MonoBehaviour
         _muzzleSpriteRenderer.enabled = false;
     }
 
-    public virtual void Init(WeaponData weaponData)
-    {
-        _weaponData = weaponData;
-        transform.localPosition = _weaponData.WeaponPosition;
-        _muzzlePosition.localPosition = _weaponData.MuzzlePosition;
-        _muzzlePosition.localScale = _weaponData.MuzzleScale;
-    }
-
     public abstract void Shoot();
 
     protected bool ReadyToShoot()

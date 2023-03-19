@@ -43,6 +43,9 @@ public class ShootingEnemyController : EnemyController
 
     private void Update()
     {
+        if (_targetHealth is null || _targetHealth.IsDead)
+            return;
+
         if (Time.time > _nextShootTime &&
             (_rigidbody2D.position - (Vector2)_targetHealth.transform.position).magnitude <= _shootDistance)
         {

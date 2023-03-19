@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class EntityData : ScriptableObject
@@ -17,9 +16,6 @@ public class EntityData : ScriptableObject
     [SerializeField]
     private float _healthPoints;
 
-    [SerializeField]
-    private AnimatorController _animatorController;
-
     #endregion
 
     #region Properties
@@ -29,8 +25,6 @@ public class EntityData : ScriptableObject
     public float MaxMoveSpeed => _maxMoveSpeed;
 
     public float HealthPoints => _healthPoints;
-
-    public AnimatorController AnimatorController => _animatorController;
 
     #endregion
 

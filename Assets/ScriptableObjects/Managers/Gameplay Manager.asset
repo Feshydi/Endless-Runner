@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modesList: {fileID: 11400000, guid: 25ab709b0982e455787d43da18737e04, type: 2}
   _difficultiesList: {fileID: 11400000, guid: c9f43b05e77e142ae963a84dfb367637, type: 2}
-  CurrentGameplayMode: 1
-  CurrentDifficulty: 3
+  Player: {fileID: 0}
+  LevelData: {fileID: 0}
+  AutoSeedGeneration: 1
+  Seed: 0
+  CurrentGameplayMode: 0
+  CurrentDifficulty: 0
